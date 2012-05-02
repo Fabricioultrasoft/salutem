@@ -10,6 +10,8 @@
  */
 package salutem.TelaPrincipal;
 
+import salutem.Cadastro.TelaCadastroPaciente;
+
 /**
  *
  * @author Tironi
@@ -80,6 +82,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu13 = new javax.swing.JMenu();
         jMenuItem39 = new javax.swing.JMenuItem();
         jMenuItem40 = new javax.swing.JMenuItem();
+        jMenuItem41 = new javax.swing.JMenuItem();
+        jMenuItem42 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
         jMenuItem27 = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
@@ -103,6 +107,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1.setText("Cadastro");
 
         jMenuItem1.setText("Paciente");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Médicos");
@@ -232,11 +241,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu13.setText("Frota");
 
-        jMenuItem39.setText("Cadastro de Veiculos");
+        jMenuItem39.setText("Cadastro de Veículos");
         jMenu13.add(jMenuItem39);
 
-        jMenuItem40.setText("Cadastro de Veiculos");
+        jMenuItem40.setText("Agendar Viagem");
         jMenu13.add(jMenuItem40);
+
+        jMenuItem41.setText("Reservar Veículo");
+        jMenu13.add(jMenuItem41);
+
+        jMenuItem42.setText("Status do Veículo");
+        jMenu13.add(jMenuItem42);
 
         jMenuBar1.add(jMenu13);
 
@@ -297,6 +312,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
 }//GEN-LAST:event_formWindowOpened
+
+private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+new TelaCadastroPaciente().setVisible(true);
+}//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -383,6 +402,8 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
     private javax.swing.JMenuItem jMenuItem39;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem40;
+    private javax.swing.JMenuItem jMenuItem41;
+    private javax.swing.JMenuItem jMenuItem42;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

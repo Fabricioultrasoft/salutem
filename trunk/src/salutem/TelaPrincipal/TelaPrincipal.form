@@ -13,6 +13,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Paciente"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
@@ -233,12 +236,22 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem39">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cadastro de Veiculos"/>
+                <Property name="text" type="java.lang.String" value="Cadastro de Ve&#xed;culos"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem40">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cadastro de Veiculos"/>
+                <Property name="text" type="java.lang.String" value="Agendar Viagem"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem41">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reservar Ve&#xed;culo"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem42">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Status do Ve&#xed;culo"/>
               </Properties>
             </MenuItem>
           </SubComponents>

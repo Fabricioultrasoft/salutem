@@ -18,6 +18,8 @@ public class PessoaBean {
     private String complemento;
     private String cidade; 
     private String estado;
+    private String sexo;
+    private String telefone;
 
     /**
      * @return the nome
@@ -143,6 +145,34 @@ public class PessoaBean {
      */
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    /**
+     * @return the sexo
+     */
+    public String getSexo() {
+        return sexo;
+    }
+
+    /**
+     * @param sexo the sexo to set
+     */
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    /**
+     * @return the telefone
+     */
+    public String getTelefone() {
+        return telefone;
+    }
+
+    /**
+     * @param telefone the telefone to set
+     */
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
     
     

@@ -9,6 +9,7 @@ public class ModuloBean {
     private int idModulo;
     private ModuloBean moduloPai;
     private String descricao;
+    private String nomeTela;
 
     /**
      * @return the idModulo
@@ -50,5 +51,19 @@ public class ModuloBean {
      */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    /**
+     * @return the nomeTela
+     */
+    public String getNomeTela() {
+        return nomeTela;
+    }
+
+    /**
+     * @param nomeTela the nomeJar to set
+     */
+    public void setNomeTela(String nomeTela) {
+        this.nomeTela = nomeTela;
     }
 }

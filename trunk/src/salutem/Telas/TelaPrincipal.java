@@ -10,9 +10,8 @@
  */
 package salutem.Telas;
 
-import salutem.Beans.FuncionarioBean;
 import salutem.Beans.ModuloBean;
-import salutem.Telas.TelaCadastroPaciente;
+import salutem.Beans.UsuarioBean;
 import salutem.Utils.Msg;
 
 /**
@@ -21,7 +20,7 @@ import salutem.Utils.Msg;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
-    private FuncionarioBean funcionario;
+    private UsuarioBean usuario;
     private ModuloBean modulo;
     
     public TelaPrincipal() {
@@ -38,7 +37,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
+        lbIdentificacao = new javax.swing.JLabel();
+        barraMenu = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -57,20 +57,35 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenuBar1.setMaximumSize(new java.awt.Dimension(0, 20));
-        jMenuBar1.setMinimumSize(new java.awt.Dimension(0, 20));
-        jMenuBar1.setPreferredSize(new java.awt.Dimension(0, 20));
-        setJMenuBar(jMenuBar1);
+        lbIdentificacao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbIdentificacao.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbIdentificacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/man.png"))); // NOI18N
+        lbIdentificacao.setText("Usuário");
+        lbIdentificacao.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        lbIdentificacao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lbIdentificacao.setIconTextGap(8);
+        lbIdentificacao.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        barraMenu.setMaximumSize(new java.awt.Dimension(0, 20));
+        barraMenu.setMinimumSize(new java.awt.Dimension(0, 20));
+        barraMenu.setPreferredSize(new java.awt.Dimension(0, 20));
+        setJMenuBar(barraMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 766, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbIdentificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(424, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(427, Short.MAX_VALUE)
+                .addComponent(lbIdentificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -127,15 +142,16 @@ private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuBar jMenuBar1;
+    protected javax.swing.JMenuBar barraMenu;
+    protected javax.swing.JLabel lbIdentificacao;
     // End of variables declaration//GEN-END:variables
 
-    public FuncionarioBean getFuncionario() {
-        return funcionario;
+    public UsuarioBean getUsuario() {
+        return usuario;
     }
 
-    public void setUsuario(FuncionarioBean funcionario) {
-        this.funcionario = funcionario;
+    public void setUsuario(UsuarioBean usuario) {
+        this.usuario = usuario;
     }
 
     public ModuloBean getModulo() {

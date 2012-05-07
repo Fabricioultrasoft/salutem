@@ -81,7 +81,7 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
 }//GEN-LAST:event_formWindowOpened
 
 private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if (Msg.confirmar(this, "Deseja realmente sair do sistema ???")) {
+        if (Msg.confirmar(this, "Deseja Realmente Sair do Sistema?")) {
             this.setVisible(false);
             System.exit(0);
         }

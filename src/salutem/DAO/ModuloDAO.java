@@ -14,7 +14,7 @@ import salutem.conexao.MySQL;
 public class ModuloDAO extends MySQL {
 
     public void inserir(ModuloBean modulo) throws SQLException {
-        this.setConnection("soft-academico");
+        this.setConnection("sal");
         this.open();
 
         String SQL = "INSERT INTO modulo (idModulo, idModuloPai, descricao) "
@@ -28,7 +28,7 @@ public class ModuloDAO extends MySQL {
     }
 
     public void alterar(ModuloBean modulo) throws SQLException {
-        this.setConnection("soft-academico");
+        this.setConnection("sal");
         this.open();
 
         String SQL = "UPDATE modulo SET modulo.descricao = ?, modulo.idModuloPai = "
@@ -42,7 +42,7 @@ public class ModuloDAO extends MySQL {
     }
 
     public void excluir(int id) throws SQLException {
-        this.setConnection("soft-academico");
+        this.setConnection("sal");
         this.open();
         this.startTransaction();
 
@@ -59,7 +59,7 @@ public class ModuloDAO extends MySQL {
     }
 
     public List<ModuloBean> getLista() throws SQLException {
-        this.setConnection("soft-academico");
+        this.setConnection("sal");
         this.open();
 
         String SQL = "SELECT modulo.idModulo, modulo.descricao, "
@@ -89,7 +89,7 @@ public class ModuloDAO extends MySQL {
     }
 
     public ModuloBean getModulo(int id) throws SQLException {
-        this.setConnection("soft-academico");
+        this.setConnection("sal");
         this.open();
 
         String SQL = "SELECT modulo.idModulo, modulo.descricao, modulo.nomeJar, "
@@ -117,7 +117,7 @@ public class ModuloDAO extends MySQL {
     }
 
     public int getCodigo() throws SQLException {
-        this.setConnection("soft-academico");
+        this.setConnection("sal");
         this.open();
 
         String SQL = "SELECT IFNULL(MAX(idModulo),0)+1 AS ID FROM modulo";
@@ -164,7 +164,7 @@ public class ModuloDAO extends MySQL {
     }
 
     public int getTotalModulos() throws SQLException {
-        this.setConnection("soft-academico");
+        this.setConnection("sal");
         this.open();
 
         String SQL = "SELECT COUNT(*) AS TOTAL FROM modulo";

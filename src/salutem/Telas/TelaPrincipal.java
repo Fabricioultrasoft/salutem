@@ -10,16 +10,20 @@
  */
 package salutem.Telas;
 
+import salutem.Beans.FuncionarioBean;
+import salutem.Beans.ModuloBean;
 import salutem.Telas.TelaCadastroPaciente;
+import salutem.Utils.Msg;
 
 /**
  *
- * @author Tironi
+ * @author Renato Doretto
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-    
 
-    /** Creates new form TelaPrincipal */
+    private FuncionarioBean funcionario;
+    private ModuloBean modulo;
+    
     public TelaPrincipal() {
         initComponents();
         setExtendedState(TelaPrincipal.MAXIMIZED_BOTH);
@@ -37,7 +41,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -65,6 +79,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
 }//GEN-LAST:event_formWindowOpened
+
+private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if (Msg.confirmar(this, "Deseja realmente sair do sistema ???")) {
+            this.setVisible(false);
+            System.exit(0);
+        }
+}//GEN-LAST:event_formWindowClosing
+
+private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        this.repaint();
+}//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
@@ -104,4 +129,20 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
+
+    public FuncionarioBean getFuncionario() {
+        return funcionario;
+    }
+
+    public void setUsuario(FuncionarioBean funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public ModuloBean getModulo() {
+        return modulo;
+    }
+
+    public void setModulo(ModuloBean modulo) {
+        this.modulo = modulo;
+    }
 }

@@ -2,26 +2,12 @@ package salutem.Beans;
 
 /**
  *
- * @author Sandro Alves Peres
+ * @author Renato Doretto
  */
 public class PermissaoBean {
 
-    private FuncionarioBean funcionario;
+    private UsuarioBean usuario;
     private ModuloBean modulo;
-
-    /**
-     * @return the funcionario
-     */
-    public FuncionarioBean getFuncionario() {
-        return funcionario;
-    }
-
-    /**
-     * @param funcionario the funcionario to set
-     */
-    public void setFuncionario(FuncionarioBean funcionario) {
-        this.funcionario = funcionario;
-    }
 
     /**
      * @return the modulo
@@ -35,5 +21,19 @@ public class PermissaoBean {
      */
     public void setModulo(ModuloBean modulo) {
         this.modulo = modulo;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioBean getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioBean usuario) {
+        this.usuario = usuario;
     }
 }

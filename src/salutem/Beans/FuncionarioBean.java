@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class FuncionarioBean extends PessoaBean{
 
+    private int idFuncionario;
     private Date admissao;
     private String decreto;
     private String tipoRegistro;
@@ -72,5 +73,19 @@ public class FuncionarioBean extends PessoaBean{
      */
     public void setRegistro(String registro) {
         this.registro = registro;
+    }
+
+    /**
+     * @return the idFuncionario
+     */
+    public int getIdFuncionario() {
+        return idFuncionario;
+    }
+
+    /**
+     * @param idFuncionario the idFuncionario to set
+     */
+    public void setIdFuncionario(int idFuncionario) {
+        this.idFuncionario = idFuncionario;
     }
 }

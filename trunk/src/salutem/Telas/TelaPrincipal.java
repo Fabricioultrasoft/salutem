@@ -35,278 +35,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jSeparator5 = new javax.swing.JPopupMenu.Separator();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jSeparator4 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jSeparator6 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
-        jMenuItem16 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem17 = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem19 = new javax.swing.JMenuItem();
-        jMenuItem20 = new javax.swing.JMenuItem();
-        jMenuItem21 = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
-        jMenuItem22 = new javax.swing.JMenuItem();
-        jMenuItem30 = new javax.swing.JMenuItem();
-        jMenu9 = new javax.swing.JMenu();
-        jMenuItem23 = new javax.swing.JMenuItem();
-        jMenuItem24 = new javax.swing.JMenuItem();
-        jMenuItem25 = new javax.swing.JMenuItem();
-        jMenuItem31 = new javax.swing.JMenuItem();
-        jMenu10 = new javax.swing.JMenu();
-        jMenuItem26 = new javax.swing.JMenuItem();
-        jMenu14 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem43 = new javax.swing.JMenuItem();
-        jMenu13 = new javax.swing.JMenu();
-        jMenuItem39 = new javax.swing.JMenuItem();
-        jMenuItem40 = new javax.swing.JMenuItem();
-        jMenuItem41 = new javax.swing.JMenuItem();
-        jMenuItem42 = new javax.swing.JMenuItem();
-        jMenu11 = new javax.swing.JMenu();
-        jMenuItem27 = new javax.swing.JMenuItem();
-        jMenu12 = new javax.swing.JMenu();
-        jMenuItem28 = new javax.swing.JMenuItem();
-        jMenuItem29 = new javax.swing.JMenuItem();
-        jMenuItem32 = new javax.swing.JMenuItem();
-        jMenuItem33 = new javax.swing.JMenuItem();
-        jMenuItem34 = new javax.swing.JMenuItem();
-        jMenuItem35 = new javax.swing.JMenuItem();
-        jMenuItem36 = new javax.swing.JMenuItem();
-        jMenuItem37 = new javax.swing.JMenuItem();
-        jMenuItem38 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
 
-        jMenu1.setText("Cadastro");
-
-        jMenuItem1.setText("Paciente");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem3.setText("Funcionários");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem3);
-        jMenu1.add(jSeparator2);
-
-        jMenuItem4.setText("Especialidades");
-        jMenu1.add(jMenuItem4);
-
-        jMenuItem5.setText("Unidades");
-        jMenu1.add(jMenuItem5);
-        jMenu1.add(jSeparator1);
-
-        jMenuItem6.setText("Sair");
-        jMenu1.add(jMenuItem6);
-        jMenu1.add(jSeparator5);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Consultas");
-
-        jMenuItem7.setText("Atendimento");
-        jMenu2.add(jMenuItem7);
-
-        jMenuItem8.setText("Pré-Atendimento");
-        jMenu2.add(jMenuItem8);
-        jMenu2.add(jSeparator3);
-
-        jMenuItem9.setText("Encaminhamento");
-        jMenu2.add(jMenuItem9);
-        jMenu2.add(jSeparator4);
-
-        jMenuItem10.setText("Gerar Receita");
-        jMenu2.add(jMenuItem10);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Farmácia");
-
-        jMenuItem11.setText("Medicamentos");
-        jMenu3.add(jMenuItem11);
-
-        jMenu4.setText("Movimentação");
-
-        jMenuItem12.setText("Entrada");
-        jMenu4.add(jMenuItem12);
-
-        jMenuItem13.setText("Retirada");
-        jMenu4.add(jMenuItem13);
-
-        jMenu3.add(jMenu4);
-
-        jMenuBar1.add(jMenu3);
-
-        jMenu5.setText("PSF");
-        jMenu5.add(jSeparator6);
-
-        jMenuItem14.setText("Áreas");
-        jMenu5.add(jMenuItem14);
-
-        jMenuItem15.setText("Distribuição de Áreas");
-        jMenu5.add(jMenuItem15);
-
-        jMenuItem16.setText("Agendamento de Visitas");
-        jMenu5.add(jMenuItem16);
-
-        jMenuBar1.add(jMenu5);
-
-        jMenu6.setText("Laboratorio");
-
-        jMenuItem17.setText("Gerar Exame");
-        jMenu6.add(jMenuItem17);
-
-        jMenuItem18.setText("Agendar Exame");
-        jMenu6.add(jMenuItem18);
-
-        jMenuBar1.add(jMenu6);
-
-        jMenu7.setText("Odontologia");
-
-        jMenuItem19.setText("Agendar Atendimento");
-        jMenu7.add(jMenuItem19);
-
-        jMenuItem20.setText("Gerar Receita");
-        jMenu7.add(jMenuItem20);
-
-        jMenuItem21.setText("Histórico Paciente");
-        jMenu7.add(jMenuItem21);
-
-        jMenuBar1.add(jMenu7);
-
-        jMenu8.setText("Postos de Saúde");
-
-        jMenuItem22.setText("Agendar Consulta");
-        jMenu8.add(jMenuItem22);
-
-        jMenuItem30.setText("Pré-Atendimento");
-        jMenu8.add(jMenuItem30);
-
-        jMenuBar1.add(jMenu8);
-
-        jMenu9.setText("Fisioterapia");
-
-        jMenuItem23.setText("Agendar Sessões");
-        jMenu9.add(jMenuItem23);
-
-        jMenuItem24.setText("Lançar Atendimento");
-        jMenu9.add(jMenuItem24);
-
-        jMenuItem25.setText("Histórico Paciente");
-        jMenu9.add(jMenuItem25);
-
-        jMenuItem31.setText("Gerar Receita");
-        jMenu9.add(jMenuItem31);
-
-        jMenuBar1.add(jMenu9);
-
-        jMenu10.setText("C.S da Mulher");
-
-        jMenuItem26.setText("Agendar Consulta");
-        jMenu10.add(jMenuItem26);
-
-        jMenuBar1.add(jMenu10);
-
-        jMenu14.setText("Vigilância");
-
-        jMenuItem2.setText("Gerar Ocorrência");
-        jMenu14.add(jMenuItem2);
-
-        jMenuItem43.setText("Zonas de Dengue");
-        jMenu14.add(jMenuItem43);
-
-        jMenuBar1.add(jMenu14);
-
-        jMenu13.setText("Frota");
-
-        jMenuItem39.setText("Cadastro de Veículos");
-        jMenu13.add(jMenuItem39);
-
-        jMenuItem40.setText("Agendar Viagem");
-        jMenu13.add(jMenuItem40);
-
-        jMenuItem41.setText("Reservar Veículo");
-        jMenu13.add(jMenuItem41);
-
-        jMenuItem42.setText("Status do Veículo");
-        jMenu13.add(jMenuItem42);
-
-        jMenuBar1.add(jMenu13);
-
-        jMenu11.setText("Gestor");
-
-        jMenuItem27.setText("Retirada de Medicamento");
-        jMenu11.add(jMenuItem27);
-
-        jMenu12.setText("Relátorios");
-
-        jMenuItem28.setText("Histórico Todos Atendimentos");
-        jMenu12.add(jMenuItem28);
-
-        jMenuItem29.setText("Histórico Atendimentos PSF");
-        jMenu12.add(jMenuItem29);
-
-        jMenuItem32.setText("Histórico Atendimentos Odontologia");
-        jMenu12.add(jMenuItem32);
-
-        jMenuItem33.setText("Histórico Atendimentos Posto de Saúde");
-        jMenu12.add(jMenuItem33);
-
-        jMenuItem34.setText("Histórico Atendimentos Fisioterapia");
-        jMenu12.add(jMenuItem34);
-
-        jMenuItem35.setText("Histórico Atendimentos CS da Mulher");
-        jMenu12.add(jMenuItem35);
-
-        jMenuItem36.setText("Histórico Atendimentos Laboratório");
-        jMenu12.add(jMenuItem36);
-
-        jMenu11.add(jMenu12);
-
-        jMenuItem37.setText("Encaminhamento");
-        jMenu11.add(jMenuItem37);
-
-        jMenuItem38.setText("Requisição de Combustivel");
-        jMenu11.add(jMenuItem38);
-
-        jMenuBar1.add(jMenu11);
-
+        jMenuBar1.setMaximumSize(new java.awt.Dimension(0, 20));
+        jMenuBar1.setMinimumSize(new java.awt.Dimension(0, 20));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(0, 20));
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -317,7 +56,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 354, Short.MAX_VALUE)
+            .addGap(0, 499, Short.MAX_VALUE)
         );
 
         pack();
@@ -326,14 +65,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
 }//GEN-LAST:event_formWindowOpened
-
-private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-new TelaCadastroPaciente().setVisible(true);
-}//GEN-LAST:event_jMenuItem1ActionPerformed
-
-private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-new TelaCadastroFuncionário().setVisible(true);
-}//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -371,69 +102,6 @@ new TelaCadastroFuncionário().setVisible(true);
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
-    private javax.swing.JMenu jMenu11;
-    private javax.swing.JMenu jMenu12;
-    private javax.swing.JMenu jMenu13;
-    private javax.swing.JMenu jMenu14;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem18;
-    private javax.swing.JMenuItem jMenuItem19;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem20;
-    private javax.swing.JMenuItem jMenuItem21;
-    private javax.swing.JMenuItem jMenuItem22;
-    private javax.swing.JMenuItem jMenuItem23;
-    private javax.swing.JMenuItem jMenuItem24;
-    private javax.swing.JMenuItem jMenuItem25;
-    private javax.swing.JMenuItem jMenuItem26;
-    private javax.swing.JMenuItem jMenuItem27;
-    private javax.swing.JMenuItem jMenuItem28;
-    private javax.swing.JMenuItem jMenuItem29;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem30;
-    private javax.swing.JMenuItem jMenuItem31;
-    private javax.swing.JMenuItem jMenuItem32;
-    private javax.swing.JMenuItem jMenuItem33;
-    private javax.swing.JMenuItem jMenuItem34;
-    private javax.swing.JMenuItem jMenuItem35;
-    private javax.swing.JMenuItem jMenuItem36;
-    private javax.swing.JMenuItem jMenuItem37;
-    private javax.swing.JMenuItem jMenuItem38;
-    private javax.swing.JMenuItem jMenuItem39;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem40;
-    private javax.swing.JMenuItem jMenuItem41;
-    private javax.swing.JMenuItem jMenuItem42;
-    private javax.swing.JMenuItem jMenuItem43;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JPopupMenu.Separator jSeparator3;
-    private javax.swing.JPopupMenu.Separator jSeparator4;
-    private javax.swing.JPopupMenu.Separator jSeparator5;
-    private javax.swing.JPopupMenu.Separator jSeparator6;
     // End of variables declaration//GEN-END:variables
 }

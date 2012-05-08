@@ -45,7 +45,7 @@ public class pacienteDAO extends MySQL {
         this.setConnection("sal");
         this.open();
 
-        String sql = "UPDATE paciente SET nome = ?, cpf = ?,..... WHERE idPaciente = ?";
+        String sql = "UPDATE paciente SET nome = ?, cpf = ?,rg = ?,nomeMae = ?,cartaoSus = ?,telefone = ?,celular = ?,rua = ?,complemento = ?,numero = ?,bairro = ?,cidade = ?,estado = ?,sexo = ? WHERE idPaciente = ?";
 
         this.prepare(sql);
         this.setString(1, paciente.getNome());

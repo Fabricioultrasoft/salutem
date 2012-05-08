@@ -34,7 +34,7 @@ public class TelaLogin extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        this.setIconImage(new ImageIcon(getClass().getResource("/salutem/imagens/icone-sistema.png")).getImage());
+        //this.setIconImage(new ImageIcon(getClass().getResource("/salutem/imagens/icone-sistema.png")).getImage());
         this.setSize(350, 290);
         this.setLocationRelativeTo(null);
 
@@ -113,8 +113,6 @@ public class TelaLogin extends javax.swing.JDialog {
             }
         });
         getContentPane().add(txSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 148, -1));
-
-        lbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/logo.gif"))); // NOI18N
         getContentPane().add(lbLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 70, 70));
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 18));

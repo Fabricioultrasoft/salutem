@@ -20,6 +20,7 @@ public class PessoaBean {
     private String estado;
     private String sexo;
     private String telefone;
+    private String celular;
 
     /**
      * @return the nome
@@ -173,6 +174,20 @@ public class PessoaBean {
      */
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    /**
+     * @return the celular
+     */
+    public String getCelular() {
+        return celular;
+    }
+
+    /**
+     * @param celular the celular to set
+     */
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
     
     

@@ -8,7 +8,7 @@ package salutem.Beans;
  *
  * @author Tironi
  */
-public class PacienteBean {
+public class PacienteBean extends PessoaBean {
     private String nomeMae;
     private String cartaoSus;
 

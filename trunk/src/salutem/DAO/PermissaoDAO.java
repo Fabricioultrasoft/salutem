@@ -18,10 +18,9 @@ public class PermissaoDAO extends MySQL {
                 + ") AS Itens FROM permissao, modulo "
                 + "WHERE permissao.idModulo = modulo.idModulo "
                 + "AND permissao.idUsuario = " + idUsuario
-                + " AND modulo.idModuloPai " + (idModuloPai == null ? "IS NULL" : " = " + idModuloPai)
+                + " AND modulo.idModuloPai " + (idModuloPai == null ? "IS NULL" : "= " + idModuloPai)
                 + " GROUP BY permissao.idModulo "
                 + "ORDER BY modulo.descricao ASC";
-        System.out.println(SQL);
         this.prepare(SQL);
         this.executeQuery();
         return this.getRS();

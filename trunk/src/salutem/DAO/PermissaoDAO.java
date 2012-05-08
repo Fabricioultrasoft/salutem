@@ -10,17 +10,18 @@ import salutem.conexao.MySQL;
  */
 public class PermissaoDAO extends MySQL {
 
-    public ResultSet consultarMenu(int idFuncionario, Integer idModuloPai) throws SQLException {
+    public ResultSet consultarMenu(int idUsuario, Integer idModuloPai) throws SQLException {
         String SQL = "SELECT *, ("
                 + "    SELECT COUNT(*) FROM permissao AS perm, modulo AS subModulo "
-                + "    WHERE perm.idModulo = subModulo.idModulo AND perm.idFuncionario = " + idFuncionario
+                + "    WHERE perm.idModulo = subModulo.idModulo AND perm.idUsuario = " + idUsuario
                 + "    AND subModulo.idModuloPai = modulo.idModulo "
                 + ") AS Itens FROM permissao, modulo "
                 + "WHERE permissao.idModulo = modulo.idModulo "
-                + "AND permissao.idFuncionario = " + idFuncionario
-                + " AND modulo.idModuloPai " + (idModuloPai == null ? "IS NULL" : "= " + idModuloPai)
+                + "AND permissao.idUsuario = " + idUsuario
+                + " AND modulo.idModuloPai " + (idModuloPai == null ? "IS NULL" : " = " + idModuloPai)
                 + " GROUP BY permissao.idModulo "
                 + "ORDER BY modulo.descricao ASC";
+        System.out.println(SQL);
         this.prepare(SQL);
         this.executeQuery();
         return this.getRS();

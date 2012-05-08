@@ -9,6 +9,8 @@ package salutem.Beans;
  * @author Tironi
  */
 public class PacienteBean extends PessoaBean {
+
+    private int idPaciente;
     private String nomeMae;
     private String cartaoSus;
 
@@ -38,6 +40,20 @@ public class PacienteBean extends PessoaBean {
      */
     public void setCartaoSus(String cartaoSus) {
         this.cartaoSus = cartaoSus;
+    }
+
+    /**
+     * @return the idPaciente
+     */
+    public int getIdPaciente() {
+        return idPaciente;
+    }
+
+    /**
+     * @param idPaciente the idPaciente to set
+     */
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
     
 }

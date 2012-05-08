@@ -12,47 +12,74 @@ import salutem.conexao.MySQL;
  *
  * @author Tironi
  */
-public class pacienteDAO extends MySQL{
-   
-    public void inserir(PacienteBean paciente) throws SQLException{
-         this.setConnection("sal");
-         this.open();
-         
-         String sql = "INSERT INTO paciente (idPaciente,nome,cpf,rg,nomeMae,cartaoSus,telefone,celular,rua,complemento,numero,bairro,cidade,estado,sexo) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-         this.prepare(sql);
-         this.setInt(1, this.getCodigo());
-         this.setString(2, paciente.getNome());
-         this.setString(3, paciente.getCpfCnpj());
-         this.setString(4, paciente.getRgie());
-         this.setString(5, paciente.getNomeMae());
-         this.setString(6, paciente.getCartaoSus());
-         this.setString(7, paciente.getTelefone());
-         this.setString(8, paciente.getCelular());
-         this.setString(9, paciente.getRua());
-         this.setString(10, paciente.getComplemento());
-         this.setInt(11, paciente.getNumero());
-         this.setString(12, paciente.getBairro());
-         this.setString(13, paciente.getCidade());
-         this.setString(14, paciente.getEstado());
-         this.setString(15, paciente.getSexo());
-         
-         this.execute();
-         this.close();
-         
-    }
-    public void excluir(int id) throws SQLException{
+public class pacienteDAO extends MySQL {
+
+    public void inserir(PacienteBean paciente) throws SQLException {
         this.setConnection("sal");
         this.open();
-        
-        String sql = "DELETE FROM paciente where idPaciente = "+id;
+
+        String sql = "INSERT INTO paciente (idPaciente,nome,cpf,rg,nomeMae,cartaoSus,telefone,celular,rua,complemento,numero,bairro,cidade,estado,sexo) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        this.prepare(sql);
+        this.setInt(1, this.getCodigo());
+        this.setString(2, paciente.getNome());
+        this.setString(3, paciente.getCpfCnpj());
+        this.setString(4, paciente.getRgie());
+        this.setString(5, paciente.getNomeMae());
+        this.setString(6, paciente.getCartaoSus());
+        this.setString(7, paciente.getTelefone());
+        this.setString(8, paciente.getCelular());
+        this.setString(9, paciente.getRua());
+        this.setString(10, paciente.getComplemento());
+        this.setInt(11, paciente.getNumero());
+        this.setString(12, paciente.getBairro());
+        this.setString(13, paciente.getCidade());
+        this.setString(14, paciente.getEstado());
+        this.setString(15, paciente.getSexo());
+
+        this.execute();
+        this.close();
+
+    }
+
+    public void alterar(PacienteBean paciente) throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String sql = "UPDATE paciente SET nome = ?, cpf = ?,..... WHERE idPaciente = ?";
+
+        this.prepare(sql);
+        this.setString(1, paciente.getNome());
+        this.setString(2, paciente.getCpfCnpj());
+        this.setString(3, paciente.getRgie());
+        this.setString(4, paciente.getNomeMae());
+        this.setString(5, paciente.getCartaoSus());
+        this.setString(6, paciente.getTelefone());
+        this.setString(7, paciente.getCelular());
+        this.setString(8, paciente.getRua());
+        this.setString(9, paciente.getComplemento());
+        this.setInt(10, paciente.getNumero());
+        this.setString(11, paciente.getBairro());
+        this.setString(12, paciente.getCidade());
+        this.setString(13, paciente.getEstado());
+        this.setString(14, paciente.getSexo());
+        this.setInt(15, paciente.getIdPaciente());
+
+        this.execute();
+        this.close();
+
+    }
+
+    public void excluir(int id) throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String sql = "DELETE FROM paciente where idPaciente = " + id;
         this.prepare(sql);
         this.execute();
-        
+
         this.close();
     }
-    
-    
-    
+
     public int getCodigo() throws SQLException {
         //this.setConnection("sal");
         //this.open();
@@ -68,6 +95,4 @@ public class pacienteDAO extends MySQL{
 
         return novoId;
     }
-    
-    
 }

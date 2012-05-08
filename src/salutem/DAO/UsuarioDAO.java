@@ -24,7 +24,7 @@ public class UsuarioDAO extends MySQL{
         this.setConnection("sal");
         this.open();
         
-        String SQL = "INSERT INTO usuario (idUsuario, login, senha, idFuncionario) VALUES (?,?,?,PASSWORD(MD5(?)))";
+        String SQL = "INSERT INTO usuario (idUsuario, login, senha, idFuncionario) VALUES (?,?,PASSWORD(MD5(?)),?)";
         this.prepare(SQL);
         this.setInt(1, this.getCodigo());
         this.setString(2, usuario.getLogin());

@@ -1,3 +1,4 @@
+
 package salutem.DAO;
 
 import java.sql.ResultSet;
@@ -17,11 +18,12 @@ public class ModuloDAO extends MySQL {
         this.setConnection("sal");
         this.open();
 
-        String SQL = "INSERT INTO modulo (idModulo, idModuloPai, descricao) "
+        String SQL = "INSERT INTO modulo (idModulo, idModuloPai, descricao, nomeTela) "
                 + "VALUES(?, " + (modulo.getModuloPai() == null ? "NULL" : modulo.getModuloPai().getIdModulo()) + ", ?, ?)";
         this.prepare(SQL);
         this.setInt(1, modulo.getIdModulo());
         this.setString(2, modulo.getDescricao());
+        this.setString(2, modulo.getNomeTela());
         this.execute();
 
         this.close();
@@ -32,10 +34,12 @@ public class ModuloDAO extends MySQL {
         this.open();
 
         String SQL = "UPDATE modulo SET modulo.descricao = ?, modulo.idModuloPai = "
-                + (modulo.getModuloPai() == null ? "NULL" : modulo.getModuloPai().getIdModulo()) + " WHERE modulo.idModulo = ?";
+                + (modulo.getModuloPai() == null ? "NULL" : modulo.getModuloPai().getIdModulo())
+                + " , modulo.nomeTela = ? WHERE modulo.idModulo = ?";
         this.prepare(SQL);
         this.setString(1, modulo.getDescricao());
-        this.setInt(2, modulo.getIdModulo());
+        this.setString(2, modulo.getNomeTela());
+        this.setInt(3, modulo.getIdModulo());
         this.execute();
 
         this.close();
@@ -92,7 +96,7 @@ public class ModuloDAO extends MySQL {
         this.setConnection("sal");
         this.open();
 
-        String SQL = "SELECT modulo.idModulo, modulo.descricao, modulo.nomeJar, "
+        String SQL = "SELECT modulo.idModulo, modulo.descricao, modulo.nomeTela, "
                 + "modulo.idModuloPai AS mPaiID, mPai.descricao AS mPaiDS "
                 + "FROM modulo LEFT OUTER JOIN modulo AS mPai "
                 + "ON modulo.idModuloPai = mPai.idModulo "
@@ -131,14 +135,14 @@ public class ModuloDAO extends MySQL {
     }
 
     // Consulta o menu verificando se o funcionário tem permissão
-    public ResultSet consultarModulo(int idFuncionario, Integer idModuloPai) throws SQLException {
+    public ResultSet consultarModulo(int idUsuario, Integer idModuloPai) throws SQLException {
         String SQL = "SELECT modulo.*, ("
                 + "     SELECT COUNT(*) FROM modulo AS subModulo "
                 + "     WHERE subModulo.idModuloPai = modulo.idModulo "
                 + ") AS Itens, EXISTS ( "
                 + "     SELECT NULL FROM permissao "
                 + "     WHERE permissao.idModulo = modulo.idModulo "
-                + "     AND permissao.idFuncionario = " + idFuncionario + " LIMIT 1 "
+                + "     AND permissao.idUsuario = " + idUsuario + " LIMIT 1 "
                 + ") AS temAcesso "
                 + "FROM modulo "
                 + "WHERE modulo.idModuloPai " + (idModuloPai == null ? "IS NULL" : "= " + idModuloPai)

@@ -79,6 +79,24 @@ public class pacienteDAO extends MySQL {
 
         this.close();
     }
+    public void ordenarPorNome(String nome) throws SQLException{
+        this.setConnection("sal");
+        this.open();
+        
+        String sql = "SELECT nome FROM paciente order by "+nome;
+        this.execute();
+        this.close();
+        
+    }
+    public void ordenarPorCodigo(int id) throws SQLException{
+        this.setConnection("sal");
+        this.open();
+        
+        String sql = "SELECT idPaciente FROM paciente order by "+id;
+        this.execute();
+        this.close();
+        
+    }
 
     public int getCodigo() throws SQLException {
         //this.setConnection("sal");

@@ -52,6 +52,7 @@ public class pacienteDAO extends MySQL{
     }
     
     
+    
     public int getCodigo() throws SQLException {
         //this.setConnection("sal");
         //this.open();

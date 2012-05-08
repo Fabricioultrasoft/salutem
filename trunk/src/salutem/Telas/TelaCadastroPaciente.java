@@ -10,14 +10,22 @@
  */
 package salutem.Telas;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import salutem.Beans.PacienteBean;
+import salutem.DAO.pacienteDAO;
+import salutem.Utils.Msg;
 
 /**
  *
  * @author Tironi
  */
 public class TelaCadastroPaciente extends JDialog {
-
+private pacienteDAO pacienteDao;
+private PacienteBean pacienteBean;
     /** Creates new form TelaCadastroPaciente */
     public TelaCadastroPaciente() {
         initComponents();
@@ -251,8 +259,18 @@ public class TelaCadastroPaciente extends JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnGravar1.setText("Cancelar");
+        btnGravar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGravar1ActionPerformed(evt);
+            }
+        });
 
         btnGravar.setText("Gravar");
+        btnGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGravarActionPerformed(evt);
+            }
+        });
 
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -324,6 +342,25 @@ private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 habilitarCampos();
 }//GEN-LAST:event_btnNovoActionPerformed
 
+private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
+pacienteBean.setNome(txNome.getText());
+pacienteBean.setBairro(txBairro.getText());
+pacienteBean.setCelular(txCelular.getText());
+pacienteBean.setComplemento(txComplemento.getText());
+pacienteBean.setNomeMae(txNomeMae.getText());
+pacienteBean.setNumero(Integer.parseInt(txNumero.getText()));
+pacienteBean.setCartaoSus(txNumeroSUS.getText());
+pacienteBean.setRgie(txRg.getText());
+pacienteBean.setRua(txRua.getText());
+pacienteBean.setTelefone(txTelefone.getText());
+       
+      
+}//GEN-LAST:event_btnGravarActionPerformed
+
+private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravar1ActionPerformed
+dispose();
+}//GEN-LAST:event_btnGravar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -335,7 +372,7 @@ habilitarCampos();
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("JTattoo".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

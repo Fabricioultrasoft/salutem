@@ -57,8 +57,8 @@ public class TelaLogin extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txUsuario = new javax.swing.JTextField();
         txSenha = new javax.swing.JPasswordField();
-        lbLogo = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LOGIN DE ACESSO");
@@ -113,12 +113,14 @@ public class TelaLogin extends javax.swing.JDialog {
             }
         });
         getContentPane().add(txSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 148, -1));
-        getContentPane().add(lbLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 70, 70));
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 18));
         jLabel3.setForeground(new java.awt.Color(0, 51, 153));
         jLabel3.setText("SALUTEM");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 270, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -174,7 +176,7 @@ public class TelaLogin extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel lbLogo;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField txSenha;
     private javax.swing.JTextField txUsuario;
     // End of variables declaration//GEN-END:variables

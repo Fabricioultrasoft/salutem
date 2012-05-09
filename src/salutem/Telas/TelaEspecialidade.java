@@ -336,7 +336,7 @@ public class TelaEspecialidade extends javax.swing.JDialog {
     }
 
     public void inserir(){
-        TelaCadastroEspecialidade tela = new TelaCadastroEspecialidade(this, true);
+        TelaEspecialidadeCadastro tela = new TelaEspecialidadeCadastro(this, true);
         tela.setTitle("INSERIR ESPECIALIDADE");
         tela.setInserir(true);
         tela.setLocationRelativeTo(null);
@@ -354,7 +354,7 @@ public class TelaEspecialidade extends javax.swing.JDialog {
         DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
-        TelaCadastroEspecialidade tela = new TelaCadastroEspecialidade(this, true);
+        TelaEspecialidadeCadastro tela = new TelaEspecialidadeCadastro(this, true);
         tela.setTitle("ALTERAR ESPECIALIDADE");
         tela.setInserir(false);
         tela.setLocationRelativeTo(null);

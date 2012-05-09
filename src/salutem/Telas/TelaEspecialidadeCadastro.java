@@ -4,7 +4,7 @@
  */
 
 /*
- * TelaCadastroEspecialidade.java
+ * TelaEspecialidadeCadastro.java
  *
  * Created on 09/05/2012, 13:30:04
  */
@@ -23,21 +23,21 @@ import salutem.Utils.Params;
  *
  * @author Renato Doretto
  */
-public class TelaCadastroEspecialidade extends javax.swing.JDialog {
+public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
 
     private boolean inserir;
     private Integer idEspecialidade;
     private EspecialidadeDAO daoEsp;
     private TelaEspecialidade telaEsp;
 
-    public TelaCadastroEspecialidade(TelaEspecialidade parent, boolean modal){
+    public TelaEspecialidadeCadastro(TelaEspecialidade parent, boolean modal){
         super(parent, modal);
         initComponents();
 
         this.telaEsp = parent;
         this.daoEsp = new EspecialidadeDAO();
     }
-    public TelaCadastroEspecialidade(java.awt.Frame parent, boolean modal) {
+    public TelaEspecialidadeCadastro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -158,7 +158,7 @@ public class TelaCadastroEspecialidade extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TelaCadastroEspecialidade dialog = new TelaCadastroEspecialidade(new javax.swing.JFrame(), true);
+                TelaEspecialidadeCadastro dialog = new TelaEspecialidadeCadastro(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);

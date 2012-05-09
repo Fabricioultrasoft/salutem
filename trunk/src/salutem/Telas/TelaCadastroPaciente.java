@@ -25,14 +25,13 @@ import salutem.Utils.Msg;
  */
 public class TelaCadastroPaciente extends JDialog {
 private pacienteDAO pacienteDao = new pacienteDAO();
-private PacienteBean pacienteBean;
+private PacienteBean pacienteBean = new PacienteBean();
  
     /** Creates new form TelaCadastroPaciente */
     public TelaCadastroPaciente() {
         initComponents();
         this.setModal(true);
         desabilitarCampos();
-        pacienteBean = new PacienteBean();
         
         
         
@@ -398,9 +397,8 @@ dispose();
         });
     }
     public PacienteBean inserir(PacienteBean pacienteBean){
-         try{
-             
-         
+                     
+          try{
           selecionarItemCombo();   
           
           pacienteBean.setNome(txNome.getText().toString());
@@ -408,14 +406,21 @@ dispose();
           pacienteBean.setCelular(txCelular.getText().toString());
           pacienteBean.setComplemento(txComplemento.getText().toString());
           pacienteBean.setNomeMae(txNomeMae.getText().toString());
-          pacienteBean.setNumero(Integer.parseInt(txNumero.getText().toString()));
+          
+          int numero = 0;
+          numero = (Integer.parseInt(txNumero.getText())); 
+          pacienteBean.setNumero(numero);
+                   
+          
           pacienteBean.setCartaoSus(txNumeroSUS.getText().toString());
           pacienteBean.setRgie(txRg.getText().toString());
           pacienteBean.setRua(txRua.getText().toString());
           pacienteBean.setTelefone(txTelefone.getText().toString());
-         }catch(Exception erro){
-             JOptionPane.showMessageDialog(null,"Erro de Banco de Dados: "+ erro.getMessage());
-         }
+          
+          }catch(NumberFormatException erro){
+              
+              System.out.println("Numero está Vazio "+erro);
+          }
 
         try {
         
@@ -440,6 +445,59 @@ dispose();
         if (txNome.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "O Campo Nome Está Vazio!");
             txNome.requestFocus();
+            return;
+        }
+        if (txBairro.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O Campo Bairro Está Vazio!");
+            txBairro.requestFocus();
+            return;
+        }
+        
+        if (txCelular.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O Campo Celular Está Vazio!");
+            txCelular.requestFocus();
+            return;
+        }
+        
+        if (txComplemento.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O Campo Complemento Está Vazio!");
+            txComplemento.requestFocus();
+            return;
+        }
+        
+        if (txNomeMae.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O Campo Nome da Mâe Está Vazio!");
+            txNomeMae.requestFocus();
+            return;
+        }
+        
+        if (txNumero.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O Campo Numero Está Vazio!");
+            txNumero.requestFocus();
+            return;
+        }
+        
+        if (txNumeroSUS.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O Campo Cartão SUS Está Vazio!");
+            txNumeroSUS.requestFocus();
+            return;
+        }
+        
+        if (txRg.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O Campo RG Está Vazio!");
+            txRg.requestFocus();
+            return;
+        }
+        
+        if (txRua.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O Campo Rua Está Vazio!");
+            txRua.requestFocus();
+            return;
+        }
+        
+        if (txTelefone.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O Campo Telefone Está Vazio!");
+            txTelefone.requestFocus();
             return;
         }
         

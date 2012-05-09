@@ -406,7 +406,6 @@ dispose();
 //pacienteBean.setRua(txRua.getText().toString());
 //pacienteBean.setTelefone(txTelefone.getText().toString());
 
-
         try {
         
             pacienteDao.inserir(pacienteBean);

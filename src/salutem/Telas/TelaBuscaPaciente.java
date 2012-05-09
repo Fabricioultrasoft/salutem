@@ -10,6 +10,7 @@
  */
 package salutem.Telas;
 
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import salutem.Beans.PacienteBean;
 import salutem.DAO.pacienteDAO;

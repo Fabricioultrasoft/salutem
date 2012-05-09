@@ -25,7 +25,7 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPane1" pref="507" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane1" pref="528" max="32767" attributes="0"/>
                   <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -121,7 +121,7 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txTelefone" pref="106" max="32767" attributes="0"/>
+                                          <Component id="txTelefone" pref="117" max="32767" attributes="0"/>
                                           <Component id="lbTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -132,7 +132,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lbCpf" alignment="0" pref="123" max="32767" attributes="0"/>
+                                                  <Component id="lbCpf" alignment="0" pref="133" max="32767" attributes="0"/>
                                                   <Component id="txCpf" alignment="1" min="-2" pref="123" max="-2" attributes="1"/>
                                               </Group>
                                               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -154,7 +154,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lbRua" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txRua" pref="391" max="32767" attributes="0"/>
+                                  <Component id="txRua" pref="412" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -166,7 +166,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txDtAdmissao" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txComplemento" alignment="0" pref="120" max="32767" attributes="0"/>
+                                  <Component id="txComplemento" alignment="0" pref="131" max="32767" attributes="0"/>
                                   <Component id="lbComplemento" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbDtAdmissao" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -174,12 +174,12 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txBairro" alignment="0" pref="147" max="32767" attributes="0"/>
+                                          <Component id="txBairro" alignment="0" pref="152" max="32767" attributes="0"/>
                                           <Component id="lbBairro" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cbEstado" alignment="0" pref="69" max="32767" attributes="0"/>
+                                          <Component id="cbEstado" alignment="0" pref="74" max="32767" attributes="0"/>
                                           <Component id="lbEstado" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
@@ -192,7 +192,6 @@
                                   <Component id="lbDecreto" min="-2" max="-2" attributes="0"/>
                                   <Component id="txDecreto" alignment="0" min="-2" pref="346" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>

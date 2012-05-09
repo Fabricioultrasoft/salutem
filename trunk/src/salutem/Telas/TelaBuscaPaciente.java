@@ -10,11 +10,17 @@
  */
 package salutem.Telas;
 
+import javax.swing.table.DefaultTableModel;
+import salutem.Beans.PacienteBean;
+import salutem.DAO.pacienteDAO;
+
 /**
  *
  * @author Tironi
  */
 public class TelaBuscaPaciente extends javax.swing.JDialog {
+    private pacienteDAO pacienteDao;
+    
 
     /** Creates new form TelaBuscaPaciente */
     public TelaBuscaPaciente(java.awt.Frame parent, boolean modal) {
@@ -265,6 +271,51 @@ new TelaCadastroPaciente().setVisible(true);
             }
         });
     }
+    
+    protected void atualizarTabela(){
+        try{
+            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+            modelo.setNumRows(0);
+
+            List<PacienteBean> lista = this.pacienteDao.getLista();
+
+            for(int i=0; i< lista.size(); i++){
+                modelo.addRow(new Object[]{
+                lista.get(i).getIdEspecialidade(),
+                lista.get(i).getNome()});
+            }
+            this.lbInfoPesq.setText(modelo.getRowCount() + "resultado(s).");
+
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
+        }
+    }
+
+    protected void atualizarTabela(String filtro){
+        try{
+            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+            modelo.setNumRows(0);
+
+            List<EspecialidadeBean> lista = this.daoEsp.getLista(filtro);
+
+            for(int i=0; i< lista.size(); i++){
+                modelo.addRow(new Object[]{
+                lista.get(i).getIdEspecialidade(),
+                lista.get(i).getNome()});
+            }
+            this.lbInfoPesq.setText(modelo.getRowCount() + "resultado(s).");
+
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
+        }
+    }
+
+    protected void limparTabela(){
+        DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+        modelo.setNumRows(0);
+        this.lbInfoPesq.setText("");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnBuscar;

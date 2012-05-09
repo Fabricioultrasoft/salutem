@@ -4,6 +4,8 @@
  */
 package salutem.Beans;
 
+import java.util.Date;
+
 /**
  *
  * @author Tironi
@@ -21,6 +23,7 @@ public class PessoaBean {
     private String sexo;
     private String telefone;
     private String celular;
+    private Date data;
    
 
     /**
@@ -189,6 +192,20 @@ public class PessoaBean {
      */
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    /**
+     * @return the data
+     */
+    public Date getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(Date data) {
+        this.data = data;
     }
     
     

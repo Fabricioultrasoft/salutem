@@ -5,6 +5,8 @@
 package salutem.DAO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import salutem.Beans.PacienteBean;
 import salutem.conexao.MySQL;
 
@@ -18,7 +20,7 @@ public class pacienteDAO extends MySQL {
         this.setConnection("sal");
         this.open();
 
-        String sql = "INSERT INTO paciente (idPaciente,nome,cpf,rg,nomeMae,cartaoSus,telefone,celular,rua,complemento,numero,bairro,cidade,estado,sexo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO paciente (idPaciente,nome,cpf,rg,nomeMae,cartaoSus,telefone,celular,rua,complemento,numero,bairro,cidade,estado,sexo,data) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
        
         System.out.println(sql+" - "+this.getCodigo());
         this.prepare(sql);
@@ -38,6 +40,7 @@ public class pacienteDAO extends MySQL {
         this.setString(13, paciente.getCidade());
         this.setString(14, paciente.getEstado());
         this.setString(15, paciente.getSexo());
+        this.setDate(16, paciente.getData());
 
         this.execute();
         this.close();
@@ -116,4 +119,27 @@ public class pacienteDAO extends MySQL {
 
         return novoId;
     }
+    
+    public List<PacienteBean> getLista() throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String SQL = "SELECT * FROM paciente";
+        this.prepare(SQL);
+        this.executeQuery();
+
+        List<PacienteBean> listaEsp = new ArrayList<PacienteBean>();
+        while (this.getRS().next()) {
+            PacienteBean paciente = new PacienteBean();
+            paciente.setIdPaciente(this.getRS().getInt("idPaciente"));
+            paciente.setNome(this.getRS().getString("nome"));
+            listaEsp.add(paciente);
+        }
+
+        this.close();
+
+        return listaEsp;
+    }
+    
+    //fim
 }

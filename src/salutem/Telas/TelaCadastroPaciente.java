@@ -397,6 +397,8 @@ dispose();
         });
     }
     public PacienteBean inserir(PacienteBean pacienteBean){
+         try{
+             
          
           selecionarItemCombo();   
           
@@ -405,11 +407,14 @@ dispose();
           pacienteBean.setCelular(txCelular.getText().toString());
           pacienteBean.setComplemento(txComplemento.getText().toString());
           pacienteBean.setNomeMae(txNomeMae.getText().toString());
-          pacienteBean.setNumero(Integer.parseInt(txNumero.getText()));
+          pacienteBean.setNumero(Integer.parseInt(txNumero.getText().toString()));
           pacienteBean.setCartaoSus(txNumeroSUS.getText().toString());
           pacienteBean.setRgie(txRg.getText().toString());
           pacienteBean.setRua(txRua.getText().toString());
           pacienteBean.setTelefone(txTelefone.getText().toString());
+         }catch(Exception erro){
+             JOptionPane.showMessageDialog(null,"Erro de Banco de Dados: "+ erro.getMessage());
+         }
 
         try {
         

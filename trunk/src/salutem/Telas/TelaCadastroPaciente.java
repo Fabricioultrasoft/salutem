@@ -25,13 +25,14 @@ import salutem.Utils.Msg;
  */
 public class TelaCadastroPaciente extends JDialog {
 private pacienteDAO pacienteDao = new pacienteDAO();
-private PacienteBean pacienteBean = new PacienteBean();
+private PacienteBean pacienteBean;
  
     /** Creates new form TelaCadastroPaciente */
     public TelaCadastroPaciente() {
         initComponents();
         this.setModal(true);
         desabilitarCampos();
+        pacienteBean = new PacienteBean();
         
         
         

@@ -33,26 +33,26 @@ public class TelaFuncionario extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        txPesquisa = new javax.swing.JTextField();
+        btExibir = new javax.swing.JButton();
+        lbInfoPesq = new javax.swing.JLabel();
+        btPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btInserir = new javax.swing.JButton();
+        btAlterar = new javax.swing.JButton();
+        btExcluir = new javax.swing.JButton();
+        btSair = new javax.swing.JButton();
+        btAjuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisa"));
 
-        jButton1.setText("Exibir todos");
+        btExibir.setText("Exibir todos");
 
-        jButton2.setText("Pesquisar");
+        btPesquisar.setText("Pesquisar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -61,12 +61,12 @@ public class TelaFuncionario extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
+                    .addComponent(lbInfoPesq, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                    .addComponent(txPesquisa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btPesquisar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btExibir)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -75,14 +75,14 @@ public class TelaFuncionario extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton2))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btExibir)
+                        .addComponent(btPesquisar))
+                    .addComponent(txPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lbInfoPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -98,22 +98,22 @@ public class TelaFuncionario extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabela);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-inserir.png"))); // NOI18N
-        jButton3.setText("Inserir");
+        btInserir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-inserir.png"))); // NOI18N
+        btInserir.setText("Inserir");
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-alterar.png"))); // NOI18N
-        jButton4.setText("Alterar");
+        btAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-alterar.png"))); // NOI18N
+        btAlterar.setText("Alterar");
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-deletar.png"))); // NOI18N
-        jButton5.setText("Excluir");
+        btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-deletar.png"))); // NOI18N
+        btExcluir.setText("Excluir");
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-sair.png"))); // NOI18N
-        jButton6.setText("Sair");
+        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-sair.png"))); // NOI18N
+        btSair.setText("Sair");
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-help.png"))); // NOI18N
-        jButton7.setText("Ajuda");
+        btAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-help.png"))); // NOI18N
+        btAjuda.setText("Ajuda");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -121,15 +121,15 @@ public class TelaFuncionario extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3)
+                .addComponent(btInserir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(btAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addComponent(btExcluir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
-                .addComponent(jButton6)
+                .addComponent(btSair)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
+                .addComponent(btAjuda)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -137,11 +137,11 @@ public class TelaFuncionario extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton7)
-                    .addComponent(jButton6))
+                    .addComponent(btInserir)
+                    .addComponent(btAlterar)
+                    .addComponent(btExcluir)
+                    .addComponent(btAjuda)
+                    .addComponent(btSair))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -190,19 +190,19 @@ public class TelaFuncionario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btAjuda;
+    private javax.swing.JButton btAlterar;
+    private javax.swing.JButton btExcluir;
+    private javax.swing.JButton btExibir;
+    private javax.swing.JButton btInserir;
+    private javax.swing.JButton btPesquisar;
+    private javax.swing.JButton btSair;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lbInfoPesq;
+    private javax.swing.JTable tabela;
+    private javax.swing.JTextField txPesquisa;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -105,8 +105,8 @@ public class pacienteDAO extends MySQL {
         //this.setConnection("sal");
         //this.open();
 
-        String SQL = "SELECT HIGH_PRIORITY IFNULL(MAX(idPaciente),0)+1 AS ID FROM paciente";
-        this.prepare(SQL);
+        String SQLi = "SELECT HIGH_PRIORITY IFNULL(MAX(idPaciente),0)+1 AS ID FROM paciente";
+        this.prepare(SQLi);
         this.executeQuery();
         this.getRS().first();
 

@@ -19,6 +19,7 @@ public class pacienteDAO extends MySQL {
         this.open();
 
         String sql = "INSERT INTO paciente (idPaciente,nome,cpf,rg,nomeMae,cartaoSus,telefone,celular,rua,complemento,numero,bairro,cidade,estado,sexo) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+       
         System.out.println(sql+" - "+getCodigo());
         this.prepare(sql);
         this.setInt(1, this.getCodigo());

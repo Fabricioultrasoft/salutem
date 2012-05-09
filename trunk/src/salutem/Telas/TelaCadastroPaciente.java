@@ -395,7 +395,7 @@ dispose();
         });
     }
     public PacienteBean inserir(PacienteBean pacienteBean){
-        pacienteBean.setNome(txNome.getText().toString());
+  pacienteBean.setNome(txNome.getText().toString());
 //pacienteBean.setBairro(txBairro.getText().toString());
 //pacienteBean.setCelular(txCelular.getText().toString());
 //pacienteBean.setComplemento(txComplemento.getText().toString());

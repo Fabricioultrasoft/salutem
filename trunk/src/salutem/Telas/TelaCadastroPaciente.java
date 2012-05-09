@@ -349,7 +349,9 @@ habilitarCampos();
 
 private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
 
-camposVazios();    
+
+
+camposVazios();
 inserir(pacienteBean);       
 
       
@@ -395,16 +397,19 @@ dispose();
         });
     }
     public PacienteBean inserir(PacienteBean pacienteBean){
-  pacienteBean.setNome(txNome.getText().toString());
-//pacienteBean.setBairro(txBairro.getText().toString());
-//pacienteBean.setCelular(txCelular.getText().toString());
-//pacienteBean.setComplemento(txComplemento.getText().toString());
-//pacienteBean.setNomeMae(txNomeMae.getText().toString());
-//pacienteBean.setNumero(Integer.parseInt(txNumero.getText()));
-//pacienteBean.setCartaoSus(txNumeroSUS.getText().toString());
-//pacienteBean.setRgie(txRg.getText().toString());
-//pacienteBean.setRua(txRua.getText().toString());
-//pacienteBean.setTelefone(txTelefone.getText().toString());
+         
+          selecionarItemCombo();   
+          
+          pacienteBean.setNome(txNome.getText().toString());
+          pacienteBean.setBairro(txBairro.getText().toString());
+          pacienteBean.setCelular(txCelular.getText().toString());
+          pacienteBean.setComplemento(txComplemento.getText().toString());
+          pacienteBean.setNomeMae(txNomeMae.getText().toString());
+          pacienteBean.setNumero(Integer.parseInt(txNumero.getText()));
+          pacienteBean.setCartaoSus(txNumeroSUS.getText().toString());
+          pacienteBean.setRgie(txRg.getText().toString());
+          pacienteBean.setRua(txRua.getText().toString());
+          pacienteBean.setTelefone(txTelefone.getText().toString());
 
         try {
         
@@ -413,6 +418,16 @@ dispose();
             JOptionPane.showMessageDialog(null,"ERRO ao Conectar "+ex.getMessage());
         }
         return pacienteBean;
+       
+    }
+    public void selecionarItemCombo(){
+        if(cbSexo.getSelectedItem().equals("MASCULINO")){
+            pacienteBean.setSexo("1");
+        }else if(cbSexo.getSelectedItem().equals("FEMININO")){
+            pacienteBean.setSexo("2");
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione o Sexo.");
+        }
        
     }
     public void camposVazios(){

@@ -348,21 +348,27 @@ habilitarCampos();
 }//GEN-LAST:event_btnNovoActionPerformed
 
 private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
+
+    
+    
+    
 pacienteBean.setNome(txNome.getText().toString());
-pacienteBean.setBairro(txBairro.getText().toString());
-pacienteBean.setCelular(txCelular.getText().toString());
-pacienteBean.setComplemento(txComplemento.getText().toString());
-pacienteBean.setNomeMae(txNomeMae.getText().toString());
-pacienteBean.setNumero(Integer.parseInt(txNumero.getText()));
-pacienteBean.setCartaoSus(txNumeroSUS.getText().toString());
-pacienteBean.setRgie(txRg.getText().toString());
-pacienteBean.setRua(txRua.getText().toString());
-pacienteBean.setTelefone(txTelefone.getText().toString());
+//pacienteBean.setBairro(txBairro.getText().toString());
+//pacienteBean.setCelular(txCelular.getText().toString());
+//pacienteBean.setComplemento(txComplemento.getText().toString());
+//pacienteBean.setNomeMae(txNomeMae.getText().toString());
+//pacienteBean.setNumero(Integer.parseInt(txNumero.getText()));
+//pacienteBean.setCartaoSus(txNumeroSUS.getText().toString());
+//pacienteBean.setRgie(txRg.getText().toString());
+//pacienteBean.setRua(txRua.getText().toString());
+//pacienteBean.setTelefone(txTelefone.getText().toString());
+
+
         try {
         
             pacienteDao.inserir(pacienteBean);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null," "+ex.getMessage());
+            JOptionPane.showMessageDialog(null,"ERRO ao Conectar "+ex.getMessage());
         }
        
       

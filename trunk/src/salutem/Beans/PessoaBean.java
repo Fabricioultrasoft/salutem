@@ -21,6 +21,7 @@ public class PessoaBean {
     private String sexo;
     private String telefone;
     private String celular;
+   
 
     /**
      * @return the nome

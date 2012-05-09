@@ -15,7 +15,7 @@ public class FuncionarioBean extends PessoaBean{
 
     private int idFuncionario;
     private Date admissao;
-    private String decreto;
+    private int decreto;
     private String tipoRegistro;
     private String registro;
 
@@ -36,14 +36,14 @@ public class FuncionarioBean extends PessoaBean{
     /**
      * @return the decreto
      */
-    public String getDecreto() {
+    public int getDecreto() {
         return decreto;
     }
 
     /**
      * @param decreto the decreto to set
      */
-    public void setDecreto(String decreto) {
+    public void setDecreto(int decreto) {
         this.decreto = decreto;
     }
 

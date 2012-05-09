@@ -349,28 +349,9 @@ habilitarCampos();
 
 private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
 
-    
-    
-    
-pacienteBean.setNome(txNome.getText().toString());
-//pacienteBean.setBairro(txBairro.getText().toString());
-//pacienteBean.setCelular(txCelular.getText().toString());
-//pacienteBean.setComplemento(txComplemento.getText().toString());
-//pacienteBean.setNomeMae(txNomeMae.getText().toString());
-//pacienteBean.setNumero(Integer.parseInt(txNumero.getText()));
-//pacienteBean.setCartaoSus(txNumeroSUS.getText().toString());
-//pacienteBean.setRgie(txRg.getText().toString());
-//pacienteBean.setRua(txRua.getText().toString());
-//pacienteBean.setTelefone(txTelefone.getText().toString());
+camposVazios();    
+inserir(pacienteBean);       
 
-
-        try {
-        
-            pacienteDao.inserir(pacienteBean);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"ERRO ao Conectar "+ex.getMessage());
-        }
-       
       
 }//GEN-LAST:event_btnGravarActionPerformed
 
@@ -412,6 +393,36 @@ dispose();
                 new TelaCadastroPaciente().setVisible(true);
             }
         });
+    }
+    public PacienteBean inserir(PacienteBean pacienteBean){
+        pacienteBean.setNome(txNome.getText().toString());
+//pacienteBean.setBairro(txBairro.getText().toString());
+//pacienteBean.setCelular(txCelular.getText().toString());
+//pacienteBean.setComplemento(txComplemento.getText().toString());
+//pacienteBean.setNomeMae(txNomeMae.getText().toString());
+//pacienteBean.setNumero(Integer.parseInt(txNumero.getText()));
+//pacienteBean.setCartaoSus(txNumeroSUS.getText().toString());
+//pacienteBean.setRgie(txRg.getText().toString());
+//pacienteBean.setRua(txRua.getText().toString());
+//pacienteBean.setTelefone(txTelefone.getText().toString());
+
+
+        try {
+        
+            pacienteDao.inserir(pacienteBean);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"ERRO ao Conectar "+ex.getMessage());
+        }
+        return pacienteBean;
+       
+    }
+    public void camposVazios(){
+        if (txNome.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O Campo Nome Está Vazio!");
+            txNome.requestFocus();
+            return;
+        }
+        
     }
     public void desabilitarCampos(){
         txNome.enable(false);

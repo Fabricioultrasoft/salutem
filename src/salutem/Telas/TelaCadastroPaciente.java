@@ -10,6 +10,7 @@
  */
 package salutem.Telas;
 
+import java.awt.Component;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +19,7 @@ import javax.swing.JOptionPane;
 import salutem.Beans.PacienteBean;
 import salutem.DAO.pacienteDAO;
 import salutem.Utils.Msg;
+import salutem.Utils.Params;
 
 /**
  *
@@ -26,6 +28,10 @@ import salutem.Utils.Msg;
 public class TelaCadastroPaciente extends JDialog {
 private pacienteDAO pacienteDao = new pacienteDAO();
 private PacienteBean pacienteBean = new PacienteBean();
+    private boolean inserir;
+    private Integer idPaciente;
+    private TelaBuscaPaciente telaBusca;
+
  
     /** Creates new form TelaCadastroPaciente */
     public TelaCadastroPaciente() {
@@ -351,14 +357,14 @@ private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
 
 
-camposVazios();
+verificarCampos();
 inserir(pacienteBean);       
 
       
 }//GEN-LAST:event_btnGravarActionPerformed
 
 private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravar1ActionPerformed
-dispose();
+cancelar();
 }//GEN-LAST:event_btnGravar1ActionPerformed
 
     /**
@@ -408,8 +414,9 @@ dispose();
           pacienteBean.setNomeMae(txNomeMae.getText().toString());
           
           int numero = 0;
-          numero = (Integer.parseInt(txNumero.getText())); 
-          pacienteBean.setNumero(numero);
+                 
+           numero = (Integer.parseInt(txNumero.getText()));   
+           pacienteBean.setNumero(numero);
                    
           
           pacienteBean.setCartaoSus(txNumeroSUS.getText().toString());
@@ -441,67 +448,80 @@ dispose();
         }
        
     }
-    public void camposVazios(){
-        if (txNome.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O Campo Nome Está Vazio!");
-            txNome.requestFocus();
-            return;
+    private void destacarCampo(Component c, boolean b){
+        if(b){
+            c.setBackground(Params.COR_CAMPO_VAZIO);
+        }else{
+            c.setBackground(Params.COR_CAMPO_NORMAL);
         }
-        if (txBairro.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O Campo Bairro Está Vazio!");
-            txBairro.requestFocus();
-            return;
-        }
-        
-        if (txCelular.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O Campo Celular Está Vazio!");
-            txCelular.requestFocus();
-            return;
-        }
-        
-        if (txComplemento.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O Campo Complemento Está Vazio!");
-            txComplemento.requestFocus();
-            return;
-        }
-        
-        if (txNomeMae.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O Campo Nome da Mâe Está Vazio!");
-            txNomeMae.requestFocus();
-            return;
-        }
-        
-        if (txNumero.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O Campo Numero Está Vazio!");
-            txNumero.requestFocus();
-            return;
-        }
-        
-        if (txNumeroSUS.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O Campo Cartão SUS Está Vazio!");
-            txNumeroSUS.requestFocus();
-            return;
-        }
-        
-        if (txRg.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O Campo RG Está Vazio!");
-            txRg.requestFocus();
-            return;
-        }
-        
-        if (txRua.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O Campo Rua Está Vazio!");
-            txRua.requestFocus();
-            return;
-        }
-        
-        if (txTelefone.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O Campo Telefone Está Vazio!");
-            txTelefone.requestFocus();
-            return;
-        }
-        
     }
+    private boolean verificarCampos(){
+        boolean aux = false;
+        String msg = "Preencha corretamente os campos. \n";
+        if(this.txNome.getText().isEmpty() && this.txBairro.getText().isEmpty() && this.txCelular.getText().isEmpty() && this.txTelefone.getText().isEmpty() && 
+                this.txComplemento.getText().isEmpty() && this.txNomeMae.getText().isEmpty() && 
+                this.txNumero.getText().isEmpty() && this.txNumeroSUS.getText().isEmpty() && this.txRg.getText().isEmpty() &&
+                this.txRua.getText().isEmpty()){
+            aux = true;
+            this.destacarCampo(this.txNome, aux);
+            this.destacarCampo(this.txBairro, aux);
+            this.destacarCampo(this.txCelular, aux);
+            this.destacarCampo(this.txTelefone, aux);
+            this.destacarCampo(this.txComplemento, aux);
+            this.destacarCampo(this.txNomeMae, aux);
+            this.destacarCampo(this.txNumero, aux);
+            this.destacarCampo(this.txNumeroSUS, aux);
+            this.destacarCampo(this.txRg, aux);
+            this.destacarCampo(this.txRua, aux);
+            
+        }
+        if(aux){
+            Msg.alerta(this, msg);
+        }
+        return aux;
+    }
+        
+     protected boolean isInserir() {
+        return inserir;
+    }
+
+    protected void setInserir(boolean inserir) {
+        this.inserir = inserir;
+        this.idPaciente = null;
+    }
+    
+    private void cancelar() {
+        this.setVisible(false);
+        this.dispose();
+    }
+
+    
+    private void salvar(){
+        if(this.verificarCampos()){
+            return;
+        }
+        try{
+            if(this.isInserir()){
+                PacienteBean paciente = new PacienteBean();
+                paciente.setNome(this.txNome.getText().trim().toUpperCase());
+                this.pacienteDao.inserir(pacienteBean);
+                Msg.informacao(this, "Salvo com sucesso.");
+                this.telaBusca.atualizarTabela();
+                this.cancelar();
+            }else{
+                EspecialidadeBean esp = new EspecialidadeBean();
+                esp.setIdEspecialidade(this.idEspecialidade);
+                esp.setNome(this.txNome.getText().trim().toUpperCase());
+                this.daoEsp.alterar(esp);
+                Msg.informacao(this, "Alterado com sucesso.");
+                this.telaEsp.atualizarTabela();
+                this.cancelar();
+            }
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao salvar. \n"+ex.getMessage());
+        }
+    }
+    
     public void desabilitarCampos(){
         txNome.enable(false);
         txNomeMae.enable(false);

@@ -18,10 +18,11 @@ public class pacienteDAO extends MySQL {
         this.setConnection("sal");
         this.open();
 
-        String sql = "INSERT INTO paciente (idPaciente,nome,cpf,rg,nomeMae,cartaoSus,telefone,celular,rua,complemento,numero,bairro,cidade,estado,sexo) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO paciente (idPaciente,nome,cpf,rg,nomeMae,cartaoSus,telefone,celular,rua,complemento,numero,bairro,cidade,estado,sexo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
        
-        System.out.println(sql+" - "+getCodigo());
+        System.out.println(sql+" - "+this.getCodigo());
         this.prepare(sql);
+        
         this.setInt(1, this.getCodigo());
         this.setString(2, paciente.getNome());
         this.setString(3, paciente.getCpfCnpj());

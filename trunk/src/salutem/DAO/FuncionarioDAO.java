@@ -34,8 +34,8 @@ public class FuncionarioDAO extends MySQL{
 
         SQL = "INSERT INTO funcionario (idFuncionario, nome, cpf, rg, "
                 + "admissao, decreto, registro, telefone, celular, rua, complemento, "
-                + "bairro, numero, cidade, estado, tipoRegistro, sexo) "
-                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "bairro, numero, cidade, estado, tipoRegistro, sexo, dtNascimento) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         this.prepare(SQL);
         this.setInt(1, this.getCodigo());
@@ -55,6 +55,7 @@ public class FuncionarioDAO extends MySQL{
         this.setString(15, func.getEstado());
         this.setString(16, func.getTipoRegistro());
         this.setString(17, func.getSexo());
+        this.setDate(18, func.getData());
         this.execute();
 
         this.close();
@@ -80,7 +81,7 @@ public class FuncionarioDAO extends MySQL{
        SQL = "UPDATE funcionario SET nome = ?, cpf = ?, rg = ?, admissao = ?, "
                 + "decreto = ?, registro = ?, telefone = ?, celular = ?, rua = ?, "
                 + "complemento = ?, bairro = ?, numero = ?, cidade = ?, estado = ?, "
-                + "tipoRegistro = ?, sexo = ? WHERE idFuncionario = ?";
+                + "tipoRegistro = ?, sexo = ?, dtNascimento = ? WHERE idFuncionario = ?";
 
         this.prepare(SQL);
         this.setString(1, func.getNome());
@@ -99,7 +100,8 @@ public class FuncionarioDAO extends MySQL{
         this.setString(14, func.getEstado());
         this.setString(15, func.getTipoRegistro());
         this.setString(16, func.getSexo());
-        this.setInt(17, func.getIdFuncionario());
+        this.setDate(17, func.getData());
+        this.setInt(18, func.getIdFuncionario());
         this.execute();
 
         this.close();
@@ -123,9 +125,6 @@ public class FuncionarioDAO extends MySQL{
 //    }
 
     public int getCodigo() throws SQLException {
-        //this.setConnection("sal");
-        //this.open();
-
         String SQL = "SELECT HIGH_PRIORITY IFNULL(MAX(idFuncionario),0)+1 AS ID FROM funcionario";
         this.prepare(SQL);
         this.executeQuery();
@@ -133,7 +132,6 @@ public class FuncionarioDAO extends MySQL{
 
         int novoId = this.getRS().getInt("ID");
 
-        //this.close();
 
         return novoId;
     }

@@ -24,13 +24,15 @@ import salutem.Utils.Msg;
  * @author Tironi
  */
 public class TelaCadastroPaciente extends JDialog {
-private pacienteDAO pacienteDao;
-private PacienteBean pacienteBean;
+private pacienteDAO pacienteDao = new pacienteDAO();
+private PacienteBean pacienteBean = new PacienteBean();
+ 
     /** Creates new form TelaCadastroPaciente */
     public TelaCadastroPaciente() {
         initComponents();
         this.setModal(true);
         desabilitarCampos();
+        
         
         
     }
@@ -346,20 +348,21 @@ habilitarCampos();
 }//GEN-LAST:event_btnNovoActionPerformed
 
 private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
-pacienteBean.setNome(txNome.getText());
-pacienteBean.setBairro(txBairro.getText());
-pacienteBean.setCelular(txCelular.getText());
-pacienteBean.setComplemento(txComplemento.getText());
-pacienteBean.setNomeMae(txNomeMae.getText());
+pacienteBean.setNome(txNome.getText().toString());
+pacienteBean.setBairro(txBairro.getText().toString());
+pacienteBean.setCelular(txCelular.getText().toString());
+pacienteBean.setComplemento(txComplemento.getText().toString());
+pacienteBean.setNomeMae(txNomeMae.getText().toString());
 pacienteBean.setNumero(Integer.parseInt(txNumero.getText()));
-pacienteBean.setCartaoSus(txNumeroSUS.getText());
-pacienteBean.setRgie(txRg.getText());
-pacienteBean.setRua(txRua.getText());
-pacienteBean.setTelefone(txTelefone.getText());
+pacienteBean.setCartaoSus(txNumeroSUS.getText().toString());
+pacienteBean.setRgie(txRg.getText().toString());
+pacienteBean.setRua(txRua.getText().toString());
+pacienteBean.setTelefone(txTelefone.getText().toString());
         try {
+        
             pacienteDao.inserir(pacienteBean);
         } catch (SQLException ex) {
-            Logger.getLogger(TelaCadastroPaciente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null," "+ex.getMessage());
         }
        
       

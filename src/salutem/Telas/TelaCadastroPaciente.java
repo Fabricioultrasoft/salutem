@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import salutem.Beans.EspecialidadeBean;
 import salutem.Beans.PacienteBean;
 import salutem.DAO.pacienteDAO;
 import salutem.Utils.Msg;
@@ -355,12 +356,8 @@ habilitarCampos();
 
 private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
 
-
-
-verificarCampos();
-inserir(pacienteBean);       
-
-      
+salvar();       
+     
 }//GEN-LAST:event_btnGravarActionPerformed
 
 private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravar1ActionPerformed
@@ -402,42 +399,7 @@ cancelar();
             }
         });
     }
-    public PacienteBean inserir(PacienteBean pacienteBean){
-                     
-          try{
-          selecionarItemCombo();   
-          
-          pacienteBean.setNome(txNome.getText().toString());
-          pacienteBean.setBairro(txBairro.getText().toString());
-          pacienteBean.setCelular(txCelular.getText().toString());
-          pacienteBean.setComplemento(txComplemento.getText().toString());
-          pacienteBean.setNomeMae(txNomeMae.getText().toString());
-          
-          int numero = 0;
-                 
-           numero = (Integer.parseInt(txNumero.getText()));   
-           pacienteBean.setNumero(numero);
-                   
-          
-          pacienteBean.setCartaoSus(txNumeroSUS.getText().toString());
-          pacienteBean.setRgie(txRg.getText().toString());
-          pacienteBean.setRua(txRua.getText().toString());
-          pacienteBean.setTelefone(txTelefone.getText().toString());
-          
-          }catch(NumberFormatException erro){
-              
-              System.out.println("Numero está Vazio "+erro);
-          }
-
-        try {
-        
-            pacienteDao.inserir(pacienteBean);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"ERRO ao Conectar "+ex.getMessage());
-        }
-        return pacienteBean;
-       
-    }
+   
     public void selecionarItemCombo(){
         if(cbSexo.getSelectedItem().equals("MASCULINO")){
             pacienteBean.setSexo("1");
@@ -480,6 +442,16 @@ cancelar();
         }
         return aux;
     }
+    
+    protected void preencherCampos(int id){
+        try{
+            PacienteBean paciente = pacienteDao.getPaciente(id);
+            this.idPaciente = paciente.getIdPaciente();
+            this.txNome.setText(paciente.getNome().trim().toUpperCase());
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao preencher campos. \n"+ex.getMessage());
+        }
+    }
         
      protected boolean isInserir() {
         return inserir;
@@ -509,12 +481,12 @@ cancelar();
                 this.telaBusca.atualizarTabela();
                 this.cancelar();
             }else{
-                EspecialidadeBean esp = new EspecialidadeBean();
-                esp.setIdEspecialidade(this.idEspecialidade);
-                esp.setNome(this.txNome.getText().trim().toUpperCase());
-                this.daoEsp.alterar(esp);
+                PacienteBean paciente = new PacienteBean();
+                paciente.setIdPaciente(this.idPaciente);
+                paciente.setNome(this.txNome.getText().trim().toUpperCase());
+                this.pacienteDao.alterar(paciente);
                 Msg.informacao(this, "Alterado com sucesso.");
-                this.telaEsp.atualizarTabela();
+                this.telaBusca.atualizarTabela();
                 this.cancelar();
             }
         }catch(SQLException ex){

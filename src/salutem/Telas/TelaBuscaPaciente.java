@@ -10,10 +10,12 @@
  */
 package salutem.Telas;
 
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import salutem.Beans.PacienteBean;
 import salutem.DAO.pacienteDAO;
+import salutem.Utils.Msg;
 
 /**
  *
@@ -59,6 +61,7 @@ public class TelaBuscaPaciente extends javax.swing.JDialog {
         btnExcluir = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        lbInfoPesq = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Localizar Pacientes");
@@ -162,7 +165,8 @@ public class TelaBuscaPaciente extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(161, Short.MAX_VALUE)
+                .addComponent(lbInfoPesq)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                 .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,12 +179,15 @@ public class TelaBuscaPaciente extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)))
+                    .addComponent(lbInfoPesq))
                 .addContainerGap())
         );
 
@@ -282,8 +289,9 @@ new TelaCadastroPaciente().setVisible(true);
 
             for(int i=0; i< lista.size(); i++){
                 modelo.addRow(new Object[]{
-                lista.get(i).getIdEspecialidade(),
+                lista.get(i).getIdPaciente(),
                 lista.get(i).getNome()});
+                
             }
             this.lbInfoPesq.setText(modelo.getRowCount() + "resultado(s).");
 
@@ -297,11 +305,11 @@ new TelaCadastroPaciente().setVisible(true);
             DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
             modelo.setNumRows(0);
 
-            List<EspecialidadeBean> lista = this.daoEsp.getLista(filtro);
+            List<PacienteBean> lista = this.pacienteDao.getLista(filtro);
 
             for(int i=0; i< lista.size(); i++){
                 modelo.addRow(new Object[]{
-                lista.get(i).getIdEspecialidade(),
+                lista.get(i).getIdPaciente(),
                 lista.get(i).getNome()});
             }
             this.lbInfoPesq.setText(modelo.getRowCount() + "resultado(s).");
@@ -334,6 +342,7 @@ new TelaCadastroPaciente().setVisible(true);
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbInfoPesq;
     private javax.swing.JRadioButton rdOrdenarPorCodigo;
     private javax.swing.JRadioButton rdOrdenarPorNome;
     private javax.swing.JTable tabela;

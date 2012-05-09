@@ -15,6 +15,8 @@ import salutem.conexao.MySQL;
  * @author Tironi
  */
 public class pacienteDAO extends MySQL {
+    
+    
 
     public void inserir(PacienteBean paciente) throws SQLException {
         this.setConnection("sal");
@@ -51,7 +53,7 @@ public class pacienteDAO extends MySQL {
         this.setConnection("sal");
         this.open();
 
-        String sql = "UPDATE paciente SET nome = ?, cpf = ?,rg = ?,nomeMae = ?,cartaoSus = ?,telefone = ?,celular = ?,rua = ?,complemento = ?,numero = ?,bairro = ?,cidade = ?,estado = ?,sexo = ? WHERE idPaciente = ?";
+        String sql = "UPDATE paciente SET nome = ?, cpf = ?,rg = ?,nomeMae = ?,cartaoSus = ?,telefone = ?,celular = ?,rua = ?,complemento = ?,numero = ?,bairro = ?,cidade = ?,estado = ?,sexo = ?,data = ? WHERE idPaciente = ?";
 
         this.prepare(sql);
         this.setString(1, paciente.getNome());
@@ -69,6 +71,7 @@ public class pacienteDAO extends MySQL {
         this.setString(13, paciente.getEstado());
         this.setString(14, paciente.getSexo());
         this.setInt(15, paciente.getIdPaciente());
+         this.setDate(16, paciente.getData());
 
         this.execute();
         this.close();
@@ -154,6 +157,57 @@ public class pacienteDAO extends MySQL {
         this.close();
 
         return listaEsp;
+    }
+    
+     public List<PacienteBean> getLista(String filtro) throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String SQL = "SELECT * FROM paciente WHERE nome = '%"+filtro+"%'";
+        this.prepare(SQL);
+        this.executeQuery();
+
+        List<PacienteBean> listaEsp = new ArrayList<PacienteBean>();
+        while (this.getRS().next()) {
+            PacienteBean paciente = new PacienteBean();
+            paciente.setIdPaciente(this.getRS().getInt("idPaciente"));
+            paciente.setNome(this.getRS().getString("nome"));
+            paciente.setBairro(this.getRS().getString("bairro"));
+            paciente.setCartaoSus(this.getRS().getString("cartaoSus"));
+            paciente.setCelular(this.getRS().getString("celular"));
+            paciente.setCidade(this.getRS().getString("cidade"));
+            paciente.setComplemento(this.getRS().getString("complemento"));
+            paciente.setCpfCnpj(this.getRS().getString("cpf"));
+            paciente.setEstado(this.getRS().getString("estado"));
+            paciente.setNumero(this.getRS().getInt("numero"));
+            paciente.setData(this.getRS().getDate("data"));
+            paciente.setRgie(this.getRS().getString("rg"));
+            paciente.setRua(this.getRS().getString("rua"));
+            paciente.setSexo(this.getRS().getString("sexo"));
+            paciente.setTelefone(this.getRS().getString("telefone"));
+            listaEsp.add(paciente);
+        }
+
+        this.close();
+
+        return listaEsp;
+    }
+     
+     public PacienteBean getPaciente(int id)throws SQLException{
+        this.setConnection("sal");
+        this.open();
+
+        String SQL = "SELECT * FROM paciente WHERE idPaciente = "+id;
+        this.prepare(SQL);
+        this.executeQuery();
+        this.getRS().first();
+        PacienteBean esp = new PacienteBean();
+        esp.setIdPaciente(this.getRS().getInt("idPaciente"));
+        esp.setNome(this.getRS().getString("nome"));
+
+        this.close();
+        return esp;
+
     }
     
     //fim

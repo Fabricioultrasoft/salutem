@@ -356,6 +356,11 @@ pacienteBean.setCartaoSus(txNumeroSUS.getText());
 pacienteBean.setRgie(txRg.getText());
 pacienteBean.setRua(txRua.getText());
 pacienteBean.setTelefone(txTelefone.getText());
+        try {
+            pacienteDao.inserir(pacienteBean);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCadastroPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
       
 }//GEN-LAST:event_btnGravarActionPerformed

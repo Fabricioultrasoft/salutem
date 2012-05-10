@@ -77,7 +77,7 @@ public class EspecialidadeDAO extends MySQL {
         this.setConnection("sal");
         this.open();
 
-        String SQL = "SELECT * FROM especialidade WHERE nome = '%"+filtro+"%'";
+        String SQL = "SELECT * FROM especialidade WHERE nome LIKE '%"+filtro+"%'";
         this.prepare(SQL);
         this.executeQuery();
 

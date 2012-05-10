@@ -40,7 +40,7 @@ public class TelaCadastroPaciente extends JDialog {
     public TelaCadastroPaciente() {
         initComponents();
         this.setModal(true);
-        
+       
 
 
 
@@ -441,7 +441,7 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         });
     }
    
-    public void selecionarItemCombo() {
+    public PacienteBean selecionarItemCombo() {
         if (cbSexo.getSelectedItem().equals("MASCULINO")) {
             pacienteBean.setSexo("M");
         } else if (cbSexo.getSelectedItem().equals("FEMININO")) {
@@ -449,7 +449,7 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         } else {
             JOptionPane.showMessageDialog(null, "Selecione o Sexo.");
         }
-       
+       return pacienteBean;
     }
     
     private void destacarCampo(Component c, boolean b) {
@@ -573,10 +573,11 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 paciente.setRgie(this.txRg.getText().trim().toUpperCase());
                 paciente.setTelefone(this.txTelefone.getText().trim().toUpperCase());
                 paciente.setRua(this.txRua.getText().trim().toUpperCase());
-                paciente.setSexo(paciente.getSexo());
+                paciente.setSexo(pacienteBean.getSexo());
                 
                 this.pacienteDao.inserir(paciente);
                 Msg.informacao(this, "Salvo com sucesso.");
+                telaBusca = new TelaBuscaPaciente(null, inserir);
                 this.telaBusca.atualizarTabela();
                 this.cancelar();
             } else {
@@ -585,6 +586,7 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 paciente.setNome(this.txNome.getText().trim().toUpperCase());
                 this.pacienteDao.alterar(paciente);
                 Msg.informacao(this, "Alterado Com Sucesso.");
+                telaBusca = new TelaBuscaPaciente(null, inserir);
                 this.telaBusca.atualizarTabela();
                 this.cancelar();
             }

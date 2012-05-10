@@ -210,6 +210,20 @@ public class pacienteDAO extends MySQL {
         PacienteBean paciente = new PacienteBean();
         paciente.setIdPaciente(this.getRS().getInt("idPaciente"));
         paciente.setNome(this.getRS().getString("nome"));
+        paciente.setBairro(this.getRS().getString("bairro"));
+        paciente.setCartaoSus(this.getRS().getString("cartaoSus"));
+        paciente.setCelular(this.getRS().getString("celular"));
+        paciente.setCidade(this.getRS().getString("cidade"));
+        paciente.setComplemento(this.getRS().getString("complemento"));
+        paciente.setCpfCnpj(this.getRS().getString("cpf"));
+        paciente.setData(this.getRS().getDate("data"));
+        paciente.setEstado(this.getRS().getString("estado"));
+        paciente.setNomeMae(this.getRS().getString("nomeMae"));
+        paciente.setNumero(this.getRS().getInt("numero"));
+        paciente.setRgie(this.getRS().getString("rg"));
+        paciente.setRua(this.getRS().getString("rua"));
+        paciente.setSexo(this.getRS().getString("sexo"));
+        paciente.setTelefone(this.getRS().getString("telefone"));
 
         this.close();
         return paciente;

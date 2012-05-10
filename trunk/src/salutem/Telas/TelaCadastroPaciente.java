@@ -440,16 +440,16 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             }
         });
     }
-
+   
     public void selecionarItemCombo() {
         if (cbSexo.getSelectedItem().equals("MASCULINO")) {
-            pacienteBean.setSexo("1");
+            pacienteBean.setSexo("M");
         } else if (cbSexo.getSelectedItem().equals("FEMININO")) {
-            pacienteBean.setSexo("2");
+            pacienteBean.setSexo("F");
         } else {
             JOptionPane.showMessageDialog(null, "Selecione o Sexo.");
         }
-
+       
     }
     
     private void destacarCampo(Component c, boolean b) {
@@ -558,7 +558,8 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         }
         try {
             if (this.isInserir()) {
-               
+                
+                        
                 PacienteBean paciente = new PacienteBean();
                 paciente.setNome(this.txNome.getText().trim().toUpperCase());
                 paciente.setBairro(this.txBairro.getText().trim().toUpperCase());
@@ -568,6 +569,11 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 paciente.setComplemento(this.txComplemento.getText().trim().toUpperCase());
                 paciente.setCpfCnpj(this.txCpf.getText().trim().toUpperCase());
                 paciente.setNumero(Integer.parseInt(this.txNumero.getText()));
+                paciente.setNomeMae(this.txNomeMae.getText().trim().toUpperCase());
+                paciente.setRgie(this.txRg.getText().trim().toUpperCase());
+                paciente.setTelefone(this.txTelefone.getText().trim().toUpperCase());
+                paciente.setRua(this.txRua.getText().trim().toUpperCase());
+                paciente.setSexo(paciente.getSexo());
                 
                 this.pacienteDao.inserir(paciente);
                 Msg.informacao(this, "Salvo com sucesso.");

@@ -2,21 +2,24 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package salutem.DAO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import salutem.Beans.CargoBean;
+import salutem.Beans.EspecialidadeBean;
 import salutem.Beans.FuncionarioBean;
+import salutem.Beans.UnidadeBean;
 import salutem.conexao.MySQL;
 
 /**
  *
  * @author Renato Doretto
  */
-public class FuncionarioDAO extends MySQL{
+public class FuncionarioDAO extends MySQL {
 
-    public void inserir(FuncionarioBean func) throws SQLException{
+    public void inserir(FuncionarioBean func) throws SQLException {
         this.setConnection("sal");
         this.open();
 
@@ -61,7 +64,7 @@ public class FuncionarioDAO extends MySQL{
         this.close();
     }
 
-    public void alterar(FuncionarioBean func) throws SQLException{
+    public void alterar(FuncionarioBean func) throws SQLException {
         this.setConnection("sal");
         this.open();
 
@@ -78,7 +81,7 @@ public class FuncionarioDAO extends MySQL{
             throw new SQLException("CPF-DUPLICADO");
         }
 
-       SQL = "UPDATE funcionario SET nome = ?, cpf = ?, rg = ?, admissao = ?, "
+        SQL = "UPDATE funcionario SET nome = ?, cpf = ?, rg = ?, admissao = ?, "
                 + "decreto = ?, registro = ?, telefone = ?, celular = ?, rua = ?, "
                 + "complemento = ?, bairro = ?, numero = ?, cidade = ?, estado = ?, "
                 + "tipoRegistro = ?, sexo = ?, dtNascimento = ? WHERE idFuncionario = ?";
@@ -107,23 +110,109 @@ public class FuncionarioDAO extends MySQL{
         this.close();
     }
 
-    public void excluir(int id) throws SQLException{
+    public void excluir(int id) throws SQLException {
         this.setConnection("sal");
         this.open();
 
-        String SQL = "DELETE FROM funcionario WHERE idFuncinario = "+id;
+        String SQL = "DELETE FROM funcionario WHERE idFuncinario = " + id;
         this.prepare(SQL);
         this.execute();
         this.close();
     }
 
-//    public List<FuncionarioBean> getLista() throws SQLException{
-//        this.setConnection("sal");
-//        this.open();
-//
-//        String SQL = "SELECT * FROM funcionario f, especialidade e, cargo c "
-//                + "WHERE e.idFuncionadio";
-//    }
+    public List<FuncionarioBean> getLista() throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String SQL = "SELECT * FROM funcionario";
+        this.prepare(SQL);
+        this.executeQuery();
+
+        MySQL conAux = new MySQL("sal", true);
+
+        List<FuncionarioBean> listaFunc = new ArrayList<FuncionarioBean>();
+        while (this.getRS().next()) {
+            int idFunc = this.getRS().getInt("idFuncionario");
+
+            String SQLaux = "SELECT e.idEspecialidade, e.nome AS nomeEsp "
+                    + "FROM especiialidade e, especialidadeFuncionario ef"
+                    + "WHERE ef.idEspecialidade = e.idEspecialidade "
+                    + "AND ef.idFuncionario = " + idFunc;
+            conAux.prepare(SQL);
+            conAux.executeQuery();
+
+            List<EspecialidadeBean> listaEsp = new ArrayList<EspecialidadeBean>();
+            while (conAux.getRS().next()) {
+                EspecialidadeBean esp = new EspecialidadeBean();
+                esp.setIdEspecialidade(conAux.getRS().getInt("idEspecialidade"));
+                esp.setNome(conAux.getRS().getString("nomeEsp"));
+                listaEsp.add(esp);
+            }
+
+            SQLaux = "SELECT c.* FROM cargo c, cargoFuncionario cf "
+                    + "WHERE c.idCargo = cf.idCargo "
+                    + "AND cf.idFuncionario = " + idFunc;
+            conAux.prepare(SQL);
+            conAux.executeQuery();
+
+            List<CargoBean> listaCargo = new ArrayList<CargoBean>();
+            while (conAux.getRS().next()) {
+                CargoBean cargo = new CargoBean();
+                cargo.setIdCargo(conAux.getRS().getInt("idCargo"));
+                cargo.setDescricao(conAux.getRS().getString("descricao"));
+                listaCargo.add(cargo);
+            }
+
+            SQLaux = "SELECT u.idUnidade u.nome AS nomeU, u.rua AS ruaU, u.numero AS numeroU, "
+                    + "u.bairro AS bairroU, u.complemento AS compU "
+                    + "FROM unidade u, unidadeFuncionario uf "
+                    + "WHERE u.idUnidade = uf.idUnidade "
+                    + "AND uf.idFuncionario = " + idFunc;
+            conAux.prepare(SQL);
+            conAux.executeQuery();
+
+            List<UnidadeBean> listaUn = new ArrayList<UnidadeBean>();
+            while (conAux.getRS().next()) {
+                UnidadeBean unidade = new UnidadeBean();
+                unidade.setIdUnidade(conAux.getRS().getInt("idUnidade"));
+                unidade.setNome(conAux.getRS().getString("nomeU"));
+                unidade.setRua(conAux.getRS().getString("ruaU"));
+                unidade.setNumero(conAux.getRS().getInt("numeroU"));
+                unidade.setBairro(conAux.getRS().getString("bairroU"));
+                unidade.setComplemento(conAux.getRS().getString("compU"));
+                listaUn.add(unidade);
+            }
+
+            FuncionarioBean func = new FuncionarioBean();
+            func.setIdFuncionario(idFunc);
+            func.setNome(this.getRS().getString("nome"));
+            func.setCpfCnpj(this.getRS().getString("cpf"));
+            func.setRgie(this.getRS().getString("rg"));
+            func.setSexo(this.getRS().getString("sexo"));
+            func.setTelefone(this.getRS().getString("telefone"));
+            func.setCelular(this.getRS().getString("celular"));
+            func.setRua(this.getRS().getString("rua"));
+            func.setNumero(this.getRS().getInt("numero"));
+            func.setComplemento(this.getRS().getString("complemento"));
+            func.setBairro(this.getRS().getString("bairro"));
+            func.setEstado(this.getRS().getString("estado"));
+            func.setCidade(this.getRS().getString("cidade"));
+            func.setAdmissao(this.getRS().getDate("admissao"));
+            func.setDecreto(this.getRS().getInt("decreto"));
+            func.setData(this.getRS().getDate("dtNascimento"));
+            func.setRegistro(this.getRS().getString("registro"));
+            func.setTipoRegistro(this.getRS().getString("tipoRegistro"));
+            func.setUnidade(listaUn);
+            func.setEspecialidade(listaEsp);
+            func.setCargo(listaCargo);
+            listaFunc.add(func);
+        }
+
+        conAux.close();
+        this.close();
+
+        return listaFunc;
+    }
 
     public int getCodigo() throws SQLException {
         String SQL = "SELECT HIGH_PRIORITY IFNULL(MAX(idFuncionario),0)+1 AS ID FROM funcionario";
@@ -136,5 +225,4 @@ public class FuncionarioDAO extends MySQL{
 
         return novoId;
     }
-
 }

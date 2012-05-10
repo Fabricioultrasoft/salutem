@@ -21,6 +21,7 @@ public class FuncionarioBean extends PessoaBean{
     private String registro;
     private List<EspecialidadeBean> especialidade;
     private List<CargoBean> cargo;
+    private List<UnidadeBean> unidade;
 
     /**
      * @return the admissao
@@ -118,5 +119,19 @@ public class FuncionarioBean extends PessoaBean{
      */
     public void setCargo(List<CargoBean> cargo) {
         this.cargo = cargo;
+    }
+
+    /**
+     * @return the unidade
+     */
+    public List<UnidadeBean> getUnidade() {
+        return unidade;
+    }
+
+    /**
+     * @param unidade the unidade to set
+     */
+    public void setUnidade(List<UnidadeBean> unidade) {
+        this.unidade = unidade;
     }
 }

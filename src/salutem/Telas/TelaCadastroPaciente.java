@@ -12,6 +12,7 @@ package salutem.Telas;
 
 import java.awt.Component;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -21,27 +22,28 @@ import salutem.Beans.PacienteBean;
 import salutem.DAO.pacienteDAO;
 import salutem.Utils.Msg;
 import salutem.Utils.Params;
+import salutem.Utils.Utils;
 
 /**
  *
  * @author Tironi
  */
 public class TelaCadastroPaciente extends JDialog {
-private pacienteDAO pacienteDao = new pacienteDAO();
-private PacienteBean pacienteBean = new PacienteBean();
+
+    private pacienteDAO pacienteDao = new pacienteDAO();
+    private PacienteBean pacienteBean = new PacienteBean();
     private boolean inserir;
     private Integer idPaciente;
     private TelaBuscaPaciente telaBusca;
 
- 
     /** Creates new form TelaCadastroPaciente */
     public TelaCadastroPaciente() {
         initComponents();
         this.setModal(true);
-        desabilitarCampos();
         
-        
-        
+
+
+
     }
 
     /** This method is called from within the constructor to
@@ -66,6 +68,8 @@ private PacienteBean pacienteBean = new PacienteBean();
         dtDataNascimento = new org.jdesktop.swingx.JXDatePicker();
         jLabel12 = new javax.swing.JLabel();
         cbSexo = new javax.swing.JComboBox();
+        jLabel15 = new javax.swing.JLabel();
+        txCpf = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -76,6 +80,10 @@ private PacienteBean pacienteBean = new PacienteBean();
         txComplemento = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txBairro = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        cbEstado = new javax.swing.JComboBox();
+        cbCidade = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -106,6 +114,8 @@ private PacienteBean pacienteBean = new PacienteBean();
 
         cbSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "....", "MASCULINO", "FEMININO" }));
 
+        jLabel15.setText("Cpf");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -119,7 +129,7 @@ private PacienteBean pacienteBean = new PacienteBean();
                             .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txRg, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                            .addComponent(txRg, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                             .addComponent(jLabel2)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,8 +146,12 @@ private PacienteBean pacienteBean = new PacienteBean();
                         .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
-                            .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(96, 96, 96))
+                            .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(txCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,11 +180,13 @@ private PacienteBean pacienteBean = new PacienteBean();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel12))
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txNumeroSUS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
 
@@ -182,6 +198,14 @@ private PacienteBean pacienteBean = new PacienteBean();
 
         jLabel9.setText("Bairro");
 
+        jLabel13.setText("Estado");
+
+        jLabel14.setText("Cidade");
+
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "....", "MASCULINO", "FEMININO" }));
+
+        cbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "....", "MASCULINO", "FEMININO" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -189,24 +213,29 @@ private PacienteBean pacienteBean = new PacienteBean();
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txRua, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(txNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(117, 117, 117))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(txComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))))
-                .addContainerGap())
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txRua, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7)
+                                .addComponent(txNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(117, 117, 117))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel8)
+                                .addComponent(txComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(31, 31, 31)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel14)
+                                .addComponent(cbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel13)
+                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +256,15 @@ private PacienteBean pacienteBean = new PacienteBean();
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Endereço", jPanel2);
@@ -260,7 +297,7 @@ private PacienteBean pacienteBean = new PacienteBean();
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Telefone", jPanel3);
@@ -329,11 +366,16 @@ private PacienteBean pacienteBean = new PacienteBean();
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addContainerGap())
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(146, 146, 146)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,27 +383,26 @@ private PacienteBean pacienteBean = new PacienteBean();
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-habilitarCampos();
+    habilitarCampos();
 }//GEN-LAST:event_btnNovoActionPerformed
 
 private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
+    
+    salvar();
 
-salvar();       
-     
 }//GEN-LAST:event_btnGravarActionPerformed
 
 private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravar1ActionPerformed
-cancelar();
+    cancelar();
 }//GEN-LAST:event_btnGravar1ActionPerformed
 
     /**
@@ -399,61 +440,105 @@ cancelar();
             }
         });
     }
-   
-    public void selecionarItemCombo(){
-        if(cbSexo.getSelectedItem().equals("MASCULINO")){
+
+    public void selecionarItemCombo() {
+        if (cbSexo.getSelectedItem().equals("MASCULINO")) {
             pacienteBean.setSexo("1");
-        }else if(cbSexo.getSelectedItem().equals("FEMININO")){
+        } else if (cbSexo.getSelectedItem().equals("FEMININO")) {
             pacienteBean.setSexo("2");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Selecione o Sexo.");
         }
-       
+
     }
-    private void destacarCampo(Component c, boolean b){
-        if(b){
+    
+    private void destacarCampo(Component c, boolean b) {
+        if (b) {
             c.setBackground(Params.COR_CAMPO_VAZIO);
-        }else{
+        } else {
             c.setBackground(Params.COR_CAMPO_NORMAL);
         }
     }
-    private boolean verificarCampos(){
+
+    private boolean verificarCampos() {
         boolean aux = false;
         String msg = "Preencha corretamente os campos. \n";
-        if(this.txNome.getText().isEmpty() && this.txBairro.getText().isEmpty() && this.txCelular.getText().isEmpty() && this.txTelefone.getText().isEmpty() && 
-                this.txComplemento.getText().isEmpty() && this.txNomeMae.getText().isEmpty() && 
-                this.txNumero.getText().isEmpty() && this.txNumeroSUS.getText().isEmpty() && this.txRg.getText().isEmpty() &&
-                this.txRua.getText().isEmpty()){
+        if (this.txNome.getText().isEmpty()) {
             aux = true;
             this.destacarCampo(this.txNome, aux);
-            this.destacarCampo(this.txBairro, aux);
-            this.destacarCampo(this.txCelular, aux);
-            this.destacarCampo(this.txTelefone, aux);
-            this.destacarCampo(this.txComplemento, aux);
-            this.destacarCampo(this.txNomeMae, aux);
-            this.destacarCampo(this.txNumero, aux);
-            this.destacarCampo(this.txNumeroSUS, aux);
-            this.destacarCampo(this.txRg, aux);
-            this.destacarCampo(this.txRua, aux);
-            
+
         }
-        if(aux){
+
+        if (this.txBairro.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txBairro, aux);
+        }
+        if (this.txCelular.getText().isEmpty()) {
+            aux = true;
+
+            this.destacarCampo(this.txCelular, aux);
+        }
+
+        if (this.txTelefone.getText().isEmpty()) {
+            aux = true;
+
+            this.destacarCampo(this.txTelefone, aux);
+        }
+
+        if (this.txComplemento.getText().isEmpty()) {
+            aux = true;
+
+            this.destacarCampo(this.txComplemento, aux);
+        }
+
+        if (this.txNomeMae.getText().isEmpty()) {
+            aux = true;
+
+            this.destacarCampo(this.txNomeMae, aux);
+
+        }
+
+        if (this.txNumero.getText().isEmpty()) {
+            aux = true;
+
+            this.destacarCampo(this.txNumero, aux);
+        }
+
+        if (this.txNome.getText().isEmpty()) {
+            aux = true;
+
+            this.destacarCampo(this.txNumeroSUS, aux);
+        }
+
+        if (this.txRg.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txRg, aux);
+        }
+
+        if (this.txRua.getText().isEmpty()) {
+            aux = true;
+
+            this.destacarCampo(this.txRua, aux);
+        }
+
+
+        if (aux) {
             Msg.alerta(this, msg);
         }
         return aux;
     }
-    
-    protected void preencherCampos(int id){
-        try{
+
+    protected void preencherCampos(int id) {
+        try {
             PacienteBean paciente = pacienteDao.getPaciente(id);
             this.idPaciente = paciente.getIdPaciente();
             this.txNome.setText(paciente.getNome().trim().toUpperCase());
-        }catch(SQLException ex){
-            Msg.erro(this, "Erro ao preencher campos. \n"+ex.getMessage());
+        } catch (SQLException ex) {
+            Msg.erro(this, "Erro ao preencher campos. \n" + ex.getMessage());
         }
     }
-        
-     protected boolean isInserir() {
+
+    protected boolean isInserir() {
         return inserir;
     }
 
@@ -461,40 +546,49 @@ cancelar();
         this.inserir = inserir;
         this.idPaciente = null;
     }
-    
+
     private void cancelar() {
         this.setVisible(false);
         this.dispose();
     }
 
-    
-    private void salvar(){
-        if(this.verificarCampos()){
+    private void salvar() {
+        if (this.verificarCampos()) {
             return;
         }
-        try{
-            if(this.isInserir()){
+        try {
+            if (this.isInserir()) {
+               
                 PacienteBean paciente = new PacienteBean();
                 paciente.setNome(this.txNome.getText().trim().toUpperCase());
-                this.pacienteDao.inserir(pacienteBean);
+                paciente.setBairro(this.txBairro.getText().trim().toUpperCase());
+                paciente.setCartaoSus(this.txNumeroSUS.getText().trim().toUpperCase());
+                paciente.setCelular(this.txCelular.getText().trim().toUpperCase());
+                paciente.setData(dtDataNascimento.getDate());
+                paciente.setComplemento(this.txComplemento.getText().trim().toUpperCase());
+                paciente.setCpfCnpj(this.txCpf.getText().trim().toUpperCase());
+                paciente.setNumero(Integer.parseInt(this.txNumero.getText()));
+                
+                this.pacienteDao.inserir(paciente);
                 Msg.informacao(this, "Salvo com sucesso.");
                 this.telaBusca.atualizarTabela();
                 this.cancelar();
-            }else{
+            } else {
                 PacienteBean paciente = new PacienteBean();
                 paciente.setIdPaciente(this.idPaciente);
                 paciente.setNome(this.txNome.getText().trim().toUpperCase());
                 this.pacienteDao.alterar(paciente);
-                Msg.informacao(this, "Alterado com sucesso.");
+                Msg.informacao(this, "Alterado Com Sucesso.");
                 this.telaBusca.atualizarTabela();
                 this.cancelar();
             }
-        }catch(SQLException ex){
-            Msg.erro(this, "Erro ao salvar. \n"+ex.getMessage());
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+            Msg.erro(this, "Erro ao salvar. \n" + ex.getMessage());
         }
     }
-    
-    public void desabilitarCampos(){
+
+    public void desabilitarCampos() {
         txNome.enable(false);
         txNomeMae.enable(false);
         txNumeroSUS.enable(false);
@@ -508,7 +602,8 @@ cancelar();
         dtDataNascimento.enable(false);
         cbSexo.enable(false);
     }
-    public void habilitarCampos(){
+
+    public void habilitarCampos() {
         txNome.enable(true);
         txNomeMae.enable(true);
         txNumeroSUS.enable(true);
@@ -526,12 +621,17 @@ cancelar();
     private javax.swing.JButton btnGravar;
     private javax.swing.JButton btnGravar1;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JComboBox cbCidade;
+    private javax.swing.JComboBox cbEstado;
     private javax.swing.JComboBox cbSexo;
     private org.jdesktop.swingx.JXDatePicker dtDataNascimento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -548,6 +648,7 @@ cancelar();
     private javax.swing.JTextField txBairro;
     private javax.swing.JTextField txCelular;
     private javax.swing.JTextField txComplemento;
+    private javax.swing.JTextField txCpf;
     private javax.swing.JTextField txNome;
     private javax.swing.JTextField txNomeMae;
     private javax.swing.JTextField txNumero;

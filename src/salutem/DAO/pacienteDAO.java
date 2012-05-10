@@ -4,6 +4,7 @@
  */
 package salutem.DAO;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,32 +19,37 @@ public class pacienteDAO extends MySQL {
     
     
 
-    public void inserir(PacienteBean paciente) throws SQLException {
+    public void inserir(PacienteBean func) throws SQLException {
         this.setConnection("sal");
         this.open();
+        
+        int id = getCodigo();
 
-        String sql = "INSERT INTO paciente (idPaciente,nome,cpf,rg,nomeMae,cartaoSus,telefone,celular,rua,complemento,numero,bairro,cidade,estado,sexo,data) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO paciente "
+                        + "(idPaciente,nome,cpf,rg,nomeMae,cartaoSus,telefone,celular,rua,"
+                        + "complemento,numero,bairro,cidade,estado,sexo,data) "
+                        + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
        
-        System.out.println(sql+" - "+this.getCodigo());
+        
         this.prepare(sql);
         
-        this.setInt(1, this.getCodigo());
-        this.setString(2, paciente.getNome());
-        this.setString(3, paciente.getCpfCnpj());
-        this.setString(4, paciente.getRgie());
-        this.setString(5, paciente.getNomeMae());
-        this.setString(6, paciente.getCartaoSus());
-        this.setString(7, paciente.getTelefone());
-        this.setString(8, paciente.getCelular());
-        this.setString(9, paciente.getRua());
-        this.setString(10, paciente.getComplemento());
-        this.setInt(11, paciente.getNumero());
-        this.setString(12, paciente.getBairro());
-        this.setString(13, paciente.getCidade());
-        this.setString(14, paciente.getEstado());
-        this.setString(15, paciente.getSexo());
-        this.setDate(16, paciente.getData());
-
+         this.prepare(sql);
+        this.setInt(1, id);
+        this.setString(2, func.getNome());
+        this.setString(3, func.getCpfCnpj());
+        this.setString(4, func.getRgie());
+        this.setString(5, func.getNomeMae());
+        this.setString(6, func.getCartaoSus());
+        this.setString(7, func.getTelefone());
+        this.setString(8, func.getCelular());
+        this.setString(9, func.getRua());
+        this.setString(10, func.getComplemento());
+        this.setInt(11, func.getNumero());
+        this.setString(12, func.getBairro());
+        this.setString(13, func.getCidade());
+        this.setString(14, func.getEstado());
+        this.setString(15, func.getSexo());
+        this.setDate(16, func.getData());
         this.execute();
         this.close();
 
@@ -70,8 +76,8 @@ public class pacienteDAO extends MySQL {
         this.setString(12, paciente.getCidade());
         this.setString(13, paciente.getEstado());
         this.setString(14, paciente.getSexo());
-        this.setInt(15, paciente.getIdPaciente());
-         this.setDate(16, paciente.getData());
+        this.setDate(15, paciente.getData());
+        this.setInt(16, paciente.getIdPaciente());
 
         this.execute();
         this.close();
@@ -144,7 +150,7 @@ public class pacienteDAO extends MySQL {
             paciente.setCpfCnpj(this.getRS().getString("cpf"));
             paciente.setEstado(this.getRS().getString("estado"));
             paciente.setNumero(this.getRS().getInt("numero"));
-            paciente.setData(this.getRS().getDate("data"));
+            paciente.setData((Date)this.getRS().getDate("data"));
             paciente.setRgie(this.getRS().getString("rg"));
             paciente.setRua(this.getRS().getString("rua"));
             paciente.setSexo(this.getRS().getString("sexo"));
@@ -201,12 +207,12 @@ public class pacienteDAO extends MySQL {
         this.prepare(SQL);
         this.executeQuery();
         this.getRS().first();
-        PacienteBean esp = new PacienteBean();
-        esp.setIdPaciente(this.getRS().getInt("idPaciente"));
-        esp.setNome(this.getRS().getString("nome"));
+        PacienteBean paciente = new PacienteBean();
+        paciente.setIdPaciente(this.getRS().getInt("idPaciente"));
+        paciente.setNome(this.getRS().getString("nome"));
 
         this.close();
-        return esp;
+        return paciente;
 
     }
     

@@ -12,6 +12,7 @@ package salutem.Telas;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import salutem.Beans.PacienteBean;
 import salutem.DAO.pacienteDAO;
@@ -22,13 +23,14 @@ import salutem.Utils.Msg;
  * @author Tironi
  */
 public class TelaBuscaPaciente extends javax.swing.JDialog {
-    private pacienteDAO pacienteDao;
+    private pacienteDAO pacienteDao = new pacienteDAO();
     
 
     /** Creates new form TelaBuscaPaciente */
     public TelaBuscaPaciente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        atualizarTabela();
          
     }
 
@@ -231,7 +233,11 @@ private void rdOrdenarPorNomeActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_rdOrdenarPorNomeActionPerformed
 
 private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-new TelaCadastroPaciente().setVisible(true);
+TelaCadastroPaciente tela = new TelaCadastroPaciente();
+tela.setTitle("Inserir Paciente");
+tela.setLocationRelativeTo(null);
+tela.setInserir(true);
+tela.setVisible(true);
 
 
 }//GEN-LAST:event_btnNovoActionPerformed
@@ -293,7 +299,7 @@ new TelaCadastroPaciente().setVisible(true);
                 lista.get(i).getNome()});
                 
             }
-            this.lbInfoPesq.setText(modelo.getRowCount() + "resultado(s).");
+            this.lbInfoPesq.setText(modelo.getRowCount() + " resultado(s).");
 
         }catch(SQLException ex){
             Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
@@ -312,7 +318,7 @@ new TelaCadastroPaciente().setVisible(true);
                 lista.get(i).getIdPaciente(),
                 lista.get(i).getNome()});
             }
-            this.lbInfoPesq.setText(modelo.getRowCount() + "resultado(s).");
+            this.lbInfoPesq.setText(modelo.getRowCount() + " resultado(s).");
 
         }catch(SQLException ex){
             Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());

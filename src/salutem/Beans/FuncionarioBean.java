@@ -6,6 +6,7 @@
 package salutem.Beans;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -18,6 +19,8 @@ public class FuncionarioBean extends PessoaBean{
     private int decreto;
     private String tipoRegistro;
     private String registro;
+    private List<EspecialidadeBean> especialidade;
+    private List<CargoBean> cargo;
 
     /**
      * @return the admissao
@@ -87,5 +90,33 @@ public class FuncionarioBean extends PessoaBean{
      */
     public void setIdFuncionario(int idFuncionario) {
         this.idFuncionario = idFuncionario;
+    }
+
+    /**
+     * @return the especialidade
+     */
+    public List<EspecialidadeBean> getEspecialidade() {
+        return especialidade;
+    }
+
+    /**
+     * @param especialidade the especialidade to set
+     */
+    public void setEspecialidade(List<EspecialidadeBean> especialidade) {
+        this.especialidade = especialidade;
+    }
+
+    /**
+     * @return the cargo
+     */
+    public List<CargoBean> getCargo() {
+        return cargo;
+    }
+
+    /**
+     * @param cargo the cargo to set
+     */
+    public void setCargo(List<CargoBean> cargo) {
+        this.cargo = cargo;
     }
 }

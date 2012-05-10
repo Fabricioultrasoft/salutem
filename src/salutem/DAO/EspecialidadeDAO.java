@@ -20,9 +20,11 @@ public class EspecialidadeDAO extends MySQL {
         this.setConnection("sal");
         this.open();
 
+        int id = this.getCodigo();
+
         String SQL = "INSERT INTO especialidade (idEspecialidade, nome) VALUES (?,?)";
         this.prepare(SQL);
-        this.setInt(1, this.getCodigo());
+        this.setInt(1, id);
         this.setString(2, esp.getNome());
         this.execute();
         this.close();

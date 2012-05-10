@@ -121,7 +121,8 @@ public class FuncionarioDAO extends MySQL{
 //        this.setConnection("sal");
 //        this.open();
 //
-//        String SQL = "SELECT * FROM funcionario";
+//        String SQL = "SELECT * FROM funcionario f, especialidade e, cargo c "
+//                + "WHERE e.idFuncionadio";
 //    }
 
     public int getCodigo() throws SQLException {

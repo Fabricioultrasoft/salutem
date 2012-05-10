@@ -66,26 +66,26 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         lbDecreto = new javax.swing.JLabel();
         txDecreto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        cbUnidade = new javax.swing.JComboBox();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        tbUnidade = new javax.swing.JTable();
+        btMais = new javax.swing.JButton();
+        btMenos = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lbEspecialidade = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbEspTodas = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        tbEspSelect = new javax.swing.JTable();
+        btEspMais = new javax.swing.JButton();
+        btEspMenos = new javax.swing.JButton();
+        lbCargo = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tbCargoTodos = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        tbCargoSelect = new javax.swing.JTable();
+        btCargoMais = new javax.swing.JButton();
+        btCargoMenos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -175,11 +175,11 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
 
         jLabel3.setText("Unidades");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbUnidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jScrollPane5.setPreferredSize(new java.awt.Dimension(452, 100));
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tbUnidade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -187,11 +187,11 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane5.setViewportView(jTable5);
+        jScrollPane5.setViewportView(tbUnidade);
 
-        jButton5.setText("+");
+        btMais.setText("+");
 
-        jButton6.setText("-");
+        btMenos.setText("-");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -270,11 +270,11 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
+                        .addComponent(btMais)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6)
+                        .addComponent(btMenos)
                         .addGap(172, 172, 172))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -330,10 +330,10 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                     .addComponent(txDecreto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(btMais)
+                    .addComponent(btMenos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -341,9 +341,9 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Dados Pessoais", jPanel1);
 
-        jLabel1.setText("Especialidades");
+        lbEspecialidade.setText("Especialidades");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbEspTodas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -359,14 +359,14 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbEspTodas);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbEspSelect.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Todas especialidades"
+                "ID", "Especialidades selecionadas"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -377,20 +377,20 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tbEspSelect);
 
-        jButton1.setText(">");
+        btEspMais.setText(">");
 
-        jButton2.setText("<");
+        btEspMenos.setText("<");
 
-        jLabel2.setText("Cargos");
+        lbCargo.setText("Cargos");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tbCargoTodos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Todas especialidades"
+                "ID", "Todos cargos"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -401,14 +401,14 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tbCargoTodos);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tbCargoSelect.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Todas especialidades"
+                "ID", "Cargos selecionados"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -419,11 +419,11 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(tbCargoSelect);
 
-        jButton3.setText(">");
+        btCargoMais.setText(">");
 
-        jButton4.setText("<");
+        btCargoMenos.setText("<");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -437,18 +437,18 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton2)
-                                .addComponent(jButton1))
+                                .addComponent(btEspMenos)
+                                .addComponent(btEspMais))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel2)
+                        .addComponent(lbEspecialidade))
+                    .addComponent(lbCargo)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4))
+                            .addComponent(btCargoMais)
+                            .addComponent(btCargoMenos))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -457,31 +457,28 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lbEspecialidade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)
-                                .addGap(124, 124, 124)
-                                .addComponent(jButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4)))
-                        .addContainerGap(84, Short.MAX_VALUE))
+                        .addGap(38, 38, 38)
+                        .addComponent(btEspMais)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btEspMenos)
+                        .addGap(124, 124, 124)
+                        .addComponent(btCargoMais)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btCargoMenos))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
+                        .addComponent(lbCargo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(141, 141, 141))))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Outros dados", jPanel2);
@@ -533,19 +530,17 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
+    private javax.swing.JButton btCargoMais;
+    private javax.swing.JButton btCargoMenos;
+    private javax.swing.JButton btEspMais;
+    private javax.swing.JButton btEspMenos;
+    private javax.swing.JButton btMais;
+    private javax.swing.JButton btMenos;
     private javax.swing.JButton btSalvar;
     private javax.swing.JComboBox cbCidade;
     private javax.swing.JComboBox cbEstado;
     private javax.swing.JComboBox cbSexo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox cbUnidade;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -556,18 +551,15 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
     private javax.swing.JLabel lbBairro;
+    private javax.swing.JLabel lbCargo;
     private javax.swing.JLabel lbCelular;
     private javax.swing.JLabel lbCidade;
     private javax.swing.JLabel lbComplemento;
     private javax.swing.JLabel lbCpf;
     private javax.swing.JLabel lbDecreto;
     private javax.swing.JLabel lbDtAdmissao;
+    private javax.swing.JLabel lbEspecialidade;
     private javax.swing.JLabel lbEstado;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbNumero;
@@ -575,6 +567,11 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     private javax.swing.JLabel lbRua;
     private javax.swing.JLabel lbSexo;
     private javax.swing.JLabel lbTelefone;
+    private javax.swing.JTable tbCargoSelect;
+    private javax.swing.JTable tbCargoTodos;
+    private javax.swing.JTable tbEspSelect;
+    private javax.swing.JTable tbEspTodas;
+    private javax.swing.JTable tbUnidade;
     private javax.swing.JTextField txBairro;
     private javax.swing.JFormattedTextField txCelular;
     private javax.swing.JTextField txComplemento;

@@ -122,7 +122,7 @@ public class TelaCadastroPaciente extends JDialog {
         }
 
         try {
-            txNumeroSUS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########################")));
+            txNumeroSUS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -458,6 +458,8 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         } else {
             JOptionPane.showMessageDialog(null, "Selecione o Sexo.");
         }
+       PacienteBean paciente = new PacienteBean(); 
+       System.out.println("Dentro do Metodo: "+paciente.getSexo());
        return pacienteBean;
     }
     
@@ -558,6 +560,7 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             this.txRua.setText(paciente.getRua().trim().toUpperCase());
             this.txTelefone.setText(paciente.getTelefone());
             
+            
         } catch (SQLException ex) {
             Msg.erro(this, "Erro ao preencher campos. \n" + ex.getMessage());
         }
@@ -601,6 +604,8 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 paciente.setTelefone(this.txTelefone.getText().trim().toUpperCase());
                 paciente.setRua(this.txRua.getText().trim().toUpperCase());
                 paciente.setSexo(pacienteBean.getSexo());
+                
+                System.out.println("Dentro do Inserir: "+paciente.getSexo());
                 
                 this.pacienteDao.inserir(paciente);
                 Msg.informacao(this, "Salvo com sucesso.");

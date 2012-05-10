@@ -92,7 +92,6 @@ public class TelaCadastroPaciente extends JDialog {
         jPanel4 = new javax.swing.JPanel();
         btnGravar1 = new javax.swing.JButton();
         btnGravar = new javax.swing.JButton();
-        btnNovo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -320,43 +319,25 @@ public class TelaCadastroPaciente extends JDialog {
             }
         });
 
-        btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-inserir.png"))); // NOI18N
-        btnNovo.setText("Novo");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(btnGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(btnGravar1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(123, 123, 123)
-                    .addComponent(btnGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(169, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                    .addComponent(btnGravar1, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+                    .addComponent(btnGravar1, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                    .addComponent(btnGravar, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(btnGravar, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -366,16 +347,12 @@ public class TelaCadastroPaciente extends JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addContainerGap())
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(146, 146, 146)))))
+                        .addGap(88, 88, 88)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,13 +368,10 @@ public class TelaCadastroPaciente extends JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-    habilitarCampos();
-}//GEN-LAST:event_btnNovoActionPerformed
-
 private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
     
     salvar();
+    
 
 }//GEN-LAST:event_btnGravarActionPerformed
 
@@ -530,13 +504,28 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
     protected void preencherCampos(int id) {
         try {
+            
             PacienteBean paciente = pacienteDao.getPaciente(id);
+            
             this.idPaciente = paciente.getIdPaciente();
             this.txNome.setText(paciente.getNome().trim().toUpperCase());
+            this.txBairro.setText(paciente.getBairro().trim().toUpperCase());
+            this.txCelular.setText(paciente.getCartaoSus());
+            this.txComplemento.setText(paciente.getComplemento().trim().toUpperCase());
+            this.txCpf.setText(paciente.getCpfCnpj());
+            this.txNomeMae.setText(paciente.getNomeMae().trim().toUpperCase());
+            this.txNumero.setText(String.valueOf(paciente.getNumero()));
+            this.txNumeroSUS.setText(paciente.getCartaoSus());
+            this.txRg.setText(paciente.getRgie());
+            this.txRua.setText(paciente.getRua().trim().toUpperCase());
+            this.txTelefone.setText(paciente.getTelefone());
+            
         } catch (SQLException ex) {
             Msg.erro(this, "Erro ao preencher campos. \n" + ex.getMessage());
         }
     }
+    
+    
 
     protected boolean isInserir() {
         return inserir;
@@ -596,39 +585,10 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         }
     }
 
-    public void desabilitarCampos() {
-        txNome.enable(false);
-        txNomeMae.enable(false);
-        txNumeroSUS.enable(false);
-        txRg.enable(false);
-        txCelular.enable(false);
-        txComplemento.enable(false);
-        txRua.enable(false);
-        txNumero.enable(false);
-        txTelefone.enable(false);
-        txBairro.enable(false);
-        dtDataNascimento.enable(false);
-        cbSexo.enable(false);
-    }
-
-    public void habilitarCampos() {
-        txNome.enable(true);
-        txNomeMae.enable(true);
-        txNumeroSUS.enable(true);
-        txRg.enable(true);
-        txCelular.enable(true);
-        txComplemento.enable(true);
-        txRua.enable(true);
-        txNumero.enable(true);
-        txTelefone.enable(true);
-        txBairro.enable(true);
-        dtDataNascimento.enable(true);
-        cbSexo.enable(true);
-    }
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGravar;
     private javax.swing.JButton btnGravar1;
-    private javax.swing.JButton btnNovo;
     private javax.swing.JComboBox cbCidade;
     private javax.swing.JComboBox cbEstado;
     private javax.swing.JComboBox cbSexo;

@@ -255,6 +255,7 @@ private void txBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_txBuscarActionPerformed
 
 private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+setVisible(false);
 dispose();
 }//GEN-LAST:event_btnCancelarActionPerformed
 

@@ -169,7 +169,7 @@ public class pacienteDAO extends MySQL {
         this.setConnection("sal");
         this.open();
 
-        String SQL = "SELECT * FROM paciente WHERE nome = '%"+filtro+"%'";
+        String SQL = "SELECT * FROM paciente WHERE nome LIKE '%"+filtro+"%'";
         this.prepare(SQL);
         this.executeQuery();
 

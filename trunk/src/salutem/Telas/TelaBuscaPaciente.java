@@ -13,6 +13,8 @@ package salutem.Telas;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import salutem.Beans.PacienteBean;
 import salutem.DAO.pacienteDAO;
@@ -24,6 +26,7 @@ import salutem.Utils.Msg;
  */
 public class TelaBuscaPaciente extends javax.swing.JDialog {
     private pacienteDAO pacienteDao = new pacienteDAO();
+    private PacienteBean pacienteBean = new PacienteBean();
     
 
     /** Creates new form TelaBuscaPaciente */
@@ -152,8 +155,18 @@ public class TelaBuscaPaciente extends javax.swing.JDialog {
         });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -242,6 +255,18 @@ tela.setVisible(true);
 
 }//GEN-LAST:event_btnNovoActionPerformed
 
+private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        try {
+            excluir();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaBuscaPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}//GEN-LAST:event_btnExcluirActionPerformed
+
+private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+alterar();
+}//GEN-LAST:event_btnAlterarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -324,6 +349,44 @@ tela.setVisible(true);
             Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
         }
     }
+    
+    private void excluir() throws SQLException{
+        int row = this.tabela.getSelectedRow();
+        
+       
+        
+        if(row == -1){
+            Msg.alerta(this, "Por favor, selecione o registro.");
+            return;
+        }
+        
+        DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+        int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
+
+        pacienteDao.excluir(id);
+        atualizarTabela();
+        
+    }
+    
+    public void alterar(){
+        int row = this.tabela.getSelectedRow();
+
+        if(row == -1){
+            Msg.alerta(this, "Selecione o registro.");
+            return;
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+        int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
+
+        TelaCadastroPaciente tela = new TelaCadastroPaciente();
+        tela.setTitle("ALTERAR PACIENTE");
+        tela.setInserir(false);
+        tela.setLocationRelativeTo(null);
+        tela.preencherCampos(id);
+        tela.setVisible(true);
+    }
+
 
     protected void limparTabela(){
         DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();

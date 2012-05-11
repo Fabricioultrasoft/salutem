@@ -10,9 +10,13 @@
  */
 package salutem.Telas;
 
+import java.awt.AWTKeyStroke;
 import java.awt.Component;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -40,6 +44,7 @@ public class TelaCadastroPaciente extends JDialog {
     public TelaCadastroPaciente() {
         initComponents();
         this.setModal(true);
+          pularCampo();
        
 
 
@@ -111,7 +116,7 @@ public class TelaCadastroPaciente extends JDialog {
 
         jLabel12.setText("Sexo");
 
-        cbSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "....", "MASCULINO", "FEMININO" }));
+        cbSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "....", "M", "F" }));
 
         jLabel15.setText("Cpf");
 
@@ -437,9 +442,14 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         } else {
             JOptionPane.showMessageDialog(null, "Selecione o Sexo.");
         }
-       PacienteBean paciente = new PacienteBean(); 
-       System.out.println("Dentro do Metodo: "+paciente.getSexo());
+       
        return pacienteBean;
+    }
+    public void pularCampo(){
+       
+         HashSet conj = new HashSet(this.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));   
+         conj.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_ENTER, 0));  
+         this.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, conj);  
     }
     
     private void destacarCampo(Component c, boolean b) {
@@ -449,15 +459,31 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             c.setBackground(Params.COR_CAMPO_NORMAL);
         }
     }
+    public void perdeFoco(){
+       
+      
+        //this.txCpf.lostFocus(null, this);
+        //if (this.txCpf.getText().length() < 15){
+          //  JOptionPane.showMessageDialog(null, "CPF DEVE CONTER TODOS OS DIGITOS.");
+        //}
+        
+    }
 
     private boolean verificarCampos() {
         boolean aux = false;
         String msg = "Preencha corretamente os campos. \n";
+        
+        if (this.txCpf.getText().length() < 15){
+            JOptionPane.showMessageDialog(null, "CPF DEVE CONTER TODOS OS DIGITOS.");
+        }
+        
         if (this.txNome.getText().isEmpty()) {
             aux = true;
             this.destacarCampo(this.txNome, aux);
 
         }
+        
+        
         
          if (this.txCpf.getText().isEmpty()) {
             aux = true;
@@ -516,7 +542,8 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
             this.destacarCampo(this.txRua, aux);
         }
-
+        
+        
 
         if (aux) {
             Msg.alerta(this, msg);
@@ -529,6 +556,8 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     
     protected void preencherCampos(int id) {
         try {
+            
+            
             
             PacienteBean paciente = pacienteDao.getPaciente(id);
             
@@ -544,7 +573,9 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             this.txRg.setText(paciente.getRgie());
             this.txRua.setText(paciente.getRua().trim().toUpperCase());
             this.txTelefone.setText(paciente.getTelefone());
+            this.cbSexo.setSelectedItem(paciente.getSexo());
             
+           
             
         } catch (SQLException ex) {
             Msg.erro(this, "Erro ao preencher campos. \n" + ex.getMessage());
@@ -588,7 +619,10 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 paciente.setRgie(this.txRg.getText().trim().toUpperCase());
                 paciente.setTelefone(this.txTelefone.getText().trim().toUpperCase());
                 paciente.setRua(this.txRua.getText().trim().toUpperCase());
-                paciente.setSexo(pacienteBean.getSexo());
+                String sexo;
+                sexo = (String) cbSexo.getSelectedItem();
+                
+                paciente.setSexo(sexo);
                
                 this.pacienteDao.inserir(paciente);
                 Msg.informacao(this, "Salvo com sucesso.");

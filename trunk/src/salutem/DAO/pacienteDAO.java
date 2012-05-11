@@ -23,6 +23,18 @@ public class pacienteDAO extends MySQL {
         this.setConnection("sal");
         this.open();
         
+        String SQL = "SELECT COUNT(*) AS T FROM paciente "
+                + "WHERE paciente.cpf = ?";
+        this.prepare(SQL);
+        this.setString(1, func.getCpfCnpj());
+        this.executeQuery();
+        this.getRS().first();
+
+        if (this.getRS().getInt("T") > 0) {
+            this.close();
+            throw new SQLException("CPF-DUPLICADO");
+        }
+        
         int id = getCodigo();
 
         String sql = "INSERT INTO paciente "
@@ -58,6 +70,18 @@ public class pacienteDAO extends MySQL {
     public void alterar(PacienteBean paciente) throws SQLException {
         this.setConnection("sal");
         this.open();
+        
+        String SQL = "SELECT COUNT(*) AS T FROM paciente "
+                + "WHERE paciente.cpf = ?";
+        this.prepare(SQL);
+        this.setString(1, paciente.getCpfCnpj());
+        this.executeQuery();
+        this.getRS().first();
+
+        if (this.getRS().getInt("T") > 0) {
+            this.close();
+            throw new SQLException("CPF-DUPLICADO");
+        }
 
         String sql = "UPDATE paciente SET nome = ?, cpf = ?,rg = ?,nomeMae = ?,cartaoSus = ?,telefone = ?,celular = ?,rua = ?,complemento = ?,numero = ?,bairro = ?,cidade = ?,estado = ?,sexo = ?,data = ? WHERE idPaciente = ?";
 
@@ -94,20 +118,24 @@ public class pacienteDAO extends MySQL {
 
         this.close();
     }
-    public void ordenarPorNome(String nome) throws SQLException{
+    public void ordenarPorNome() throws SQLException{
         this.setConnection("sal");
+        
         this.open();
         
-        String sql = "SELECT nome FROM paciente order by "+nome;
+        String sql = "SELECT idPaciente,nome FROM paciente order by nome";
+        this.prepare(sql);
         this.execute();
         this.close();
         
+        
     }
-    public void ordenarPorCodigo(int id) throws SQLException{
+    public void ordenarPorCodigo() throws SQLException{
         this.setConnection("sal");
         this.open();
         
-        String sql = "SELECT idPaciente FROM paciente order by "+id;
+        String sql = "SELECT idPaciente,nome FROM paciente order by idPaciente";
+        this.prepare(sql);
         this.execute();
         this.close();
         

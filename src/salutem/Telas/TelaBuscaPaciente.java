@@ -282,7 +282,7 @@ private void rdOrdenarPorNomeActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_rdOrdenarPorNomeActionPerformed
 
 private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-TelaCadastroPaciente tela = new TelaCadastroPaciente(TelaCadastroPaciente, true);
+TelaCadastroPaciente tela = new TelaCadastroPaciente();
 tela.setTitle("Inserir Paciente");
 tela.setLocationRelativeTo(null);
 tela.setInserir(true);

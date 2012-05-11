@@ -43,11 +43,12 @@ public class TelaCadastroPaciente extends JDialog {
 
     /** Creates new form TelaCadastroPaciente */
     
+    /**
      public TelaCadastroPaciente(TelaBuscaPaciente parent, boolean modal){
         super(parent, modal);
         initComponents();
         
-        TelaCadastroPaciente tela = new TelaCadastroPaciente();
+       
 
         this.telaBusca = parent;
         this.pacienteDao = new pacienteDAO();
@@ -56,7 +57,14 @@ public class TelaCadastroPaciente extends JDialog {
         super(parent, modal);
         initComponents();
     }
-    
+    */
+     public TelaCadastroPaciente() {
+        
+        initComponents();
+        
+          
+         
+    }
    
 
     /** This method is called from within the constructor to

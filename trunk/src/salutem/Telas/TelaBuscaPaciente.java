@@ -34,7 +34,7 @@ import salutem.Utils.Msg;
 public class TelaBuscaPaciente extends javax.swing.JDialog {
     private pacienteDAO pacienteDao;
     private PacienteBean pacienteBean;
-    private TelaPrincipal telaP = new TelaPrincipal();
+    private TelaPrincipal telaP;
 
     /** Creates new form TelaBuscaPaciente */
     public TelaBuscaPaciente(java.awt.Frame parent, boolean modal) {

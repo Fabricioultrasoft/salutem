@@ -4,18 +4,19 @@
  */
 
 /*
- * TelaEspecialidade.java
+ * TelaCargo.java
  *
- * Created on 09/05/2012, 13:23:33
+ * Created on 11/05/2012, 14:31:04
  */
 
 package salutem.Telas;
 
+import com.mysql.jdbc.Util;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import salutem.Beans.EspecialidadeBean;
-import salutem.DAO.EspecialidadeDAO;
+import salutem.Beans.CargoBean;
+import salutem.DAO.CargoDAO;
 import salutem.Utils.Msg;
 import salutem.Utils.Utils;
 
@@ -23,16 +24,17 @@ import salutem.Utils.Utils;
  *
  * @author Renato Doretto
  */
-public class TelaEspecialidade extends javax.swing.JDialog {
+public class TelaCargo extends javax.swing.JDialog {
 
-    private EspecialidadeDAO daoEsp;
+    private CargoDAO daoCargo;
     private TelaPrincipal telaP;
-    public TelaEspecialidade(java.awt.Frame parent, boolean modal) {
+    
+    public TelaCargo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
         this.telaP = (TelaPrincipal) parent;
-        this.daoEsp = new EspecialidadeDAO();
+        this.daoCargo = new CargoDAO();
 
         Utils.maximizar(this);
         this.tabela.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -66,7 +68,7 @@ public class TelaEspecialidade extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
-        btTodos.setText("Exibir todos");
+        btTodos.setText("Exibir Todos");
         btTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btTodosActionPerformed(evt);
@@ -86,29 +88,27 @@ public class TelaEspecialidade extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbInfoPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btPesquisar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btTodos)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbInfoPesq, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                    .addComponent(txPesquisar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btPesquisar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btTodos)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btTodos)
-                    .addComponent(btPesquisar)
-                    .addComponent(txPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btPesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbInfoPesq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lbInfoPesq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
@@ -116,7 +116,7 @@ public class TelaEspecialidade extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "NOME"
+                "ID", "Descricao"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -175,7 +175,7 @@ public class TelaEspecialidade extends javax.swing.JDialog {
                 .addComponent(btAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btExcluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addComponent(btSair)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btAjuda)
@@ -198,12 +198,12 @@ public class TelaEspecialidade extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -212,7 +212,7 @@ public class TelaEspecialidade extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -251,7 +251,7 @@ public class TelaEspecialidade extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TelaEspecialidade dialog = new TelaEspecialidade(new javax.swing.JFrame(), true);
+                TelaCargo dialog = new TelaCargo(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
@@ -278,20 +278,24 @@ public class TelaEspecialidade extends javax.swing.JDialog {
     private javax.swing.JTextField txPesquisar;
     // End of variables declaration//GEN-END:variables
 
+    private void sair(){
+        this.setVisible(false);
+        this.dispose();
+    }
+
     protected void atualizarTabela(){
         try{
             DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
             modelo.setNumRows(0);
 
-            List<EspecialidadeBean> lista = this.daoEsp.getLista();
+            List<CargoBean> listaCargo = this.daoCargo.getLista();
 
-            for(int i=0; i< lista.size(); i++){
+            for(int i=0; i < listaCargo.size(); i++){
                 modelo.addRow(new Object[]{
-                lista.get(i).getIdEspecialidade(),
-                lista.get(i).getNome()});
+                listaCargo.get(i).getIdCargo(),
+                listaCargo.get(i).getDescricao()});
             }
-            this.lbInfoPesq.setText(modelo.getRowCount() + " resultado(s).");
-
+            this.lbInfoPesq.setText(modelo.getRowCount()+ " resultado(s).");
         }catch(SQLException ex){
             Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
         }
@@ -302,15 +306,14 @@ public class TelaEspecialidade extends javax.swing.JDialog {
             DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
             modelo.setNumRows(0);
 
-            List<EspecialidadeBean> lista = this.daoEsp.getLista(filtro);
+            List<CargoBean> listaCargo = this.daoCargo.getLista(filtro);
 
-            for(int i=0; i< lista.size(); i++){
+            for(int i=0; i < listaCargo.size(); i++){
                 modelo.addRow(new Object[]{
-                lista.get(i).getIdEspecialidade(),
-                lista.get(i).getNome()});
+                listaCargo.get(i).getIdCargo(),
+                listaCargo.get(i).getDescricao()});
             }
-            this.lbInfoPesq.setText(modelo.getRowCount() + "resultado(s).");
-
+            this.lbInfoPesq.setText(modelo.getRowCount()+ " resultado(s).");
         }catch(SQLException ex){
             Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
         }
@@ -322,11 +325,6 @@ public class TelaEspecialidade extends javax.swing.JDialog {
         this.lbInfoPesq.setText("");
     }
 
-    private void sair(){
-        this.setVisible(false);
-        this.dispose();
-    }
-
     private void pesquisar(){
         if(this.txPesquisar.getText().length() >= 3){
             this.atualizarTabela(this.txPesquisar.getText().trim());
@@ -336,8 +334,8 @@ public class TelaEspecialidade extends javax.swing.JDialog {
     }
 
     public void inserir(){
-        TelaEspecialidadeCadastro tela = new TelaEspecialidadeCadastro(this, true);
-        tela.setTitle("INSERIR ESPECIALIDADE");
+        TelaCargoCadastro tela = new TelaCargoCadastro(this, true);
+        tela.setTitle("INSERIR CARGO");
         tela.setInserir(true);
         tela.setLocationRelativeTo(null);
         tela.setVisible(true);
@@ -345,7 +343,6 @@ public class TelaEspecialidade extends javax.swing.JDialog {
 
     public void alterar(){
         int row = this.tabela.getSelectedRow();
-
         if(row == -1){
             Msg.alerta(this, "Selecione o registro.");
             return;
@@ -354,29 +351,28 @@ public class TelaEspecialidade extends javax.swing.JDialog {
         DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
-        TelaEspecialidadeCadastro tela = new TelaEspecialidadeCadastro(this, true);
-        tela.setTitle("ALTERAR ESPECIALIDADE");
+        TelaCargoCadastro tela = new TelaCargoCadastro(this, true);
+        tela.setTitle("ALTERAR CARGO");
         tela.setInserir(false);
         tela.setLocationRelativeTo(null);
-        tela.preencherCampos(id);
+        
         tela.setVisible(true);
     }
 
     private void excluir(){
         int row = this.tabela.getSelectedRow();
-
         if(row == -1){
-            Msg.alerta(this, "Por favor, selecione o registro.");
+            Msg.alerta(this, "Selecione o registro.");
             return;
         }
 
         DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
-        String esp = modelo.getValueAt(row, 1).toString();
+        String cargo = modelo.getValueAt(row, 1).toString();
 
-        if(Msg.confirmar(this, "Deseja excluir o registro \""+esp+"\" ?")){
+        if(Msg.confirmar(this, "Deseja excluir o registro \""+cargo+"\"?")){
             try{
-                this.daoEsp.excluir(id);
+                this.daoCargo.excluir(id);
                 this.atualizarTabela();
             }catch(SQLException ex){
                 if(ex.getMessage().startsWith("Cannot delete or update a parent row")){

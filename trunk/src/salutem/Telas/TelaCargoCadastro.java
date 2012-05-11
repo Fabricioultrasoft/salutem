@@ -4,18 +4,17 @@
  */
 
 /*
- * TelaEspecialidadeCadastro.java
+ * TelaCargoCadastro.java
  *
- * Created on 09/05/2012, 13:30:04
+ * Created on 11/05/2012, 14:45:18
  */
 
 package salutem.Telas;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.sql.SQLException;
-import salutem.Beans.EspecialidadeBean;
-import salutem.DAO.EspecialidadeDAO;
+import salutem.Beans.CargoBean;
+import salutem.DAO.CargoDAO;
 import salutem.Utils.Msg;
 import salutem.Utils.Params;
 
@@ -23,21 +22,21 @@ import salutem.Utils.Params;
  *
  * @author Renato Doretto
  */
-public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
+public class TelaCargoCadastro extends javax.swing.JDialog {
 
     private boolean inserir;
-    private Integer idEspecialidade;
-    private EspecialidadeDAO daoEsp;
-    private TelaEspecialidade telaEsp;
+    private Integer idCargo;
+    private CargoDAO daoCargo;
+    private TelaCargo telaCargo;
 
-    public TelaEspecialidadeCadastro(TelaEspecialidade parent, boolean modal){
+    public TelaCargoCadastro(TelaCargo parent, boolean modal){
         super(parent, modal);
         initComponents();
 
-        this.telaEsp = parent;
-        this.daoEsp = new EspecialidadeDAO();
+        this.telaCargo = parent;
+        this.daoCargo = new CargoDAO();
     }
-    public TelaEspecialidadeCadastro(java.awt.Frame parent, boolean modal) {
+    public TelaCargoCadastro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -52,8 +51,8 @@ public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lbNome = new javax.swing.JLabel();
-        txNome = new javax.swing.JTextField();
+        lbDescricao = new javax.swing.JLabel();
+        txDescricao = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btSalvar = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
@@ -62,7 +61,7 @@ public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lbNome.setText("Nome");
+        lbDescricao.setText("Descrição");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -71,18 +70,18 @@ public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbNome)
-                    .addComponent(txNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
+                    .addComponent(txDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(lbDescricao))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbNome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addComponent(lbDescricao)
+                .addGap(18, 18, 18)
+                .addComponent(txDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-salvar.png"))); // NOI18N
@@ -106,11 +105,11 @@ public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(52, 52, 52)
                 .addComponent(btSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btCancelar)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,21 +125,21 @@ public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -160,7 +159,7 @@ public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TelaEspecialidadeCadastro dialog = new TelaEspecialidadeCadastro(new javax.swing.JFrame(), true);
+                TelaCargoCadastro dialog = new TelaCargoCadastro(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
@@ -176,8 +175,8 @@ public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
     private javax.swing.JButton btSalvar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lbNome;
-    private javax.swing.JTextField txNome;
+    private javax.swing.JLabel lbDescricao;
+    private javax.swing.JTextField txDescricao;
     // End of variables declaration//GEN-END:variables
 
     private void cancelar() {
@@ -191,7 +190,7 @@ public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
 
     protected void setInserir(boolean inserir) {
         this.inserir = inserir;
-        this.idEspecialidade = null;
+        this.idCargo = null;
     }
 
     private void destacarCampo(Component c, boolean b){
@@ -205,9 +204,9 @@ public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
     private boolean verificarCampos(){
         boolean aux = false;
         String msg = "Preencha corretamente os campos. \n";
-        if(this.txNome.getText().isEmpty()){
+        if(this.txDescricao.getText().isEmpty()){
             aux = true;
-            this.destacarCampo(this.txNome, aux);
+            this.destacarCampo(this.txDescricao, aux);
         }
         if(aux){
             Msg.alerta(this, msg);
@@ -217,9 +216,9 @@ public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
 
     protected void preencherCampos(int id){
         try{
-            EspecialidadeBean esp = daoEsp.getEspecialidade(id);
-            this.idEspecialidade = esp.getIdEspecialidade();
-            this.txNome.setText(esp.getNome().trim().toUpperCase());
+            CargoBean cargo = daoCargo.getCargo(id);
+            this.idCargo = cargo.getIdCargo();
+            this.txDescricao.setText(cargo.getDescricao().trim().toUpperCase());
         }catch(SQLException ex){
             Msg.erro(this, "Erro ao preencher campos. \n"+ex.getMessage());
         }
@@ -231,19 +230,19 @@ public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
         }
         try{
             if(this.isInserir()){
-                EspecialidadeBean esp = new EspecialidadeBean();
-                esp.setNome(this.txNome.getText().trim().toUpperCase());
-                this.daoEsp.inserir(esp);
+                CargoBean cargo = new CargoBean();
+                cargo.setDescricao(this.txDescricao.getText().trim().toUpperCase());
+                this.daoCargo.inserir(cargo);
                 Msg.informacao(this, "Salvo com sucesso.");
-                this.telaEsp.atualizarTabela();
+                this.telaCargo.atualizarTabela();
                 this.cancelar();
             }else{
-                EspecialidadeBean esp = new EspecialidadeBean();
-                esp.setIdEspecialidade(this.idEspecialidade);
-                esp.setNome(this.txNome.getText().trim().toUpperCase());
-                this.daoEsp.alterar(esp);
+                CargoBean cargo = new CargoBean();
+                cargo.setIdCargo(this.idCargo);
+                cargo.setDescricao(this.txDescricao.getText().trim().toUpperCase());
+                this.daoCargo.alterar(cargo);
                 Msg.informacao(this, "Alterado com sucesso.");
-                this.telaEsp.atualizarTabela();
+                this.telaCargo.atualizarTabela();
                 this.cancelar();
             }
         }catch(SQLException ex){

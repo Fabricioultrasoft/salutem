@@ -44,7 +44,7 @@ public class TelaCadastroPaciente extends JDialog {
     public TelaCadastroPaciente() {
         initComponents();
         this.setModal(true);
-          pularCampo();
+         
        
 
 
@@ -390,6 +390,7 @@ public class TelaCadastroPaciente extends JDialog {
 private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
     
     salvar();
+    telaBusca.atualizarTabela();
     
 
 }//GEN-LAST:event_btnGravarActionPerformed
@@ -459,23 +460,13 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             c.setBackground(Params.COR_CAMPO_NORMAL);
         }
     }
-    public void perdeFoco(){
-       
-      
-        //this.txCpf.lostFocus(null, this);
-        //if (this.txCpf.getText().length() < 15){
-          //  JOptionPane.showMessageDialog(null, "CPF DEVE CONTER TODOS OS DIGITOS.");
-        //}
-        
-    }
+    
 
     private boolean verificarCampos() {
         boolean aux = false;
         String msg = "Preencha corretamente os campos. \n";
         
-        if (this.txCpf.getText().length() < 15){
-            JOptionPane.showMessageDialog(null, "CPF DEVE CONTER TODOS OS DIGITOS.");
-        }
+        
         
         if (this.txNome.getText().isEmpty()) {
             aux = true;
@@ -594,6 +585,7 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     }
 
     private void cancelar() {
+        telaBusca.atualizarTabela();
         this.setVisible(false);
         this.dispose();
     }

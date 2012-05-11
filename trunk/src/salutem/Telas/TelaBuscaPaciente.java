@@ -10,7 +10,11 @@
  */
 package salutem.Telas;
 
+import java.awt.AWTKeyStroke;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -37,6 +41,7 @@ public class TelaBuscaPaciente extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         atualizarTabela();
+          
          
     }
 
@@ -158,6 +163,9 @@ public class TelaBuscaPaciente extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        rdOrdenarPorNome.getAccessibleContext().setAccessibleName("nome");
+        rdOrdenarPorCodigo.getAccessibleContext().setAccessibleName("idPaciente");
+
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -267,12 +275,7 @@ dispose();
 }//GEN-LAST:event_btnCancelarActionPerformed
 
 private void rdOrdenarPorNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdOrdenarPorNomeActionPerformed
-        try{
-            pacienteDao.ordenarPorNome();
-
-        }catch(SQLException ex){
-            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
-        }       
+        ordenarPorOrdem();
 }//GEN-LAST:event_rdOrdenarPorNomeActionPerformed
 
 private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -306,17 +309,8 @@ pesquisar();
 }//GEN-LAST:event_btnBuscarActionPerformed
 
 private void rdOrdenarPorCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdOrdenarPorCodigoActionPerformed
-    DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
-    modelo.setNumRows(0);
     
-    try {
-        pacienteDao.ordenarPorCodigo();
-        
-        atualizarTabela();
-
-    } catch (SQLException ex) {
-        Msg.erro(this, "Erro ao atualizar tabela. \n" + ex.getMessage());
-    }       
+    ordenarPorOrdemId();
 }//GEN-LAST:event_rdOrdenarPorCodigoActionPerformed
 
     /**
@@ -363,6 +357,59 @@ private void rdOrdenarPorCodigoActionPerformed(java.awt.event.ActionEvent evt) {
         });
     }
     
+  
+      
+    
+     protected void ordenarPorOrdemId(){
+        
+        
+        try{           
+            
+            
+            
+            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+            modelo.setNumRows(0);
+
+            List<PacienteBean> lista = this.pacienteDao.getListaPorOrdemId();
+
+            for(int i=0; i< lista.size(); i++){
+                modelo.addRow(new Object[]{
+                lista.get(i).getIdPaciente(),
+                lista.get(i).getNome()});
+                
+            }
+          
+
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
+        }
+    }
+    
+    
+    protected void ordenarPorOrdem(){
+        
+        
+        try{           
+            
+            
+            
+            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+            modelo.setNumRows(0);
+
+            List<PacienteBean> lista = this.pacienteDao.getListaPorOrdem();
+
+            for(int i=0; i< lista.size(); i++){
+                modelo.addRow(new Object[]{
+                lista.get(i).getIdPaciente(),
+                lista.get(i).getNome()});
+                
+            }
+          
+
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
+        }
+    }
     
     protected void atualizarTabela(){
         try{

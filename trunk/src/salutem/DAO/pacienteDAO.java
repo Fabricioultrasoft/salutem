@@ -118,29 +118,7 @@ public class pacienteDAO extends MySQL {
 
         this.close();
     }
-    public void ordenarPorNome() throws SQLException{
-        this.setConnection("sal");
-        
-        this.open();
-        
-        String sql = "SELECT idPaciente,nome FROM paciente order by nome";
-        this.prepare(sql);
-        this.execute();
-        this.close();
-        
-        
-    }
-    public void ordenarPorCodigo() throws SQLException{
-        this.setConnection("sal");
-        this.open();
-        
-        String sql = "SELECT idPaciente,nome FROM paciente order by idPaciente";
-        this.prepare(sql);
-        this.execute();
-        this.close();
-        
-    }
-
+   
     public int getCodigo() throws SQLException {
         //this.setConnection("sal");
         //this.open();
@@ -256,6 +234,55 @@ public class pacienteDAO extends MySQL {
         this.close();
         return paciente;
 
+    }
+   
+     
+        public List<PacienteBean> getListaPorOrdem() throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String SQL = "SELECT idPaciente,nome FROM paciente order by nome";
+        this.prepare(SQL);
+        this.executeQuery();
+
+        List<PacienteBean> listaEsp = new ArrayList<PacienteBean>();
+        while (this.getRS().next()) {
+            PacienteBean paciente = new PacienteBean();
+            paciente.setIdPaciente(this.getRS().getInt("idPaciente"));
+            paciente.setNome(this.getRS().getString("nome"));
+            
+           
+            
+            listaEsp.add(paciente);
+        }
+
+        this.close();
+
+        return listaEsp;
+    }
+        
+         public List<PacienteBean> getListaPorOrdemId() throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String SQL = "SELECT idPaciente,nome FROM paciente order by idPaciente";
+        this.prepare(SQL);
+        this.executeQuery();
+
+        List<PacienteBean> listaEsp = new ArrayList<PacienteBean>();
+        while (this.getRS().next()) {
+            PacienteBean paciente = new PacienteBean();
+            paciente.setIdPaciente(this.getRS().getInt("idPaciente"));
+            paciente.setNome(this.getRS().getString("nome"));
+            
+           
+            
+            listaEsp.add(paciente);
+        }
+
+        this.close();
+
+        return listaEsp;
     }
     
     //fim

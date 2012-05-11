@@ -23,10 +23,12 @@ public class UsuarioDAO extends MySQL{
     public void inserir(UsuarioBean usuario) throws SQLException{
         this.setConnection("sal");
         this.open();
+
+        int id = this.getCodigo();
         
         String SQL = "INSERT INTO usuario (idUsuario, login, senha, idFuncionario) VALUES (?,?,PASSWORD(MD5(?)),?)";
         this.prepare(SQL);
-        this.setInt(1, this.getCodigo());
+        this.setInt(1, id);
         this.setString(2, usuario.getLogin());
         this.setString(3, usuario.getSenha());
         this.setInt(4, usuario.getFuncionario().getIdFuncionario());
@@ -176,8 +178,6 @@ public class UsuarioDAO extends MySQL{
     }
 
     public int getCodigo() throws SQLException {
-        //this.setConnection("sal");
-        //this.open();
 
         String SQL = "SELECT HIGH_PRIORITY IFNULL(MAX(idUsuario),0)+1 AS ID FROM usuario";
         this.prepare(SQL);
@@ -185,8 +185,6 @@ public class UsuarioDAO extends MySQL{
         this.getRS().first();
 
         int novoId = this.getRS().getInt("ID");
-
-        //this.close();
 
         return novoId;
     }

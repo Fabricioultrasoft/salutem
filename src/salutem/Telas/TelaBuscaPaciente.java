@@ -29,6 +29,8 @@ public class TelaBuscaPaciente extends javax.swing.JDialog {
     private pacienteDAO pacienteDao = new pacienteDAO();
     private PacienteBean pacienteBean = new PacienteBean();
     
+    
+    
 
     /** Creates new form TelaBuscaPaciente */
     public TelaBuscaPaciente(java.awt.Frame parent, boolean modal) {
@@ -95,6 +97,11 @@ public class TelaBuscaPaciente extends javax.swing.JDialog {
 
         buttonGroup1.add(rdOrdenarPorCodigo);
         rdOrdenarPorCodigo.setText("Código");
+        rdOrdenarPorCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdOrdenarPorCodigoActionPerformed(evt);
+            }
+        });
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -260,7 +267,12 @@ dispose();
 }//GEN-LAST:event_btnCancelarActionPerformed
 
 private void rdOrdenarPorNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdOrdenarPorNomeActionPerformed
-// TODO add your handling code here:
+        try{
+            pacienteDao.ordenarPorNome();
+
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
+        }       
 }//GEN-LAST:event_rdOrdenarPorNomeActionPerformed
 
 private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -292,6 +304,20 @@ atualizarTabela();
 private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 pesquisar();
 }//GEN-LAST:event_btnBuscarActionPerformed
+
+private void rdOrdenarPorCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdOrdenarPorCodigoActionPerformed
+    DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+    modelo.setNumRows(0);
+    
+    try {
+        pacienteDao.ordenarPorCodigo();
+        
+        atualizarTabela();
+
+    } catch (SQLException ex) {
+        Msg.erro(this, "Erro ao atualizar tabela. \n" + ex.getMessage());
+    }       
+}//GEN-LAST:event_rdOrdenarPorCodigoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -421,6 +447,8 @@ pesquisar();
         tela.setLocationRelativeTo(null);
         tela.preencherCampos(id);
         tela.setVisible(true);
+        
+        
     }
 
 

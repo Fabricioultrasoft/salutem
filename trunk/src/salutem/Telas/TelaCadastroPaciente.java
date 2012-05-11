@@ -39,17 +39,25 @@ public class TelaCadastroPaciente extends JDialog {
     private boolean inserir;
     private Integer idPaciente;
     private TelaBuscaPaciente telaBusca;
+   
 
     /** Creates new form TelaCadastroPaciente */
-    public TelaCadastroPaciente() {
+    
+     public TelaCadastroPaciente(TelaBuscaPaciente parent, boolean modal){
+        super(parent, modal);
         initComponents();
-        this.setModal(true);
-         
-       
+        
+        TelaCadastroPaciente tela = new TelaCadastroPaciente();
 
-
-
+        this.telaBusca = parent;
+        this.pacienteDao = new pacienteDAO();
     }
+    public TelaCadastroPaciente(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+    }
+    
+   
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -584,7 +592,7 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     }
 
     private void cancelar() {
-        telaBusca.atualizarTabela();
+        
         this.setVisible(false);
         this.dispose();
     }

@@ -23,6 +23,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import salutem.Beans.PacienteBean;
 import salutem.DAO.pacienteDAO;
+import salutem.Telas.TelaCadastroPaciente;
+import salutem.Telas.TelaPrincipal;
 import salutem.Utils.Msg;
 
 /**
@@ -32,6 +34,7 @@ import salutem.Utils.Msg;
 public class TelaBuscaPaciente extends javax.swing.JDialog {
     private pacienteDAO pacienteDao = new pacienteDAO();
     private PacienteBean pacienteBean = new PacienteBean();
+   
     
     
     
@@ -279,7 +282,7 @@ private void rdOrdenarPorNomeActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_rdOrdenarPorNomeActionPerformed
 
 private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-TelaCadastroPaciente tela = new TelaCadastroPaciente();
+TelaCadastroPaciente tela = new TelaCadastroPaciente(TelaCadastroPaciente, true);
 tela.setTitle("Inserir Paciente");
 tela.setLocationRelativeTo(null);
 tela.setInserir(true);

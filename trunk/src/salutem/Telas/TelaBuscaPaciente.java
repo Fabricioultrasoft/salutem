@@ -32,19 +32,18 @@ import salutem.Utils.Msg;
  * @author Tironi
  */
 public class TelaBuscaPaciente extends javax.swing.JDialog {
-    private pacienteDAO pacienteDao = new pacienteDAO();
-    private PacienteBean pacienteBean = new PacienteBean();
-   
-    
-    
-    
+    private pacienteDAO pacienteDao;
+    private PacienteBean pacienteBean;
+    private TelaPrincipal telaP = new TelaPrincipal();
 
     /** Creates new form TelaBuscaPaciente */
     public TelaBuscaPaciente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         atualizarTabela();
-          
+        this.telaP = (TelaPrincipal) parent;
+        this.pacienteDao = new pacienteDAO();
+        this.pacienteBean  = new PacienteBean();
          
     }
 
@@ -282,7 +281,7 @@ private void rdOrdenarPorNomeActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_rdOrdenarPorNomeActionPerformed
 
 private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-TelaCadastroPaciente tela = new TelaCadastroPaciente();
+TelaCadastroPaciente tela = new TelaCadastroPaciente(this, true);
 tela.setTitle("Inserir Paciente");
 tela.setLocationRelativeTo(null);
 tela.setInserir(true);
@@ -491,7 +490,7 @@ private void rdOrdenarPorCodigoActionPerformed(java.awt.event.ActionEvent evt) {
         DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
-        TelaCadastroPaciente tela = new TelaCadastroPaciente();
+        TelaCadastroPaciente tela = new TelaCadastroPaciente(this, true);
         tela.setTitle("ALTERAR PACIENTE");
         tela.setInserir(false);
         tela.setLocationRelativeTo(null);

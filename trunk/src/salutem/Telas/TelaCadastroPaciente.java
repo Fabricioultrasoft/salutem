@@ -34,38 +34,27 @@ import salutem.Utils.Utils;
  */
 public class TelaCadastroPaciente extends JDialog {
 
-    private pacienteDAO pacienteDao = new pacienteDAO();
-    private PacienteBean pacienteBean = new PacienteBean();
+    private pacienteDAO pacienteDao;
+    private PacienteBean pacienteBean;
     private boolean inserir;
     private Integer idPaciente;
     private TelaBuscaPaciente telaBusca;
-   
 
     /** Creates new form TelaCadastroPaciente */
-    
-    /**
-     public TelaCadastroPaciente(TelaBuscaPaciente parent, boolean modal){
+    public TelaCadastroPaciente(TelaBuscaPaciente parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-       
 
         this.telaBusca = parent;
         this.pacienteDao = new pacienteDAO();
+        this.pacienteBean = new PacienteBean();
+
     }
+
     public TelaCadastroPaciente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    */
-     public TelaCadastroPaciente() {
-        
-        initComponents();
-        
-          
-         
-    }
-   
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -419,10 +408,10 @@ public class TelaCadastroPaciente extends JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
-    
+
     salvar();
     telaBusca.atualizarTabela();
-    
+
 
 }//GEN-LAST:event_btnGravarActionPerformed
 
@@ -461,11 +450,18 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new TelaCadastroPaciente().setVisible(true);
+                TelaCadastroPaciente dialog = new TelaCadastroPaciente(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
+                    public void windoClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
-   
+
     public PacienteBean selecionarItemCombo() {
         if (cbSexo.getSelectedItem().equals("MASCULINO")) {
             pacienteBean.setSexo("M");
@@ -474,16 +470,17 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         } else {
             JOptionPane.showMessageDialog(null, "Selecione o Sexo.");
         }
-       
-       return pacienteBean;
+
+        return pacienteBean;
     }
-    public void pularCampo(){
-       
-         HashSet conj = new HashSet(this.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));   
-         conj.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_ENTER, 0));  
-         this.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, conj);  
+
+    public void pularCampo() {
+
+        HashSet conj = new HashSet(this.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));
+        conj.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_ENTER, 0));
+        this.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, conj);
     }
-    
+
     private void destacarCampo(Component c, boolean b) {
         if (b) {
             c.setBackground(Params.COR_CAMPO_VAZIO);
@@ -491,14 +488,13 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             c.setBackground(Params.COR_CAMPO_NORMAL);
         }
     }
-    
 
     private boolean verificarCampos() {
         boolean aux = false;
         String msg = "Preencha corretamente os campos. \n";
-        
-        
-        
+
+
+
         if (this.txNome.getText().isEmpty()) {
             aux = true;
             this.destacarCampo(this.txNome, aux);
@@ -552,8 +548,8 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
             this.destacarCampo(this.txRua, aux);
         }
-        
-        
+
+
 
         if (aux) {
             Msg.alerta(this, msg);
@@ -561,16 +557,13 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         return aux;
     }
 
-   
-            
-    
     protected void preencherCampos(int id) {
         try {
-            
-            
-            
+
+
+
             PacienteBean paciente = pacienteDao.getPaciente(id);
-            
+
             this.idPaciente = paciente.getIdPaciente();
             this.txNome.setText(paciente.getNome().trim().toUpperCase());
             this.txBairro.setText(paciente.getBairro().trim().toUpperCase());
@@ -584,15 +577,13 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             this.txRua.setText(paciente.getRua().trim().toUpperCase());
             this.txTelefone.setText(paciente.getTelefone());
             this.cbSexo.setSelectedItem(paciente.getSexo());
-            
-           
-            
+
+
+
         } catch (SQLException ex) {
             Msg.erro(this, "Erro ao preencher campos. \n" + ex.getMessage());
         }
     }
-    
-    
 
     protected boolean isInserir() {
         return inserir;
@@ -604,7 +595,7 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     }
 
     private void cancelar() {
-        
+
         this.setVisible(false);
         this.dispose();
     }
@@ -615,8 +606,8 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         }
         try {
             if (this.isInserir()) {
-                
-                        
+
+
                 PacienteBean paciente = new PacienteBean();
                 paciente.setNome(this.txNome.getText().trim().toUpperCase());
                 paciente.setBairro(this.txBairro.getText().trim().toUpperCase());
@@ -632,9 +623,9 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 paciente.setRua(this.txRua.getText().trim().toUpperCase());
                 String sexo;
                 sexo = (String) cbSexo.getSelectedItem();
-                
+
                 paciente.setSexo(sexo);
-               
+
                 this.pacienteDao.inserir(paciente);
                 Msg.informacao(this, "Salvo com sucesso.");
                 telaBusca = new TelaBuscaPaciente(null, inserir);
@@ -651,12 +642,10 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 this.cancelar();
             }
         } catch (SQLException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
             Msg.erro(this, "Erro ao salvar. \n" + ex.getMessage());
         }
     }
-
-  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGravar;
     private javax.swing.JButton btnGravar1;

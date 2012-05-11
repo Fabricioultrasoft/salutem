@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package salutem.DAO;
 
 import java.sql.SQLException;
@@ -15,9 +14,9 @@ import salutem.conexao.MySQL;
  *
  * @author Renato Doretto
  */
-public class UnidadeDAO extends MySQL{
+public class UnidadeDAO extends MySQL {
 
-    public void inserir(UnidadeBean uni) throws SQLException{
+    public void inserir(UnidadeBean uni) throws SQLException {
         this.setConnection("sal");
         this.open();
 
@@ -37,11 +36,9 @@ public class UnidadeDAO extends MySQL{
         this.close();
     }
 
-    public void alterar(UnidadeBean uni) throws SQLException{
+    public void alterar(UnidadeBean uni) throws SQLException {
         this.setConnection("sal");
         this.open();
-
-        int id = this.getCodigo();
 
         String SQL = "UPDATE unidade SET nome = ?, rua = ?, numero = ?, "
                 + "bairro = ?, complemento = ?, WHERE idUnidade = ?";
@@ -56,17 +53,17 @@ public class UnidadeDAO extends MySQL{
         this.close();
     }
 
-    public void excluir(int id) throws SQLException{
+    public void excluir(int id) throws SQLException {
         this.setConnection("sal");
         this.open();
 
-        String SQL = "DELETE FROM unidade WHERE idUnidade = "+id;
+        String SQL = "DELETE FROM unidade WHERE idUnidade = " + id;
         this.prepare(SQL);
         this.execute();
         this.close();
     }
 
-    public List<UnidadeBean> getLista() throws SQLException{
+    public List<UnidadeBean> getLista() throws SQLException {
         this.setConnection("sal");
         this.open();
 
@@ -75,7 +72,7 @@ public class UnidadeDAO extends MySQL{
         this.executeQuery();
 
         List<UnidadeBean> listaUni = new ArrayList<UnidadeBean>();
-        while(this.getRS().next()){
+        while (this.getRS().next()) {
             UnidadeBean uni = new UnidadeBean();
             uni.setIdUnidade(this.getRS().getInt("idUnidade"));
             uni.setNome(this.getRS().getString("nome"));
@@ -91,16 +88,16 @@ public class UnidadeDAO extends MySQL{
         return listaUni;
     }
 
-    public List<UnidadeBean> getLista(String filtro) throws SQLException{
+    public List<UnidadeBean> getLista(String filtro) throws SQLException {
         this.setConnection("sal");
         this.open();
 
-        String SQL = "SELECT * FROM unidade WHERE nome LIKE '%"+filtro+"%'";
+        String SQL = "SELECT * FROM unidade WHERE nome LIKE '%" + filtro + "%'";
         this.prepare(SQL);
         this.executeQuery();
 
         List<UnidadeBean> listaUni = new ArrayList<UnidadeBean>();
-        while(this.getRS().next()){
+        while (this.getRS().next()) {
             UnidadeBean uni = new UnidadeBean();
             uni.setIdUnidade(this.getRS().getInt("idUnidade"));
             uni.setNome(this.getRS().getString("nome"));
@@ -114,6 +111,27 @@ public class UnidadeDAO extends MySQL{
         this.close();
 
         return listaUni;
+    }
+
+    public UnidadeBean getUnidade(int id) throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String SQL = "SELECT * FROM unidade WHERE idUnidade = " + id;
+        this.prepare(SQL);
+        this.getRS().first();
+        UnidadeBean uni = new UnidadeBean();
+        uni.setIdUnidade(this.getRS().getInt("idUnidade"));
+        uni.setNome(this.getRS().getString("nome"));
+        uni.setRua(this.getRS().getString("rua"));
+        uni.setNumero(this.getRS().getInt("numero"));
+        uni.setBairro(this.getRS().getString("bairro"));
+        uni.setComplemento(this.getRS().getString("complemento"));
+
+        this.close();
+
+        return uni;
+
     }
 
     public int getCodigo() throws SQLException {

@@ -23,6 +23,8 @@ public class FuncionarioDAO extends MySQL {
         this.setConnection("sal");
         this.open();
 
+        int id = this.getCodigo();
+
         String SQL = "SELECT COUNT(*) AS T FROM funcionario "
                 + "WHERE funcionario.cpf = ?";
         this.prepare(SQL);
@@ -41,7 +43,7 @@ public class FuncionarioDAO extends MySQL {
                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         this.prepare(SQL);
-        this.setInt(1, this.getCodigo());
+        this.setInt(1, id);
         this.setString(2, func.getNome());
         this.setString(3, func.getCpfCnpj());
         this.setString(4, func.getRgie());

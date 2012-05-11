@@ -307,7 +307,7 @@ public class TelaLogin extends javax.swing.JDialog {
             this.dispose();
         } catch (SQLException ex) {
             if (ex.getMessage().equals("USUARIO-INVALIDO")) {
-                Msg.erro(this, "Usuário e/ou senha inválidos!!!");
+                Msg.erro(this, "Usuário e/ou senha inválidos!");
                 this.txSenha.requestFocus();
                 this.txSenha.selectAll();
             } else {
@@ -317,18 +317,18 @@ public class TelaLogin extends javax.swing.JDialog {
     }
 
     private void logoff() {
-        if (Msg.confirmar(this, "Deseja realmente fazer logoff ???")) {
+        if (Msg.confirmar(this, "Deseja realmente fazer logoff ?")) {
             try {
                 Runtime.getRuntime().exec("cmd /c salutem.jar 1");
                 System.exit(0);
             } catch (IOException ex) {
-                Msg.erro(null, "Erro ao fazer logoff!!!\n\n" + ex.getMessage());
+                Msg.erro(null, "Erro ao fazer logoff!\n\n" + ex.getMessage());
             }
         }
     }
 
     private void sair() {
-        if (Msg.confirmar(this, "Deseja realmente sair do sistema ???")) {
+        if (Msg.confirmar(this, "Deseja realmente sair do sistema ?")) {
             this.setVisible(false);
             System.exit(0);
         }

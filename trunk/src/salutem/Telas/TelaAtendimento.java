@@ -26,15 +26,15 @@ import salutem.Utils.Utils;
 public class TelaAtendimento extends javax.swing.JDialog {
     private Integer idPaciente;
     private pacienteDAO pacientedao = new pacienteDAO();
-    private TelaBuscaPaciente tela;
+    
     private boolean inserir;
     
 
     /** Creates new form TelaAtendimento */
-    public TelaAtendimento(TelaBuscaPaciente parent, boolean modal) {
+    public TelaAtendimento(TelaPacienteBusca parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.tela = parent;
+        
     }
      public TelaAtendimento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

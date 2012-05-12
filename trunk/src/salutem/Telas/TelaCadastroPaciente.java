@@ -38,10 +38,10 @@ public class TelaCadastroPaciente extends JDialog {
     private PacienteBean pacienteBean;
     private boolean inserir;
     private Integer idPaciente;
-    private TelaBuscaPaciente telaBusca;
+    private TelaPacienteBusca telaBusca;
 
     /** Creates new form TelaCadastroPaciente */
-    public TelaCadastroPaciente(TelaBuscaPaciente parent, boolean modal) {
+    public TelaCadastroPaciente(TelaPacienteBusca parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -628,7 +628,7 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
                 this.pacienteDao.inserir(paciente);
                 Msg.informacao(this, "Salvo com sucesso.");
-                telaBusca = new TelaBuscaPaciente(null, inserir);
+                telaBusca = new TelaPacienteBusca(null, inserir);
                 this.telaBusca.atualizarTabela();
                 this.cancelar();
             } else {
@@ -637,7 +637,7 @@ private void btnGravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 paciente.setNome(this.txNome.getText().trim().toUpperCase());
                 this.pacienteDao.alterar(paciente);
                 Msg.informacao(this, "Alterado Com Sucesso.");
-                telaBusca = new TelaBuscaPaciente(null, inserir);
+                telaBusca = new TelaPacienteBusca(null, inserir);
                 this.telaBusca.atualizarTabela();
                 this.cancelar();
             }

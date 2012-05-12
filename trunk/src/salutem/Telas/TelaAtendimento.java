@@ -26,14 +26,17 @@ import salutem.Utils.Utils;
 public class TelaAtendimento extends javax.swing.JDialog {
     private Integer idPaciente;
     private pacienteDAO pacientedao = new pacienteDAO();
-    
+    private TelaPacientePesquisa telaBusca;
     private boolean inserir;
     
 
     /** Creates new form TelaAtendimento */
-    public TelaAtendimento(TelaPacienteBusca parent, boolean modal) {
+    public TelaAtendimento(TelaPacientePesquisa parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.telaBusca = parent;
+        
+        
         
     }
      public TelaAtendimento(java.awt.Frame parent, boolean modal) {
@@ -299,7 +302,8 @@ public class TelaAtendimento extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 private void btnPesquisaPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaPacienteActionPerformed
-
+telaBusca = new TelaPacientePesquisa(this, true);
+this.telaBusca.setVisible(true);
 }//GEN-LAST:event_btnPesquisaPacienteActionPerformed
 
     /**

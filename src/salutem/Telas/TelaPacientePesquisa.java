@@ -25,14 +25,20 @@ import salutem.Utils.Msg;
 public class TelaPacientePesquisa extends javax.swing.JDialog {
     private TelaPacienteBusca telaPaciente ;
     private PacientePesquisaDAO pacienteDao;
+    private PacienteBean paciente;
+    private TelaAtendimento telaAtendimento;
 
     /** Creates new form TelaPacientePesquisa */
-   public TelaPacientePesquisa(TelaPacienteBusca parent, boolean modal) {
+  
+   
+    
+    public TelaPacientePesquisa(TelaAtendimento parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        this.telaPaciente = parent;
+        this.telaAtendimento = parent;
         this.pacienteDao = new PacientePesquisaDAO();
+        this.paciente = new PacienteBean();
         
 
     }
@@ -56,7 +62,6 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txPesquisar = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
@@ -77,13 +82,6 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -96,10 +94,6 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnPesquisar)
                 .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(308, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(200, 200, 200))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,9 +103,7 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
                     .addComponent(jLabel1)
                     .addComponent(txPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -146,6 +138,11 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnSelecionar.setText("Selecionar");
+        btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -215,9 +212,9 @@ private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 pesquisar();
 }//GEN-LAST:event_btnPesquisarActionPerformed
 
-private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-atualizarTabela();
-}//GEN-LAST:event_jButton1ActionPerformed
+private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
+
+}//GEN-LAST:event_btnSelecionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,8 +260,30 @@ atualizarTabela();
         });
     }
     
+    public void pegarId(){
+       
+        int row = this.tabela.getSelectedRow();
+
+        if(row == -1){
+            Msg.alerta(this, "Selecione o registro.");
+            return;
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+        int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
+
+        TelaAtendimento tela = new TelaAtendimento(this, true);
+        tela.setInserir(false);
+        tela.setLocationRelativeTo(null);
+        tela.preencherCampos(id);
+        tela.setVisible(true);
+        
+    }
+    
     protected void atualizarTabela(){
         try{
+            this.pacienteDao = new PacientePesquisaDAO();
+            
             DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
             modelo.setNumRows(0);
 
@@ -285,6 +304,8 @@ atualizarTabela();
     
   protected void atualizarTabela(String filtro){
         try{
+            this.pacienteDao = new PacientePesquisaDAO();
+            
             DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
             modelo.setNumRows(0);
 
@@ -314,7 +335,6 @@ atualizarTabela();
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSelecionar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

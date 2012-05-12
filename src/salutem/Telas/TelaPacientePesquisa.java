@@ -213,7 +213,9 @@ pesquisar();
 }//GEN-LAST:event_btnPesquisarActionPerformed
 
 private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
-
+pegarId();
+setVisible(false);
+dispose();
 }//GEN-LAST:event_btnSelecionarActionPerformed
 
     /**
@@ -272,11 +274,9 @@ private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
-        TelaAtendimento tela = new TelaAtendimento(this, true);
-        tela.setInserir(false);
-        tela.setLocationRelativeTo(null);
-        tela.preencherCampos(id);
-        tela.setVisible(true);
+        this.telaAtendimento.preencherCampos(id);
+        
+        
         
     }
     

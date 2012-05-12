@@ -15,7 +15,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import salutem.Beans.PacienteBean;
-import salutem.DAO.TelaPacientePesquisaDAO;
+import salutem.DAO.PacientePesquisaDAO;
 import salutem.Utils.Msg;
 
 /**
@@ -23,16 +23,25 @@ import salutem.Utils.Msg;
  * @author Tironi
  */
 public class TelaPacientePesquisa extends javax.swing.JDialog {
-    private TelaPacientePesquisa telaPaciente ;
-    private TelaPacientePesquisaDAO pacienteDao;
+    private TelaPacienteBusca telaPaciente ;
+    private PacientePesquisaDAO pacienteDao;
 
     /** Creates new form TelaPacientePesquisa */
-    public TelaPacientePesquisa(TelaPacientePesquisa parent, boolean modal) {
+   public TelaPacientePesquisa(TelaPacienteBusca parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
         this.telaPaciente = parent;
-        this.pacienteDao = new TelaPacientePesquisaDAO();
+        this.pacienteDao = new PacientePesquisaDAO();
+        
+
     }
+
+    public TelaPacientePesquisa(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+    }
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -47,6 +56,7 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txPesquisar = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
@@ -61,6 +71,18 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
         jLabel1.setText("Busca");
 
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,6 +96,10 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnPesquisar)
                 .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(308, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(200, 200, 200))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,7 +109,9 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
                     .addComponent(jLabel1)
                     .addComponent(txPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisar))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -183,6 +211,14 @@ setVisible(false);
 dispose();
 }//GEN-LAST:event_btnCancelarActionPerformed
 
+private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+pesquisar();
+}//GEN-LAST:event_btnPesquisarActionPerformed
+
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+atualizarTabela();
+}//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -214,7 +250,7 @@ dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                TelaPacientePesquisa dialog = new TelaPacientePesquisa(new javax.swing.JFrame, true);
+                TelaPacientePesquisa dialog = new TelaPacientePesquisa(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
                     @Override
@@ -227,7 +263,44 @@ dispose();
         });
     }
     
-  
+    protected void atualizarTabela(){
+        try{
+            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+            modelo.setNumRows(0);
+
+            List<PacienteBean> lista = this.pacienteDao.getLista();
+
+            for(int i=0; i< lista.size(); i++){
+                modelo.addRow(new Object[]{
+                lista.get(i).getIdPaciente(),
+                lista.get(i).getNome()});
+                
+            }
+            
+
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
+        }
+    }
+    
+  protected void atualizarTabela(String filtro){
+        try{
+            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+            modelo.setNumRows(0);
+
+            List<PacienteBean> lista = this.pacienteDao.getLista(filtro);
+
+            for(int i=0; i< lista.size(); i++){
+                modelo.addRow(new Object[]{
+                lista.get(i).getIdPaciente(),
+                lista.get(i).getNome()});
+            }
+           
+
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
+        }
+    }
     
      public void pesquisar(){
         if(this.txPesquisar.getText().length() >= 3){
@@ -241,6 +314,7 @@ dispose();
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSelecionar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

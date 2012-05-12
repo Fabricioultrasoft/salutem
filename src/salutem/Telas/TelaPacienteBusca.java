@@ -31,13 +31,13 @@ import salutem.Utils.Msg;
  *
  * @author Tironi
  */
-public class TelaBuscaPaciente extends javax.swing.JDialog {
+public class TelaPacienteBusca extends javax.swing.JDialog {
     private pacienteDAO pacienteDao;
     private PacienteBean pacienteBean;
     private TelaPrincipal telaP;
 
     /** Creates new form TelaBuscaPaciente */
-    public TelaBuscaPaciente(java.awt.Frame parent, boolean modal) {
+    public TelaPacienteBusca(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         atualizarTabela();
@@ -294,7 +294,7 @@ private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         try {
             excluir();
         } catch (SQLException ex) {
-            Logger.getLogger(TelaBuscaPaciente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaPacienteBusca.class.getName()).log(Level.SEVERE, null, ex);
         }
 }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -332,13 +332,13 @@ private void rdOrdenarPorCodigoActionPerformed(java.awt.event.ActionEvent evt) {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPacienteBusca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPacienteBusca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPacienteBusca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPacienteBusca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -346,7 +346,7 @@ private void rdOrdenarPorCodigoActionPerformed(java.awt.event.ActionEvent evt) {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                TelaBuscaPaciente dialog = new TelaBuscaPaciente(new javax.swing.JFrame(), true);
+                TelaPacienteBusca dialog = new TelaPacienteBusca(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
                     @Override

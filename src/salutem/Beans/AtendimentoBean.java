@@ -14,10 +14,10 @@ import javax.xml.soap.Text;
 public class AtendimentoBean {
     private int idAtendimento;
     private int idUsuario;
-    private int idFuncionario;
+    private int idPaciente;
     private int idUnidade;
     private Date data;
-    private Text descricao;
+    private String descricao;
 
     /**
      * @return the idAtendimento
@@ -50,15 +50,15 @@ public class AtendimentoBean {
     /**
      * @return the idFuncionario
      */
-    public int getIdFuncionario() {
-        return idFuncionario;
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
     /**
      * @param idFuncionario the idFuncionario to set
      */
-    public void setIdFuncionario(int idFuncionario) {
-        this.idFuncionario = idFuncionario;
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
     /**
@@ -92,17 +92,20 @@ public class AtendimentoBean {
     /**
      * @return the descricao
      */
-    public Text getDescricao() {
+    public String getDescricao() {
         return descricao;
     }
 
     /**
      * @param descricao the descricao to set
      */
-    public void setDescricao(Text descricao) {
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
-    
+
+    /**
+     * @return the descricao
+     */
+   
     
 }

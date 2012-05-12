@@ -10,14 +10,33 @@
  */
 package salutem.Telas;
 
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+import salutem.Beans.AtendimentoBean;
+import salutem.Beans.PacienteBean;
+import salutem.DAO.AtendimentoDAO;
+import salutem.DAO.pacienteDAO;
+import salutem.Utils.Msg;
+import salutem.Utils.Utils;
+
 /**
  *
  * @author Tironi
  */
 public class TelaAtendimento extends javax.swing.JDialog {
+    private Integer idPaciente;
+    private pacienteDAO pacientedao = new pacienteDAO();
+    private TelaBuscaPaciente tela;
+    private boolean inserir;
+    
 
     /** Creates new form TelaAtendimento */
-    public TelaAtendimento(java.awt.Frame parent, boolean modal) {
+    public TelaAtendimento(TelaBuscaPaciente parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        this.tela = parent;
+    }
+     public TelaAtendimento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -33,7 +52,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnPesquisaPaciente = new javax.swing.JButton();
         lbNome = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -60,12 +79,18 @@ public class TelaAtendimento extends javax.swing.JDialog {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setModal(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Paciente"));
 
         jLabel1.setText("Nome:");
 
-        jButton1.setText("Localizar Paciente");
+        btnPesquisaPaciente.setText("Localizar Paciente");
+        btnPesquisaPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisaPacienteActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Data de Nascimento:");
 
@@ -86,25 +111,28 @@ public class TelaAtendimento extends javax.swing.JDialog {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbNome)
-                        .addGap(367, 367, 367)
-                        .addComponent(jButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 523, Short.MAX_VALUE)
+                        .addComponent(btnPesquisaPaciente)
+                        .addGap(97, 97, 97))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbDataNascimento))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbIdade))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(1, 1, 1)
-                        .addComponent(lbArterial)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbTemperatura)))
-                .addContainerGap(199, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbDataNascimento))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbIdade))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(1, 1, 1)
+                                .addComponent(lbArterial)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbTemperatura)))
+                        .addContainerGap(607, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,8 +140,8 @@ public class TelaAtendimento extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1)
-                    .addComponent(lbNome))
+                    .addComponent(lbNome)
+                    .addComponent(btnPesquisaPaciente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -151,14 +179,13 @@ public class TelaAtendimento extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados de Atendimento"));
@@ -188,12 +215,12 @@ public class TelaAtendimento extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
@@ -205,8 +232,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dtAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -245,31 +271,36 @@ public class TelaAtendimento extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+private void btnPesquisaPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaPacienteActionPerformed
+
+}//GEN-LAST:event_btnPesquisaPacienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,9 +345,38 @@ public class TelaAtendimento extends javax.swing.JDialog {
             }
         });
     }
+    
+     protected void setInserir(boolean inserir) {
+        this.inserir = inserir;
+        this.idPaciente = null;
+    }
+
+    
+    
+   protected void preencherCampos(int id) {
+        try {
+
+
+
+            PacienteBean paciente = pacientedao.getPaciente(id);
+            
+            Utils util = new Utils();
+
+            this.idPaciente = paciente.getIdPaciente();
+            this.lbNome.setText(paciente.getNome().trim().toUpperCase());
+            this.lbDataNascimento.setText(util.convertData(paciente.getData()));
+            
+
+
+
+        } catch (SQLException ex) {
+            Msg.erro(this, "Erro ao preencher campos. \n" + ex.getMessage());
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPesquisaPaciente;
     private org.jdesktop.swingx.JXDatePicker dtAtendimento;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

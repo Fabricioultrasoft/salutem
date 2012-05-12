@@ -433,7 +433,7 @@ private void rdOrdenarPorCodigoActionPerformed(java.awt.event.ActionEvent evt) {
         }
     }
     
-    private void pesquisar(){
+    public void pesquisar(){
         if(this.txBuscar.getText().length() >= 3){
             this.atualizarTabela(this.txBuscar.getText().trim());
         }else{
@@ -499,6 +499,9 @@ private void rdOrdenarPorCodigoActionPerformed(java.awt.event.ActionEvent evt) {
         
         
     }
+    
+   
+
 
 
     protected void limparTabela(){

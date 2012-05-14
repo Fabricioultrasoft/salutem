@@ -27,8 +27,9 @@ public class AtendimentoDAO extends MySQL{
         
         int id = getCodigo();
 
-        String sql = "INSERT INTO atendimento (idAtendimento,data,descricao,idUsuario,idUnidade,idPaciente,medicamento"+
-                      ") values (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO atendimento (idAtendimento,data,descricao,idUsuario,idUnidade,"+
+                       "idPaciente,medicamento,temperatura,alta,baixa,diagnostico"+
+                      ") values (?,?,?,?,?,?,?,?,?,?,?)";
        this.prepare(sql);
        
         
@@ -40,12 +41,70 @@ public class AtendimentoDAO extends MySQL{
         this.setInt(5, atendimento.getIdUnidade());
         this.setInt(6, atendimento.getIdPaciente());
         this.setString(7, atendimento.getMedicamento());
+        this.setInt(8, atendimento.getTemperatura());
+        this.setInt(9, atendimento.getAlta());
+        this.setInt(10, atendimento.getBaixa());
+        this.setString(11, atendimento.getDiagnostico());
         
         
         
         this.execute();
         this.close();
 
+    }
+    
+         public List<AtendimentoBean> getLista(int id) throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String SQL = "SELECT * FROM atendimento WHERE idPaciente = "+id;
+        this.prepare(SQL);
+        this.executeQuery();
+
+        List<AtendimentoBean> listaEsp = new ArrayList<AtendimentoBean>();
+        while (this.getRS().next()) {
+            AtendimentoBean paciente = new AtendimentoBean();
+            paciente.setIdPaciente(this.getRS().getInt("idPaciente"));
+            paciente.setAlta(this.getRS().getInt("alta"));
+            paciente.setBaixa(this.getRS().getInt("baixa"));
+            paciente.setData(this.getRS().getDate("data"));
+            paciente.setDescricao(this.getRS().getString("descricao"));
+            paciente.setMedicamento(this.getRS().getString("medicamento"));
+            paciente.setDiagnostico(this.getRS().getString("diagnostico"));
+           
+            listaEsp.add(paciente);
+        }
+
+        this.close();
+
+        return listaEsp;
+    }
+    
+       public List<AtendimentoBean> getLista() throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String SQL = "SELECT * FROM atendimento";
+        this.prepare(SQL);
+        this.executeQuery();
+
+        List<AtendimentoBean> listaEsp = new ArrayList<AtendimentoBean>();
+        while (this.getRS().next()) {
+            AtendimentoBean paciente = new AtendimentoBean();
+            paciente.setIdPaciente(this.getRS().getInt("idPaciente"));
+            paciente.setAlta(this.getRS().getInt("alta"));
+            paciente.setBaixa(this.getRS().getInt("baixa"));
+            paciente.setData(this.getRS().getDate("data"));
+            paciente.setDescricao(this.getRS().getString("descricao"));
+            paciente.setMedicamento(this.getRS().getString("medicamento"));
+            
+            
+            listaEsp.add(paciente);
+        }
+
+        this.close();
+
+        return listaEsp;
     }
     
     

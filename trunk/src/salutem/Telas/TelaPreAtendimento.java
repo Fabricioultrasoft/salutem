@@ -32,6 +32,7 @@ public class TelaPreAtendimento extends javax.swing.JDialog {
     private pacienteDAO pacientedao;
     private PreAtendimentoDAO dao;
     private boolean inserir;
+    private int temperatura;
      
 
     /** Creates new form TelaPreAtendimento */
@@ -398,6 +399,7 @@ cancelar();
                 atendimento.setBaixa(Integer.parseInt(TxAlta.getText()));
                 atendimento.setTemperatura(Integer.parseInt(txTemperatura.getText()));
                 atendimento.setIdPaciente(this.idPac);
+                
                 
                
                 

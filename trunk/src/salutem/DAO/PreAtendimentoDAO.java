@@ -46,6 +46,28 @@ public class PreAtendimentoDAO extends MySQL{
 
     }
     
+     public List<PacienteBean> getLista(String filtro) throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String SQL = "SELECT * FROM paciente WHERE nome LIKE '%"+filtro+"%'";
+        this.prepare(SQL);
+        this.executeQuery();
+
+        List<PacienteBean> listaEsp = new ArrayList<PacienteBean>();
+        while (this.getRS().next()) {
+            PacienteBean paciente = new PacienteBean();
+            paciente.setIdPaciente(this.getRS().getInt("idPaciente"));
+            paciente.setNome(this.getRS().getString("nome"));
+           
+            listaEsp.add(paciente);
+        }
+
+        this.close();
+
+        return listaEsp;
+    }
+    
     public List<PacienteBean> getListaPaciente() throws SQLException {
         this.setConnection("sal");
         this.open();
@@ -98,7 +120,7 @@ public class PreAtendimentoDAO extends MySQL{
         
         
         
-        String SQL = "SELECT * FROM preatendimento WHERE idPaciente = "+id+" AND idPreAtendimento = "+7;
+        String SQL = "SELECT * FROM preatendimento WHERE idPaciente = "+id;
         this.prepare(SQL);
         this.executeQuery();
         this.getRS().first();

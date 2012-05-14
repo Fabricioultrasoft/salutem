@@ -32,17 +32,7 @@ public class PreAtendimentoBean {
     /**
      * @return the idPaciente
      */
-    public int getIdPaciente() {
-        return idPaciente;
-    }
-
-    /**
-     * @param idPaciente the idPaciente to set
-     */
-    public void setIdPaciente(int idPaciente) {
-        this.idPaciente = idPaciente;
-    }
-
+   
     /**
      * @return the temperatura
      */
@@ -85,6 +75,24 @@ public class PreAtendimentoBean {
         this.baixa = baixa;
     }
 
+    /**
+     * @return the idPaciente
+     */
+    public int getIdPaciente() {
+        return idPaciente;
+    }
+
+    /**
+     * @param idPaciente the idPaciente to set
+     */
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
+    /**
+     * @return the idPaciente
+     */
+   
     /**
      * @return the pressaoArterial
      */

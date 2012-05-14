@@ -282,39 +282,39 @@ private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
     }
 
-//    protected void atualizarTabela() {
-//        try {
-//            this.daoPre = new PacientePesquisaDAO();
-//
-//            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
-//            modelo.setNumRows(0);
-//
-//            List<PacienteBean> lista = this.daoPre.getLista();
-//
-//            for (int i = 0; i < lista.size(); i++) {
-//                modelo.addRow(new Object[]{
-//                            lista.get(i).getIdPaciente(),
-//                            lista.get(i).getNome()});
-//
-//            }
-//
-//
-//        } catch (SQLException ex) {
-//            Msg.erro(this, "Erro ao atualizar tabela. \n" + ex.getMessage());
-//        }
-//    }
+  /**  protected void atualizarTabela() {
+        try {
+            this.daoPre = new PreAtendimentoDAO();
+
+            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+            modelo.setNumRows(0);
+
+            List<PacienteBean> lista = this.daoPre.getListaPaciente();
+
+            for (int i = 0; i < lista.size(); i++) {
+                modelo.addRow(new Object[]{
+                            lista.get(i).getIdPaciente(),
+                            lista.get(i).getNome()});
+            }
+
+
+        } catch (SQLException ex) {
+            Msg.erro(this, "Erro ao atualizar tabela. \n" + ex.getMessage());
+        }
+   }*/
+    
     protected void atualizarTabela(String filtro) {
         try {
 
             DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
             modelo.setNumRows(0);
 
-            List<PreAtendimentoBean> lista = this.daoPre.getUltimoAtendimento(filtro);
+            List<PacienteBean> lista = this.daoPre.getLista(filtro);
 
             for (int i = 0; i < lista.size(); i++) {
                 modelo.addRow(new Object[]{
-                            lista.get(i).getIdPaciente()
-                        //lista.get(i).getPaciente.getNome()
+                            lista.get(i).getIdPaciente(),
+                            lista.get(i).getNome()
                         });
             }
 

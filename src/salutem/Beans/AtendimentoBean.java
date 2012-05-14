@@ -19,6 +19,10 @@ public class AtendimentoBean {
     private Date data;
     private String descricao;
     private String medicamento;
+    private int temperatura;
+    private int alta;
+    private int baixa;
+    private String diagnostico;
 
     /**
      * @return the idAtendimento
@@ -116,6 +120,62 @@ public class AtendimentoBean {
      */
     public void setMedicamento(String medicamento) {
         this.medicamento = medicamento;
+    }
+
+    /**
+     * @return the temperatura
+     */
+    public int getTemperatura() {
+        return temperatura;
+    }
+
+    /**
+     * @param temperatura the temperatura to set
+     */
+    public void setTemperatura(int temperatura) {
+        this.temperatura = temperatura;
+    }
+
+    /**
+     * @return the alta
+     */
+    public int getAlta() {
+        return alta;
+    }
+
+    /**
+     * @param alta the alta to set
+     */
+    public void setAlta(int alta) {
+        this.alta = alta;
+    }
+
+    /**
+     * @return the baixa
+     */
+    public int getBaixa() {
+        return baixa;
+    }
+
+    /**
+     * @param baixa the baixa to set
+     */
+    public void setBaixa(int baixa) {
+        this.baixa = baixa;
+    }
+
+    /**
+     * @return the diagnostico
+     */
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+
+    /**
+     * @param diagnostico the diagnostico to set
+     */
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
     }
 
     /**

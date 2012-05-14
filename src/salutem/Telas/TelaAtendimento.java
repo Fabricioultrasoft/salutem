@@ -13,6 +13,9 @@ package salutem.Telas;
 import com.sun.media.codec.audio.msadpcm.MsAdpcm;
 import java.awt.Component;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 import salutem.Beans.AtendimentoBean;
 import salutem.Beans.PacienteBean;
@@ -32,11 +35,15 @@ public class TelaAtendimento extends javax.swing.JDialog {
     private Integer idPaciente;
     private Integer idPreAtendimento;
     private int idPac;
+    private int temperatura;
+    private int alta;
+    private int baixa;
     private pacienteDAO pacientedao = new pacienteDAO();
     private TelaPacientePesquisa telaBusca;
     private boolean inserir;
     private AtendimentoDAO atendimentoDao;
     private PreAtendimentoDAO preDao;
+    
     
 
     /** Creates new form TelaAtendimento */
@@ -46,11 +53,15 @@ public class TelaAtendimento extends javax.swing.JDialog {
         this.telaBusca = parent;
         this.atendimentoDao = new AtendimentoDAO();
         this.preDao = new PreAtendimentoDAO();
+       
+         
         
     }
      public TelaAtendimento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+       
     }
 
     /** This method is called from within the constructor to
@@ -81,7 +92,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
         txTemp = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         txDiagnostico = new javax.swing.JTextField();
@@ -209,16 +220,16 @@ public class TelaAtendimento extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Histórico Recente"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Data", "Diagnóstico", "Descrição", "Temperatura", "Pressão Arterial", "Unidade", "Funcionario"
+                "Data", "Diagnóstico", "Descrição", "Temperatura", "Pressão Arterial Alta", "Pressão Arterial Baixa", "Unidade", "Funcionario"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabela);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -226,8 +237,8 @@ public class TelaAtendimento extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,7 +280,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -284,16 +295,16 @@ public class TelaAtendimento extends javax.swing.JDialog {
                     .addComponent(jLabel7)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(txDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dtAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jScrollPane3, 0, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, 0, 0, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -315,21 +326,22 @@ public class TelaAtendimento extends javax.swing.JDialog {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addComponent(jButton2))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3))
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -342,28 +354,28 @@ public class TelaAtendimento extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(63, Short.MAX_VALUE))
+                        .addContainerGap(126, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(85, 85, 85))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(63, 63, 63))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -473,14 +485,43 @@ salvar();
     }
 
     
-   
+   protected void atualizarTabela(){
+        try{
+            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+            modelo.setNumRows(0);
+            
+           this.atendimentoDao = new AtendimentoDAO();
+
+            List<AtendimentoBean> lista = this.atendimentoDao.getLista(this.idPac);
+
+            for(int i=0; i< lista.size(); i++){
+                modelo.addRow(new Object[]{
+                lista.get(i).getData(),
+                lista.get(i).getDiagnostico(),
+                lista.get(i).getDescricao(),
+                lista.get(i).getTemperatura(),
+                lista.get(i).getAlta(),
+                lista.get(i).getBaixa(),
+                lista.get(i).getIdPaciente(),                
+                lista.get(i).getMedicamento(),
+                               
+                
+                });
+                
+            }
+           
+
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
+        }
+    }
    
     
    protected void preencherCampos(int id) {
         try {
 
             this.idPac = id;
-           
+            
 
             PacienteBean paciente = pacientedao.getPaciente(id);
             
@@ -489,6 +530,7 @@ salvar();
             this.idPaciente = paciente.getIdPaciente();
             this.lbNome.setText(paciente.getNome().trim().toUpperCase());
             this.lbDataNascimento.setText(util.convertData(paciente.getData()));
+           
             
             this.preDao = new PreAtendimentoDAO();
             PreAtendimentoBean pre = preDao.getPreAtendimento(id);
@@ -496,6 +538,12 @@ salvar();
             this.txTemp.setText(String.valueOf(pre.getTemperatura()));
             this.txAlta.setText(String.valueOf(pre.getAlta()));
             this.txBaixa.setText(String.valueOf(pre.getBaixa()));
+            
+            this.temperatura = pre.getTemperatura();
+            this.alta = pre.getAlta();
+            this.baixa = pre.getBaixa();
+            
+            atualizarTabela();
             
             
 
@@ -523,10 +571,16 @@ salvar();
                 
 
                 AtendimentoBean atendimento = new AtendimentoBean();
+                atendimento.setDiagnostico(txDiagnostico.getText().trim().toUpperCase());
                 atendimento.setDescricao(txDescricao.getText().trim().toUpperCase());
                 atendimento.setIdPaciente(this.idPac);
                 atendimento.setData(dtAtendimento.getDate());
                 atendimento.setMedicamento(txMedicamento.getText().trim().toUpperCase());
+                atendimento.setTemperatura(this.temperatura);
+                atendimento.setAlta(this.alta);
+                atendimento.setBaixa(this.baixa);
+                
+                
                
                 
                 this.atendimentoDao = new AtendimentoDAO();
@@ -567,12 +621,12 @@ salvar();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbArterial;
     private javax.swing.JLabel lbDataNascimento;
     private javax.swing.JLabel lbIdade;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbTemperatura;
+    private javax.swing.JTable tabela;
     private javax.swing.JLabel txAlta;
     private javax.swing.JLabel txBaixa;
     private javax.swing.JTextArea txDescricao;

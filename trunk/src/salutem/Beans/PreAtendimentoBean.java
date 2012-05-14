@@ -12,7 +12,8 @@ public class PreAtendimentoBean {
     private int idPreAtendimento;
     private int idPaciente;
     private int temperatura;
-    private int pressaoArterial;
+    private int alta;
+    private int baixa;
 
     /**
      * @return the idPreAtendimento
@@ -57,17 +58,35 @@ public class PreAtendimentoBean {
     }
 
     /**
-     * @return the pressaoArterial
+     * @return the alta
      */
-    public int getPressaoArterial() {
-        return pressaoArterial;
+    public int getAlta() {
+        return alta;
     }
 
     /**
-     * @param pressaoArterial the pressaoArterial to set
+     * @param alta the alta to set
      */
-    public void setPressaoArterial(int pressaoArterial) {
-        this.pressaoArterial = pressaoArterial;
+    public void setAlta(int alta) {
+        this.alta = alta;
     }
-    
+
+    /**
+     * @return the baixa
+     */
+    public int getBaixa() {
+        return baixa;
+    }
+
+    /**
+     * @param baixa the baixa to set
+     */
+    public void setBaixa(int baixa) {
+        this.baixa = baixa;
+    }
+
+    /**
+     * @return the pressaoArterial
+     */
+   
 }

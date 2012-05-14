@@ -23,33 +23,28 @@ import salutem.Utils.Msg;
  * @author Tironi
  */
 public class TelaPreAtendimentoPesquisa extends javax.swing.JDialog {
-    
+
     private PacientePesquisaDAO pacienteDao;
     private PacienteBean paciente;
     private TelaPreAtendimento preAtendimento;
-   
 
     /** Creates new form TelaPacientePesquisa */
-  
-   
     public TelaPreAtendimentoPesquisa(TelaPreAtendimento parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        
+
         this.preAtendimento = parent;
-       
+
         this.pacienteDao = new PacientePesquisaDAO();
         this.paciente = new PacienteBean();
-        
+
     }
-   
 
     public TelaPreAtendimentoPesquisa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -207,18 +202,18 @@ public class TelaPreAtendimentoPesquisa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-setVisible(false);
-dispose();
+    setVisible(false);
+    dispose();
 }//GEN-LAST:event_btnCancelarActionPerformed
 
 private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-pesquisar();
+    pesquisar();
 }//GEN-LAST:event_btnPesquisarActionPerformed
 
 private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
-pegarId();
-setVisible(false);
-dispose();
+    pegarId();
+    setVisible(false);
+    dispose();
 }//GEN-LAST:event_btnSelecionarActionPerformed
 
     /**
@@ -264,12 +259,12 @@ dispose();
             }
         });
     }
-    
-    public void pegarId(){
-       
+
+    public void pegarId() {
+
         int row = this.tabela.getSelectedRow();
 
-        if(row == -1){
+        if (row == -1) {
             Msg.alerta(this, "Selecione o registro.");
             return;
         }
@@ -277,65 +272,66 @@ dispose();
         DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
-        this.preAtendimento = new TelaPreAtendimento(this,true);
-        
+        // FALEI PRA VC TIRA ESSA MERDA AQUI \/  \/  \/  \/  \/
+        //this.preAtendimento = new TelaPreAtendimento(this,true);
+        // FALEI PRA VC TIRA ESSA MERDA AQUI /\  /\  /\  /\  /\
+
         this.preAtendimento.preencherCampos(id);
-       
-                
-        
+        this.preAtendimento.repaint();
+
+
     }
-    
-    protected void atualizarTabela(){
-        try{
+
+    protected void atualizarTabela() {
+        try {
             this.pacienteDao = new PacientePesquisaDAO();
-            
+
             DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
             modelo.setNumRows(0);
 
             List<PacienteBean> lista = this.pacienteDao.getLista();
 
-            for(int i=0; i< lista.size(); i++){
+            for (int i = 0; i < lista.size(); i++) {
                 modelo.addRow(new Object[]{
-                lista.get(i).getIdPaciente(),
-                lista.get(i).getNome()});
-                
-            }
-            
+                            lista.get(i).getIdPaciente(),
+                            lista.get(i).getNome()});
 
-        }catch(SQLException ex){
-            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
+            }
+
+
+        } catch (SQLException ex) {
+            Msg.erro(this, "Erro ao atualizar tabela. \n" + ex.getMessage());
         }
     }
-    
-  protected void atualizarTabela(String filtro){
-        try{
+
+    protected void atualizarTabela(String filtro) {
+        try {
             this.pacienteDao = new PacientePesquisaDAO();
-            
+
             DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
             modelo.setNumRows(0);
 
             List<PacienteBean> lista = this.pacienteDao.getLista(filtro);
 
-            for(int i=0; i< lista.size(); i++){
+            for (int i = 0; i < lista.size(); i++) {
                 modelo.addRow(new Object[]{
-                lista.get(i).getIdPaciente(),
-                lista.get(i).getNome()});
+                            lista.get(i).getIdPaciente(),
+                            lista.get(i).getNome()});
             }
-           
 
-        }catch(SQLException ex){
-            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
+
+        } catch (SQLException ex) {
+            Msg.erro(this, "Erro ao atualizar tabela. \n" + ex.getMessage());
         }
     }
-    
-     public void pesquisar(){
-        if(this.txPesquisar.getText().length() >= 3){
+
+    public void pesquisar() {
+        if (this.txPesquisar.getText().length() >= 3) {
             this.atualizarTabela(this.txPesquisar.getText().trim());
-        }else{
-            JOptionPane.showMessageDialog(this,"Digite No Minimo 3 Dígitos.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Digite No Minimo 3 Dígitos.");
         }
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnPesquisar;

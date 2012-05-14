@@ -35,13 +35,13 @@ public class TelaPreAtendimento extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.telaBusca = parent;
-        this.pacientedao = new pacienteDAO();
-        
        
+         
     }
      public TelaPreAtendimento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.pacientedao = new pacienteDAO();
     }
     /** This method is called from within the constructor to
      * initialize the form.
@@ -256,7 +256,7 @@ this.telaBusca.setVisible(true);
 
             this.idPac = id;
            
-
+            this.pacientedao = new pacienteDAO();
             PacienteBean paciente = pacientedao.getPaciente(id);
                      
 

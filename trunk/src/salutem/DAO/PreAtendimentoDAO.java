@@ -17,6 +17,7 @@ import salutem.conexao.MySQL;
  * @author Tironi
  */
 public class PreAtendimentoDAO extends MySQL{
+    private int idC;
     
     public void inserir(PreAtendimentoBean atendimento) throws SQLException {
         this.setConnection("sal");
@@ -24,7 +25,7 @@ public class PreAtendimentoDAO extends MySQL{
         
      
         
-        int id = getCodigo();
+        idC = getCodigo();
 
         String sql = "INSERT INTO preatendimento (idPreAtendimento,idPaciente,temperatura,alta,baixa)"+
                 " values(?,?,?,?,?)";
@@ -32,7 +33,7 @@ public class PreAtendimentoDAO extends MySQL{
        
         
         this.prepare(sql);
-        this.setInt(1, id);
+        this.setInt(1, idC);
         this.setInt(2, atendimento.getIdPaciente());
         this.setInt(3, atendimento.getTemperatura());
         this.setInt(4, atendimento.getAlta());
@@ -90,12 +91,18 @@ public class PreAtendimentoDAO extends MySQL{
      public PreAtendimentoBean getPreAtendimento(int id)throws SQLException{
         this.setConnection("sal");
         this.open();
+        PreAtendimentoBean paciente = new PreAtendimentoBean();
+        
+        
+        
+        
 
-        String SQL = "SELECT * FROM preatendimento WHERE idPaciente = "+id;
+        String SQL = "SELECT * FROM preatendimento WHERE idPaciente = "+id+"AND idPreAtendimento = "+this.idC;
         this.prepare(SQL);
         this.executeQuery();
         this.getRS().first();
-        PreAtendimentoBean paciente = new PreAtendimentoBean();
+       
+        
         paciente.setIdPaciente(this.getRS().getInt("idPaciente"));
         paciente.setTemperatura(this.getRS().getInt("temperatura"));
         paciente.setAlta(this.getRS().getInt("alta"));

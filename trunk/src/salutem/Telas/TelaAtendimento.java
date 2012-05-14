@@ -490,6 +490,7 @@ salvar();
             this.lbNome.setText(paciente.getNome().trim().toUpperCase());
             this.lbDataNascimento.setText(util.convertData(paciente.getData()));
             
+            this.preDao = new PreAtendimentoDAO();
             PreAtendimentoBean pre = preDao.getPreAtendimento(id);
             this.idPreAtendimento = pre.getIdPreAtendimento();
             this.txTemp.setText(String.valueOf(pre.getTemperatura()));

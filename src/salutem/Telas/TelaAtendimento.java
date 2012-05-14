@@ -10,6 +10,8 @@
  */
 package salutem.Telas;
 
+import com.sun.media.codec.audio.msadpcm.MsAdpcm;
+import java.awt.Component;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import salutem.Beans.AtendimentoBean;
@@ -17,6 +19,7 @@ import salutem.Beans.PacienteBean;
 import salutem.DAO.AtendimentoDAO;
 import salutem.DAO.pacienteDAO;
 import salutem.Utils.Msg;
+import salutem.Utils.Params;
 import salutem.Utils.Utils;
 
 /**
@@ -25,9 +28,11 @@ import salutem.Utils.Utils;
  */
 public class TelaAtendimento extends javax.swing.JDialog {
     private Integer idPaciente;
+    private int idPac;
     private pacienteDAO pacientedao = new pacienteDAO();
     private TelaPacientePesquisa telaBusca;
     private boolean inserir;
+    private AtendimentoDAO atendimentoDao;
     
 
     /** Creates new form TelaAtendimento */
@@ -35,8 +40,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.telaBusca = parent;
-        
-        
+        this.atendimentoDao = new AtendimentoDAO();
         
     }
      public TelaAtendimento(java.awt.Frame parent, boolean modal) {
@@ -76,6 +80,9 @@ public class TelaAtendimento extends javax.swing.JDialog {
         txDescricao = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         dtAtendimento = new org.jdesktop.swingx.JXDatePicker();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txMedicamento = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -116,7 +123,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
                         .addComponent(lbNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 523, Short.MAX_VALUE)
                         .addComponent(btnPesquisaPaciente)
-                        .addGap(97, 97, 97))
+                        .addGap(134, 134, 134))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -135,7 +142,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lbTemperatura)))
-                        .addContainerGap(607, Short.MAX_VALUE))))
+                        .addContainerGap(644, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +189,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,6 +210,12 @@ public class TelaAtendimento extends javax.swing.JDialog {
 
         jLabel8.setText("Data Atendimento");
 
+        jLabel9.setText("Medicamento");
+
+        txMedicamento.setColumns(20);
+        txMedicamento.setRows(5);
+        jScrollPane3.setViewportView(txMedicamento);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -217,8 +230,12 @@ public class TelaAtendimento extends javax.swing.JDialog {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,7 +243,8 @@ public class TelaAtendimento extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -235,7 +253,9 @@ public class TelaAtendimento extends javax.swing.JDialog {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dtAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -245,6 +265,11 @@ public class TelaAtendimento extends javax.swing.JDialog {
         jButton3.setText("Cancelar");
 
         jButton4.setText("Salvar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -282,7 +307,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
                         .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,6 +330,11 @@ private void btnPesquisaPacienteActionPerformed(java.awt.event.ActionEvent evt) 
 telaBusca = new TelaPacientePesquisa(this, true);
 this.telaBusca.setVisible(true);
 }//GEN-LAST:event_btnPesquisaPacienteActionPerformed
+
+private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+setInserir(true);
+salvar();
+}//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,13 +384,60 @@ this.telaBusca.setVisible(true);
         this.inserir = inserir;
         this.idPaciente = null;
     }
+     
+      protected boolean isInserir() {
+        return inserir;
+    }
+
+     
+     private void destacarCampo(Component c, boolean b) {
+        if (b) {
+            c.setBackground(Params.COR_CAMPO_VAZIO);
+        } else {
+            c.setBackground(Params.COR_CAMPO_NORMAL);
+        }
+    }
+     
+     private boolean verificarCampos() {
+        boolean aux = false;
+        String msg = "Preencha corretamente os campos. \n";
+
+
+
+        if (this.txDiagnostico.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txDiagnostico, aux);
+
+        }
+        
+        if (this.txDescricao.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txDescricao, aux);
+
+        }    
+        
+         if (this.txMedicamento.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txMedicamento, aux);
+
+        }    
+        
+
+        if (aux) {
+            Msg.alerta(this, msg);
+        }
+        return aux;
+    }
 
     
+   
+   
     
    protected void preencherCampos(int id) {
         try {
 
-
+            this.idPac = id;
+           
 
             PacienteBean paciente = pacientedao.getPaciente(id);
             
@@ -375,6 +452,43 @@ this.telaBusca.setVisible(true);
 
         } catch (SQLException ex) {
             Msg.erro(this, "Erro ao preencher campos. \n" + ex.getMessage());
+        }
+       
+    }
+   
+    private void cancelar() {
+
+        this.setVisible(false);
+        this.dispose();
+    }
+   
+    private void salvar() {
+        if (this.verificarCampos()) {
+            return;
+        }
+        try {
+            if (this.isInserir()) {
+                
+                
+
+                AtendimentoBean atendimento = new AtendimentoBean();
+                atendimento.setDescricao(txDescricao.getText().trim().toUpperCase());
+                atendimento.setIdPaciente(this.idPac);
+                atendimento.setData(dtAtendimento.getDate());
+                atendimento.setMedicamento(txMedicamento.getText().trim().toUpperCase());
+               
+                
+                this.atendimentoDao = new AtendimentoDAO();
+                this.atendimentoDao.inserir(atendimento);
+                Msg.informacao(this, "Salvo com sucesso.");
+                //telaBusca = new TelaPacienteBusca(null, inserir);
+                this.telaBusca.atualizarTabela();
+                this.cancelar();
+            } 
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Msg.erro(this, "Erro ao salvar. \n" + ex.getMessage());
         }
     }
     
@@ -392,12 +506,14 @@ this.telaBusca.setVisible(true);
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbArterial;
     private javax.swing.JLabel lbDataNascimento;
@@ -406,5 +522,6 @@ this.telaBusca.setVisible(true);
     private javax.swing.JLabel lbTemperatura;
     private javax.swing.JTextArea txDescricao;
     private javax.swing.JTextField txDiagnostico;
+    private javax.swing.JTextArea txMedicamento;
     // End of variables declaration//GEN-END:variables
 }

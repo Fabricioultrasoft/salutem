@@ -23,7 +23,7 @@ import salutem.Utils.Msg;
  * @author Tironi
  */
 public class TelaPreAtendimentoPesquisa extends javax.swing.JDialog {
-    private TelaPacienteBusca telaPaciente ;
+    
     private PacientePesquisaDAO pacienteDao;
     private PacienteBean paciente;
     private TelaPreAtendimento preAtendimento;

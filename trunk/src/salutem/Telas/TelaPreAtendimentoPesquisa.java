@@ -15,7 +15,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import salutem.Beans.PacienteBean;
+import salutem.Beans.PreAtendimentoBean;
 import salutem.DAO.PacientePesquisaDAO;
+import salutem.DAO.PreAtendimentoDAO;
 import salutem.Utils.Msg;
 
 /**
@@ -24,7 +26,7 @@ import salutem.Utils.Msg;
  */
 public class TelaPreAtendimentoPesquisa extends javax.swing.JDialog {
 
-    private PacientePesquisaDAO pacienteDao;
+    private PreAtendimentoDAO daoPre;
     private PacienteBean paciente;
     private TelaPreAtendimento preAtendimento;
 
@@ -36,7 +38,7 @@ public class TelaPreAtendimentoPesquisa extends javax.swing.JDialog {
 
         this.preAtendimento = parent;
 
-        this.pacienteDao = new PacientePesquisaDAO();
+        this.daoPre = new PreAtendimentoDAO();
         this.paciente = new PacienteBean();
 
     }
@@ -272,7 +274,7 @@ private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
-       
+
 
         this.preAtendimento.preencherCampos(id);
         this.preAtendimento.repaint();
@@ -280,42 +282,42 @@ private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
     }
 
-    protected void atualizarTabela() {
-        try {
-            this.pacienteDao = new PacientePesquisaDAO();
-
-            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
-            modelo.setNumRows(0);
-
-            List<PacienteBean> lista = this.pacienteDao.getLista();
-
-            for (int i = 0; i < lista.size(); i++) {
-                modelo.addRow(new Object[]{
-                            lista.get(i).getIdPaciente(),
-                            lista.get(i).getNome()});
-
-            }
-
-
-        } catch (SQLException ex) {
-            Msg.erro(this, "Erro ao atualizar tabela. \n" + ex.getMessage());
-        }
-    }
-
+//    protected void atualizarTabela() {
+//        try {
+//            this.daoPre = new PacientePesquisaDAO();
+//
+//            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+//            modelo.setNumRows(0);
+//
+//            List<PacienteBean> lista = this.daoPre.getLista();
+//
+//            for (int i = 0; i < lista.size(); i++) {
+//                modelo.addRow(new Object[]{
+//                            lista.get(i).getIdPaciente(),
+//                            lista.get(i).getNome()});
+//
+//            }
+//
+//
+//        } catch (SQLException ex) {
+//            Msg.erro(this, "Erro ao atualizar tabela. \n" + ex.getMessage());
+//        }
+//    }
     protected void atualizarTabela(String filtro) {
         try {
-            this.pacienteDao = new PacientePesquisaDAO();
 
             DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
             modelo.setNumRows(0);
 
-            List<PacienteBean> lista = this.pacienteDao.getLista(filtro);
+            List<PreAtendimentoBean> lista = this.daoPre.getUltimoAtendimento(filtro);
 
             for (int i = 0; i < lista.size(); i++) {
                 modelo.addRow(new Object[]{
-                            lista.get(i).getIdPaciente(),
-                            lista.get(i).getNome()});
+                            lista.get(i).getIdPaciente()
+                        //lista.get(i).getPaciente.getNome()
+                        });
             }
+
 
 
         } catch (SQLException ex) {

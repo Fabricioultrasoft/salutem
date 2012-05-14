@@ -405,7 +405,7 @@ cancelar();
                 this.dao.inserir(atendimento);
                 Msg.informacao(this, "Salvo com sucesso.");
                 //telaBusca = new TelaPacienteBusca(null, inserir);
-                this.telaBusca.atualizarTabela();
+                //this.telaBusca.atualizarTabela();
                 this.cancelar();
             } 
             

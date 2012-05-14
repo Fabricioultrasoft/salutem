@@ -23,7 +23,7 @@ import salutem.Utils.Msg;
  */
 public class TelaPreAtendimento extends javax.swing.JDialog {
    
-    private TelaPacientePesquisa telaBusca;
+    private TelaPreAtendimentoPesquisa telaBusca;
     private int idPaciente;
     private int idPac;
     private pacienteDAO pacientedao;
@@ -31,7 +31,7 @@ public class TelaPreAtendimento extends javax.swing.JDialog {
      
 
     /** Creates new form TelaPreAtendimento */
-   public TelaPreAtendimento(TelaPacientePesquisa parent, boolean modal) {
+   public TelaPreAtendimento(TelaPreAtendimentoPesquisa parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.telaBusca = parent;
@@ -201,7 +201,7 @@ public class TelaPreAtendimento extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
-telaBusca = new TelaPacientePesquisa(this, true);
+telaBusca = new TelaPreAtendimentoPesquisa(this, true);
 this.telaBusca.setVisible(true);
 }//GEN-LAST:event_btnPesquisaActionPerformed
 
@@ -249,6 +249,8 @@ this.telaBusca.setVisible(true);
         });
     }
     
+    
+    
     protected void preencherCampos(int id) {
         try {
 
@@ -260,6 +262,8 @@ this.telaBusca.setVisible(true);
 
             this.idPaciente = paciente.getIdPaciente();
             this.lbNome.setText(paciente.getNome().trim().toUpperCase());
+            
+           
            
 
         } catch (SQLException ex) {

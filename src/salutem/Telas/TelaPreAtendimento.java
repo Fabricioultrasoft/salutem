@@ -10,12 +10,15 @@
  */
 package salutem.Telas;
 
+import java.awt.Component;
 import java.sql.SQLException;
 import org.jcp.xml.dsig.internal.dom.Utils;
 import salutem.Beans.PacienteBean;
+import salutem.Beans.PreAtendimentoBean;
 import salutem.DAO.PreAtendimentoDAO;
 import salutem.DAO.pacienteDAO;
 import salutem.Utils.Msg;
+import salutem.Utils.Params;
 
 /**
  *
@@ -24,10 +27,11 @@ import salutem.Utils.Msg;
 public class TelaPreAtendimento extends javax.swing.JDialog {
    
     private TelaPreAtendimentoPesquisa telaBusca;
-    private int idPaciente;
+    private Integer idPaciente;
     private int idPac;
     private pacienteDAO pacientedao;
     private PreAtendimentoDAO dao;
+    private boolean inserir;
      
 
     /** Creates new form TelaPreAtendimento */
@@ -42,6 +46,7 @@ public class TelaPreAtendimento extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.pacientedao = new pacienteDAO();
+        this.dao = new PreAtendimentoDAO();
     }
     /** This method is called from within the constructor to
      * initialize the form.
@@ -60,11 +65,14 @@ public class TelaPreAtendimento extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txPressaoArterial = new javax.swing.JFormattedTextField();
+        TxAlta = new javax.swing.JFormattedTextField();
         txTemperatura = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        txBaixa = new javax.swing.JFormattedTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
 
@@ -112,15 +120,25 @@ public class TelaPreAtendimento extends javax.swing.JDialog {
 
         jLabel3.setText("Pressão Arterial");
 
-        txPressaoArterial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        TxAlta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         txTemperatura.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -143,36 +161,64 @@ public class TelaPreAtendimento extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        txBaixa.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        jLabel5.setText("Alta");
+
+        jLabel6.setText("Baixa");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txPressaoArterial))
-                    .addComponent(txTemperatura, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE))
-                .addGap(244, 244, 244)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TxAlta, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txBaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel3))
+                                .addGap(184, 184, 184))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(txTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(550, 550, 550))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txPressaoArterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel2)
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(TxAlta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txBaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(txTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -185,7 +231,7 @@ public class TelaPreAtendimento extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,6 +250,16 @@ private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 telaBusca = new TelaPreAtendimentoPesquisa(this, true);
 this.telaBusca.setVisible(true);
 }//GEN-LAST:event_btnPesquisaActionPerformed
+
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+setInserir(true);
+salvar();
+
+}//GEN-LAST:event_jButton1ActionPerformed
+
+private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+cancelar();
+}//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,6 +319,7 @@ this.telaBusca.setVisible(true);
             this.idPaciente = paciente.getIdPaciente();
             this.lbNome.setText(paciente.getNome().trim().toUpperCase());
             
+            
            
            
 
@@ -272,7 +329,95 @@ this.telaBusca.setVisible(true);
        
     }
     
+    protected void setInserir(boolean inserir) {
+        this.inserir = inserir;
+        this.idPaciente = null;
+    }
+     
+      protected boolean isInserir() {
+        return inserir;
+    }
+      
+      private void destacarCampo(Component c, boolean b) {
+        if (b) {
+            c.setBackground(Params.COR_CAMPO_VAZIO);
+        } else {
+            c.setBackground(Params.COR_CAMPO_NORMAL);
+        }
+    }
+     
+     private boolean verificarCampos() {
+        boolean aux = false;
+        String msg = "Preencha corretamente os campos. \n";
+
+
+
+        if (this.TxAlta.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.TxAlta, aux);
+
+        }
+        
+         if (this.txBaixa.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txBaixa, aux);
+
+        }
+        
+        if (this.txTemperatura.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txTemperatura, aux);
+
+        }
+        
+        
+
+        if (aux) {
+            Msg.alerta(this, msg);
+        }
+        return aux;
+    }
+
+     private void cancelar() {
+
+        this.setVisible(false);
+        this.dispose();
+    }
+   
+    private void salvar() {
+        if (this.verificarCampos()) {
+            return;
+        }
+        try {
+            if (this.isInserir()) {
+                
+                
+
+                PreAtendimentoBean atendimento = new PreAtendimentoBean();
+                atendimento.setAlta(Integer.parseInt(TxAlta.getText()));
+                atendimento.setBaixa(Integer.parseInt(TxAlta.getText()));
+                atendimento.setTemperatura(Integer.parseInt(txTemperatura.getText()));
+                atendimento.setIdPaciente(this.idPac);
+                
+               
+                
+                this.dao = new PreAtendimentoDAO();
+                this.dao.inserir(atendimento);
+                Msg.informacao(this, "Salvo com sucesso.");
+                //telaBusca = new TelaPacienteBusca(null, inserir);
+                this.telaBusca.atualizarTabela();
+                this.cancelar();
+            } 
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Msg.erro(this, "Erro ao salvar. \n" + ex.getMessage());
+        }
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField TxAlta;
     private javax.swing.JButton btnPesquisa;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -280,11 +425,13 @@ this.telaBusca.setVisible(true);
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbNome;
-    private javax.swing.JFormattedTextField txPressaoArterial;
+    private javax.swing.JFormattedTextField txBaixa;
     private javax.swing.JFormattedTextField txTemperatura;
     // End of variables declaration//GEN-END:variables
 }

@@ -272,9 +272,7 @@ private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
-        // FALEI PRA VC TIRA ESSA MERDA AQUI \/  \/  \/  \/  \/
-        //this.preAtendimento = new TelaPreAtendimento(this,true);
-        // FALEI PRA VC TIRA ESSA MERDA AQUI /\  /\  /\  /\  /\
+       
 
         this.preAtendimento.preencherCampos(id);
         this.preAtendimento.repaint();

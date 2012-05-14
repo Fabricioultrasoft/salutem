@@ -10,6 +10,7 @@
  */
 package salutem.Telas;
 
+import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
 import com.sun.media.codec.audio.msadpcm.MsAdpcm;
 import java.awt.Component;
 import java.sql.SQLException;
@@ -504,8 +505,7 @@ salvar();
                 lista.get(i).getBaixa(),
                 lista.get(i).getIdPaciente(),                
                 lista.get(i).getMedicamento(),
-                               
-                
+                             
                 });
                 
             }
@@ -522,9 +522,10 @@ salvar();
 
             this.idPac = id;
             
-
-            PacienteBean paciente = pacientedao.getPaciente(id);
             
+            
+            PacienteBean paciente = pacientedao.getPaciente(id);
+                        
             Utils util = new Utils();
 
             this.idPaciente = paciente.getIdPaciente();
@@ -545,7 +546,7 @@ salvar();
             
             atualizarTabela();
             
-            
+           
 
 
 

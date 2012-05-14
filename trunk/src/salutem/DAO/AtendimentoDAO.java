@@ -71,6 +71,7 @@ public class AtendimentoDAO extends MySQL{
             paciente.setDescricao(this.getRS().getString("descricao"));
             paciente.setMedicamento(this.getRS().getString("medicamento"));
             paciente.setDiagnostico(this.getRS().getString("diagnostico"));
+            paciente.setTemperatura(this.getRS().getShort("temperatura"));
            
             listaEsp.add(paciente);
         }

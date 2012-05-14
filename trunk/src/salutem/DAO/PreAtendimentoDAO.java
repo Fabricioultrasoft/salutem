@@ -17,7 +17,7 @@ import salutem.conexao.MySQL;
  * @author Tironi
  */
 public class PreAtendimentoDAO extends MySQL{
-    private int idC;
+   
     
     public void inserir(PreAtendimentoBean atendimento) throws SQLException {
         this.setConnection("sal");
@@ -25,7 +25,7 @@ public class PreAtendimentoDAO extends MySQL{
         
      
         
-        idC = getCodigo();
+        int id = getCodigo();
 
         String sql = "INSERT INTO preatendimento (idPreAtendimento,idPaciente,temperatura,alta,baixa)"+
                 " values(?,?,?,?,?)";
@@ -33,7 +33,7 @@ public class PreAtendimentoDAO extends MySQL{
        
         
         this.prepare(sql);
-        this.setInt(1, idC);
+        this.setInt(1, id);
         this.setInt(2, atendimento.getIdPaciente());
         this.setInt(3, atendimento.getTemperatura());
         this.setInt(4, atendimento.getAlta());
@@ -93,11 +93,12 @@ public class PreAtendimentoDAO extends MySQL{
         this.open();
         PreAtendimentoBean paciente = new PreAtendimentoBean();
         
+        //SELECT pA.*, p.idPaciente FROM paciente p , preAtendimento pA WHERE p.idPaciente = pA.idPaciente AND pA.idPaciente = 3
+        //String sql = "SELECT IFNULL(MAX(pA.idPreAtendimento),0) AS idPreAtendimento,temperatura,alta,baixa, p.idPaciente FROM paciente p, preAtendimento pA WHERE p.idPaciente = pA.idPaciente";
         
         
         
-
-        String SQL = "SELECT * FROM preatendimento WHERE idPaciente = "+id+"AND idPreAtendimento = "+this.idC;
+        String SQL = "SELECT * FROM preatendimento WHERE idPaciente = "+id+" AND idPreAtendimento = "+7;
         this.prepare(SQL);
         this.executeQuery();
         this.getRS().first();
@@ -114,6 +115,37 @@ public class PreAtendimentoDAO extends MySQL{
         return paciente;
 
     }
+     public List<PreAtendimentoBean> getCodigo(int id) throws SQLException {
+        this.setConnection("sal");
+        this.open();
+        String SQL = "SELECT HIGH_PRIORITY IFNULL(MAX(idPreAtendimento),0)+1 AS ID FROM preatendimento";
+        this.prepare(SQL);
+        this.executeQuery();
+        this.getRS().first();
+        int novoId = this.getRS().getInt("ID");
+        SQL = "SELECT pA.* FROM preAtendimento pA, paciente p "
+                + "WHERE p.idPaciente = pA.idPaciente "
+                + "AND pA.idPreAtendimento = "+novoId
+                + " AND p.idPaciente = "+id;
+        this.prepare(SQL);
+        this.executeQuery();
+        List<PreAtendimentoBean> listaPA = new ArrayList<PreAtendimentoBean>();
+        while(this.getRS().next()){
+            PreAtendimentoBean pA = new PreAtendimentoBean();
+            pA.setIdPaciente(this.getRS().getInt("idPaciente"));
+            pA.setTemperatura(this.getRS().getInt("temperatura"));
+            pA.setAlta(this.getRS().getInt("alta"));
+            pA.setBaixa(this.getRS().getInt("baixa"));
+            pA.setIdPreAtendimento(this.getRS().getInt("idPreAtendimento"));
+        
+            listaPA.add(pA);
+        }
+
+        this.close();
+
+        return listaPA;
+    }
+
      
     
 }

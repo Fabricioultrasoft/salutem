@@ -22,32 +22,30 @@ import salutem.Utils.Msg;
  *
  * @author Tironi
  */
-public class TelaPacientePesquisa extends javax.swing.JDialog {
+public class TelaPreAtendimentoPesquisa extends javax.swing.JDialog {
     private TelaPacienteBusca telaPaciente ;
     private PacientePesquisaDAO pacienteDao;
     private PacienteBean paciente;
-    private TelaAtendimento telaAtendimento;
     private TelaPreAtendimento preAtendimento;
+   
 
     /** Creates new form TelaPacientePesquisa */
   
    
-    
-    public TelaPacientePesquisa(TelaAtendimento parent, boolean modal) {
+    public TelaPreAtendimentoPesquisa(TelaPreAtendimento parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        this.telaAtendimento = parent;
+        
+        this.preAtendimento = parent;
+       
         this.pacienteDao = new PacientePesquisaDAO();
         this.paciente = new PacienteBean();
         
-
     }
-    
-   
    
 
-    public TelaPacientePesquisa(java.awt.Frame parent, boolean modal) {
+    public TelaPreAtendimentoPesquisa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -74,6 +72,7 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Tela Pesquisa Paciente");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisa"));
 
@@ -239,13 +238,13 @@ dispose();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPacientePesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPreAtendimentoPesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPacientePesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPreAtendimentoPesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPacientePesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPreAtendimentoPesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPacientePesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPreAtendimentoPesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -253,7 +252,7 @@ dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                TelaPacientePesquisa dialog = new TelaPacientePesquisa(new javax.swing.JFrame(), true);
+                TelaPreAtendimentoPesquisa dialog = new TelaPreAtendimentoPesquisa(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
                     @Override
@@ -278,11 +277,11 @@ dispose();
         DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
+        this.preAtendimento = new TelaPreAtendimento(this,true);
         
-        
-        this.telaAtendimento.preencherCampos(id);
-        
-        
+        this.preAtendimento.preencherCampos(id);
+       
+                
         
     }
     

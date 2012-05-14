@@ -115,7 +115,7 @@ public class PreAtendimentoDAO extends MySQL{
         return paciente;
 
     }
-     public List<PreAtendimentoBean> getCodigo(int id) throws SQLException {
+     public List<PreAtendimentoBean> getUltimoAtendimento(String filtro) throws SQLException {
         this.setConnection("sal");
         this.open();
         String SQL = "SELECT HIGH_PRIORITY IFNULL(MAX(idPreAtendimento),0)+1 AS ID FROM preatendimento";
@@ -126,7 +126,7 @@ public class PreAtendimentoDAO extends MySQL{
         SQL = "SELECT pA.* FROM preAtendimento pA, paciente p "
                 + "WHERE p.idPaciente = pA.idPaciente "
                 + "AND pA.idPreAtendimento = "+novoId
-                + " AND p.idPaciente = "+id;
+                + " AND p.nome LIKE '%"+filtro+"%'";
         this.prepare(SQL);
         this.executeQuery();
         List<PreAtendimentoBean> listaPA = new ArrayList<PreAtendimentoBean>();

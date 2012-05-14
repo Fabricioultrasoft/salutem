@@ -27,6 +27,7 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
     private PacientePesquisaDAO pacienteDao;
     private PacienteBean paciente;
     private TelaAtendimento telaAtendimento;
+    private TelaPreAtendimento preAtendimento;
 
     /** Creates new form TelaPacientePesquisa */
   
@@ -37,11 +38,25 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
         initComponents();
 
         this.telaAtendimento = parent;
+        this.preAtendimento = new TelaPreAtendimento(this, true);
         this.pacienteDao = new PacientePesquisaDAO();
         this.paciente = new PacienteBean();
         
 
     }
+    
+    public TelaPacientePesquisa(TelaPreAtendimento parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+
+        
+        this.preAtendimento = parent;
+        this.preAtendimento = new TelaPreAtendimento(this, true);
+        
+        
+
+    }
+   
 
     public TelaPacientePesquisa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -274,6 +289,8 @@ dispose();
         DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
+        
+        this.preAtendimento.preencherCampos(id);
         this.telaAtendimento.preencherCampos(id);
         
         

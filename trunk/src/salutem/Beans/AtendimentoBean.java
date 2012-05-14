@@ -18,6 +18,7 @@ public class AtendimentoBean {
     private int idUnidade;
     private Date data;
     private String descricao;
+    private String medicamento;
 
     /**
      * @return the idAtendimento
@@ -101,6 +102,20 @@ public class AtendimentoBean {
      */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    /**
+     * @return the medicamento
+     */
+    public String getMedicamento() {
+        return medicamento;
+    }
+
+    /**
+     * @param medicamento the medicamento to set
+     */
+    public void setMedicamento(String medicamento) {
+        this.medicamento = medicamento;
     }
 
     /**

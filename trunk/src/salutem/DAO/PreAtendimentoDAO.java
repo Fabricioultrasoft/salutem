@@ -8,18 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.xml.soap.Text;
-import salutem.Beans.AtendimentoBean;
 import salutem.Beans.PacienteBean;
+import salutem.Beans.PreAtendimentoBean;
 import salutem.conexao.MySQL;
 
 /**
  *
  * @author Tironi
  */
-public class AtendimentoDAO extends MySQL{
+public class PreAtendimentoDAO extends MySQL{
     
-    public void inserir(AtendimentoBean atendimento) throws SQLException {
+    public void inserir(PreAtendimentoBean atendimento) throws SQLException {
         this.setConnection("sal");
         this.open();
         
@@ -27,19 +26,16 @@ public class AtendimentoDAO extends MySQL{
         
         int id = getCodigo();
 
-        String sql = "INSERT INTO atendimento (idAtendimento,data,descricao,idUsuario,idUnidade,idPaciente,medicamento"+
-                      ") values (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO preatendimento (idPreAtendimento,idPaciente,temperatura,pressaoArterial)"+
+                " values(?,?,?,?)";
        this.prepare(sql);
        
         
         this.prepare(sql);
         this.setInt(1, id);
-        this.setDate(2, atendimento.getData());
-        this.setString(3, atendimento.getDescricao());
-        this.setInt(4, atendimento.getIdUsuario());
-        this.setInt(5, atendimento.getIdUnidade());
-        this.setInt(6, atendimento.getIdPaciente());
-        this.setString(7, atendimento.getMedicamento());
+        this.setInt(2, atendimento.getIdPaciente());
+        this.setInt(3, atendimento.getTemperatura());
+        this.setInt(4, atendimento.getPressaoArterial());
         
         
         
@@ -48,9 +44,7 @@ public class AtendimentoDAO extends MySQL{
 
     }
     
-    
-    
-     public List<PacienteBean> getListaPaciente() throws SQLException {
+    public List<PacienteBean> getListaPaciente() throws SQLException {
         this.setConnection("sal");
         this.open();
 
@@ -63,7 +57,7 @@ public class AtendimentoDAO extends MySQL{
             PacienteBean paciente = new PacienteBean();
             paciente.setIdPaciente(this.getRS().getInt("idPaciente"));
             paciente.setNome(this.getRS().getString("nome"));
-            paciente.setData((Date)this.getRS().getDate("data"));
+            
             
            
             
@@ -75,11 +69,11 @@ public class AtendimentoDAO extends MySQL{
         return lista;
     }
     
-    public int getCodigo() throws SQLException {
+     public int getCodigo() throws SQLException {
         //this.setConnection("sal");
         //this.open();
 
-        String SQLi = "SELECT HIGH_PRIORITY IFNULL(MAX(idAtendimento),0)+1 AS ID FROM atendimento";
+        String SQLi = "SELECT HIGH_PRIORITY IFNULL(MAX(idPreAtendimento),0)+1 AS ID FROM preatendimento";
         this.prepare(SQLi);
         this.executeQuery();
         this.getRS().first();
@@ -90,8 +84,5 @@ public class AtendimentoDAO extends MySQL{
 
         return novoId;
     }
-
-   
-  
     
 }

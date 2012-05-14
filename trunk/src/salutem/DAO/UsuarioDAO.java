@@ -11,6 +11,7 @@ import java.util.List;
 import salutem.Beans.FuncionarioBean;
 import salutem.Beans.ModuloBean;
 import salutem.Beans.PermissaoBean;
+import salutem.Beans.PreAtendimentoBean;
 import salutem.Beans.UsuarioBean;
 import salutem.conexao.MySQL;
 
@@ -188,5 +189,4 @@ public class UsuarioDAO extends MySQL{
 
         return novoId;
     }
-
 }

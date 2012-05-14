@@ -355,7 +355,7 @@ public class TelaCargo extends javax.swing.JDialog {
         tela.setTitle("ALTERAR CARGO");
         tela.setInserir(false);
         tela.setLocationRelativeTo(null);
-        
+        tela.preencherCampos(id);
         tela.setVisible(true);
     }
 

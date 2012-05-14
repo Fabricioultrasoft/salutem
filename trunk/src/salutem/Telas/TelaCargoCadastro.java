@@ -223,7 +223,7 @@ public class TelaCargoCadastro extends javax.swing.JDialog {
             Msg.erro(this, "Erro ao preencher campos. \n"+ex.getMessage());
         }
     }
-
+    
     private void salvar(){
         if(this.verificarCampos()){
             return;

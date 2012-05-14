@@ -8,8 +8,17 @@
  *
  * Created on 11/05/2012, 15:42:56
  */
-
 package salutem.Telas;
+
+import java.awt.Component;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JTextField;
+import salutem.Beans.UnidadeBean;
+import salutem.DAO.UnidadeDAO;
+import salutem.Utils.Msg;
+import salutem.Utils.Params;
 
 /**
  *
@@ -17,7 +26,19 @@ package salutem.Telas;
  */
 public class TelaUnidadeCadastro extends javax.swing.JDialog {
 
-    /** Creates new form TelaUnidadeCadastro */
+    private boolean inserir;
+    private Integer idUnidade;
+    private UnidadeDAO daoUnidade;
+    private TelaUnidade telaUnidade;
+
+    public TelaUnidadeCadastro(TelaUnidade parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+
+        this.telaUnidade = parent;
+        this.daoUnidade = new UnidadeDAO();
+    }
+
     public TelaUnidadeCadastro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -33,31 +54,31 @@ public class TelaUnidadeCadastro extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        lbNome = new javax.swing.JLabel();
+        txNome = new javax.swing.JTextField();
+        lbRua = new javax.swing.JLabel();
+        txRua = new javax.swing.JTextField();
+        txNumero = new javax.swing.JTextField();
+        lbNumero = new javax.swing.JLabel();
+        lbBairro = new javax.swing.JLabel();
+        txBairro = new javax.swing.JTextField();
+        txComplemento = new javax.swing.JTextField();
+        lbComplemento = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btSalvar = new javax.swing.JButton();
+        btCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Nome");
+        lbNome.setText("Nome");
 
-        jLabel2.setText("Rua");
+        lbRua.setText("Rua");
 
-        jLabel3.setText("Número");
+        lbNumero.setText("Número");
 
-        jLabel4.setText("Bairro");
+        lbBairro.setText("Bairro");
 
-        jLabel5.setText("Complemento");
+        lbComplemento.setText("Complemento");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -66,60 +87,70 @@ public class TelaUnidadeCadastro extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbNome)
+                    .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                                .addComponent(txRua, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(lbRua)
                                 .addGap(249, 249, 249)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lbNumero)
+                            .addComponent(txNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(txBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbBairro))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))))
+                            .addComponent(lbComplemento)
+                            .addComponent(txComplemento, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lbNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbRua)
+                    .addComponent(lbNumero))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(txRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbBairro)
+                    .addComponent(lbComplemento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-salvar.png"))); // NOI18N
-        jButton1.setText("Salvar");
+        btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-salvar.png"))); // NOI18N
+        btSalvar.setText("Salvar");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-cancelar.png"))); // NOI18N
-        jButton2.setText("Cancelar");
+        btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-cancelar.png"))); // NOI18N
+        btCancelar.setText("Cancelar");
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -127,9 +158,9 @@ public class TelaUnidadeCadastro extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(77, 77, 77)
-                .addComponent(jButton1)
+                .addComponent(btSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btCancelar)
                 .addContainerGap(98, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -137,8 +168,8 @@ public class TelaUnidadeCadastro extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btCancelar)
+                    .addComponent(btSalvar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -166,14 +197,24 @@ public class TelaUnidadeCadastro extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        this.salvar();
+    }//GEN-LAST:event_btSalvarActionPerformed
+
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+        this.cancelar();
+    }//GEN-LAST:event_btCancelarActionPerformed
+
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 TelaUnidadeCadastro dialog = new TelaUnidadeCadastro(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
@@ -182,22 +223,115 @@ public class TelaUnidadeCadastro extends javax.swing.JDialog {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton btCancelar;
+    private javax.swing.JButton btSalvar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel lbBairro;
+    private javax.swing.JLabel lbComplemento;
+    private javax.swing.JLabel lbNome;
+    private javax.swing.JLabel lbNumero;
+    private javax.swing.JLabel lbRua;
+    private javax.swing.JTextField txBairro;
+    private javax.swing.JTextField txComplemento;
+    private javax.swing.JTextField txNome;
+    private javax.swing.JTextField txNumero;
+    private javax.swing.JTextField txRua;
     // End of variables declaration//GEN-END:variables
 
+    private void cancelar() {
+        this.setVisible(false);
+        this.dispose();
+    }
+
+    protected boolean isInserir() {
+        return inserir;
+    }
+
+    protected void setInserir(boolean inserir) {
+        this.inserir = inserir;
+        this.idUnidade = null;
+    }
+
+    private void destacarCampo(Component c, boolean b) {
+        if (b) {
+            c.setBackground(Params.COR_CAMPO_VAZIO);
+        } else {
+            c.setBackground(Params.COR_CAMPO_NORMAL);
+        }
+    }
+
+    private boolean verificarCampos() {
+        boolean aux = false;
+        String msg = "Preencha corretamente os campos. \n";
+        if(this.txNome.getText().isEmpty()){
+            aux = true;
+            this.destacarCampo(this.txNome, aux);
+        }
+        if(this.txRua.getText().isEmpty()){
+            aux = true;
+            this.destacarCampo(this.txRua, aux);
+        }
+        if(this.txNumero.getText().isEmpty()){
+            aux = true;
+            this.destacarCampo(this.txNumero, aux);
+        }
+        if(this.txBairro.getText().isEmpty()){
+            aux = true;
+            this.destacarCampo(this.txBairro, aux);
+        }
+        if(aux){
+            Msg.alerta(this, msg);
+        }
+        return aux;
+    }
+
+    protected void preencherCampos(int id){
+        try{
+            UnidadeBean uni = daoUnidade.getUnidade(id);
+            this.idUnidade = uni.getIdUnidade();
+            this.txNome.setText(uni.getNome().trim().toUpperCase());
+            this.txRua.setText(uni.getRua().trim().toUpperCase());
+            this.txNumero.setText(String.valueOf(uni.getNumero()).trim());
+            this.txBairro.setText(uni.getBairro().trim().toUpperCase());
+            this.txComplemento.setText(uni.getComplemento().trim().toUpperCase());
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao preencher campos. \n"+ex.getMessage());
+        }
+    }
+
+    private void salvar(){
+        if(this.verificarCampos()){
+            return;
+        }
+        try{
+            if(this.isInserir()){
+                UnidadeBean uni = new UnidadeBean();
+                uni.setNome(this.txNome.getText().trim().toUpperCase());
+                uni.setRua(this.txRua.getText().trim().toUpperCase());
+                uni.setNumero(Integer.parseInt(this.txNumero.getText().trim().toUpperCase()));
+                uni.setBairro(this.txBairro.getText().trim().toUpperCase());
+                uni.setComplemento(this.txComplemento.getText().trim().toUpperCase());
+                this.daoUnidade.inserir(uni);
+                Msg.informacao(this, "Salvo com sucesso.");
+
+                this.cancelar();
+            }else{
+                UnidadeBean uni = new UnidadeBean();
+                uni.setIdUnidade(this.idUnidade);
+                uni.setNome(this.txNome.getText().trim().toUpperCase());
+                uni.setRua(this.txRua.getText().trim().toUpperCase());
+                uni.setNumero(Integer.parseInt(this.txNumero.getText().trim().toUpperCase()));
+                uni.setBairro(this.txBairro.getText().trim().toUpperCase());
+                uni.setComplemento(this.txComplemento.getText().trim().toUpperCase());
+                this.daoUnidade.alterar(uni);
+                Msg.informacao(this, "Alterado com sucesso.");
+
+                this.cancelar();
+            }
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao salvar. \n"+ex.getMessage());
+        }
+    }
 }

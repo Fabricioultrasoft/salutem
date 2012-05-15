@@ -12,7 +12,8 @@ import javax.xml.soap.Text;
  * @author Tironi
  */
 public class AtendimentoBean {
-    
+    private int idUsuario;
+    private int idUnidade;
     private UnidadeBean unidade;
     private UsuarioBean usuario;
     private int idAtendimento;
@@ -44,7 +45,17 @@ public class AtendimentoBean {
     /**
      * @return the idUsuario
      */
- 
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    /**
+     * @param idUsuario the idUsuario to set
+     */
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
     /**
      * @return the idFuncionario
      */
@@ -61,7 +72,17 @@ public class AtendimentoBean {
 
     /**
      * @return the idUnidade
- 
+     */
+    public int getIdUnidade() {
+        return idUnidade;
+    }
+
+    /**
+     * @param idUnidade the idUnidade to set
+     */
+    public void setIdUnidade(int idUnidade) {
+        this.idUnidade = idUnidade;
+    }
 
     /**
      * @return the data

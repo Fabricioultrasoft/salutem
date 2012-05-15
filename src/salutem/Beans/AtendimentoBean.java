@@ -12,10 +12,13 @@ import javax.xml.soap.Text;
  * @author Tironi
  */
 public class AtendimentoBean {
+    
+    private UnidadeBean unidade;
+    private UsuarioBean usuario;
     private int idAtendimento;
-    private int idUsuario;
+  
     private int idPaciente;
-    private int idUnidade;
+   
     private Date data;
     private String descricao;
     private String medicamento;
@@ -41,17 +44,7 @@ public class AtendimentoBean {
     /**
      * @return the idUsuario
      */
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    /**
-     * @param idUsuario the idUsuario to set
-     */
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
+ 
     /**
      * @return the idFuncionario
      */
@@ -68,17 +61,7 @@ public class AtendimentoBean {
 
     /**
      * @return the idUnidade
-     */
-    public int getIdUnidade() {
-        return idUnidade;
-    }
-
-    /**
-     * @param idUnidade the idUnidade to set
-     */
-    public void setIdUnidade(int idUnidade) {
-        this.idUnidade = idUnidade;
-    }
+ 
 
     /**
      * @return the data
@@ -176,6 +159,34 @@ public class AtendimentoBean {
      */
     public void setDiagnostico(String diagnostico) {
         this.diagnostico = diagnostico;
+    }
+
+    /**
+     * @return the unidade
+     */
+    public UnidadeBean getUnidade() {
+        return unidade;
+    }
+
+    /**
+     * @param unidade the unidade to set
+     */
+    public void setUnidade(UnidadeBean unidade) {
+        this.unidade = unidade;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioBean getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioBean usuario) {
+        this.usuario = usuario;
     }
 
     /**

@@ -37,8 +37,8 @@ public class AtendimentoDAO extends MySQL{
         this.setInt(1, id);
         this.setDate(2, atendimento.getData());
         this.setString(3, atendimento.getDescricao());
-        this.setInt(4, atendimento.getIdUsuario());
-        this.setInt(5, atendimento.getIdUnidade());
+        this.setObject(4, atendimento.getUsuario());
+        this.setObject(5, atendimento.getUnidade());
         this.setInt(6, atendimento.getIdPaciente());
         this.setString(7, atendimento.getMedicamento());
         this.setInt(8, atendimento.getTemperatura());
@@ -71,7 +71,8 @@ public class AtendimentoDAO extends MySQL{
             paciente.setDescricao(this.getRS().getString("descricao"));
             paciente.setMedicamento(this.getRS().getString("medicamento"));
             paciente.setDiagnostico(this.getRS().getString("diagnostico"));
-            paciente.setTemperatura(this.getRS().getShort("temperatura"));
+            paciente.setTemperatura(this.getRS().getInt("temperatura"));
+            paciente.setUnidade(this.getRS().getString("unidade"));
            
             listaEsp.add(paciente);
         }

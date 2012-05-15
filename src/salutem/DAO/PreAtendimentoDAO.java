@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import salutem.Beans.PacienteBean;
 import salutem.Beans.PreAtendimentoBean;
+import salutem.Telas.TelaAtendimento;
 import salutem.conexao.MySQL;
 
 /**
@@ -137,22 +138,25 @@ public class PreAtendimentoDAO extends MySQL{
         return paciente;
 
     }
-     public List<PreAtendimentoBean> getUltimoAtendimento(String filtro) throws SQLException {
+     public PreAtendimentoBean getUltimoAtendimento(int filtro) throws SQLException {
         this.setConnection("sal");
         this.open();
-        String SQL = "SELECT HIGH_PRIORITY IFNULL(MAX(idPreAtendimento),0)+1 AS ID FROM preatendimento";
-        this.prepare(SQL);
-        this.executeQuery();
-        this.getRS().first();
-        int novoId = this.getRS().getInt("ID");
-        SQL = "SELECT pA.* FROM preAtendimento pA, paciente p "
+        MySQL conAux = new MySQL();
+        conAux.setConnection("sal");
+        conAux.open();
+        String auxSQL = "SELECT HIGH_PRIORITY IFNULL(MAX(idPreAtendimento),0) AS ID FROM preatendimento pA, paciente p WHERE p.idPaciente = pA.idPaciente AND pA.idPaciente = "+filtro;
+        conAux.prepare(auxSQL);
+        conAux.executeQuery();
+        conAux.getRS().first();
+        int novoId = conAux.getRS().getInt("ID");
+        String SQL = "SELECT pA.* FROM preAtendimento pA, paciente p "
                 + "WHERE p.idPaciente = pA.idPaciente "
                 + "AND pA.idPreAtendimento = "+novoId
-                + " AND p.nome LIKE '%"+filtro+"%'";
+                + " AND p.idPaciente = "+filtro;
         this.prepare(SQL);
         this.executeQuery();
-        List<PreAtendimentoBean> listaPA = new ArrayList<PreAtendimentoBean>();
-        while(this.getRS().next()){
+        
+        this.getRS().first();
             PreAtendimentoBean pA = new PreAtendimentoBean();
             pA.setIdPaciente(this.getRS().getInt("idPaciente"));
             pA.setTemperatura(this.getRS().getInt("temperatura"));
@@ -160,12 +164,11 @@ public class PreAtendimentoDAO extends MySQL{
             pA.setBaixa(this.getRS().getInt("baixa"));
             pA.setIdPreAtendimento(this.getRS().getInt("idPreAtendimento"));
         
-            listaPA.add(pA);
-        }
-
+            
+        conAux.close();
         this.close();
 
-        return listaPA;
+        return pA;
     }
 
      

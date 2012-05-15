@@ -396,7 +396,7 @@ cancelar();
 
                 PreAtendimentoBean atendimento = new PreAtendimentoBean();
                 atendimento.setAlta(Integer.parseInt(TxAlta.getText()));
-                atendimento.setBaixa(Integer.parseInt(TxAlta.getText()));
+                atendimento.setBaixa(Integer.parseInt(txBaixa.getText()));
                 atendimento.setTemperatura(Integer.parseInt(txTemperatura.getText()));
                 atendimento.setIdPaciente(this.idPac);
                 

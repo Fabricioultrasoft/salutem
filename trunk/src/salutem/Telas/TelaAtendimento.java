@@ -534,7 +534,7 @@ salvar();
            
             
             this.preDao = new PreAtendimentoDAO();
-            PreAtendimentoBean pre = preDao.getPreAtendimento(id);
+            PreAtendimentoBean pre = preDao.getUltimoAtendimento(id);
             this.idPreAtendimento = pre.getIdPreAtendimento();
             this.txTemp.setText(String.valueOf(pre.getTemperatura()));
             this.txAlta.setText(String.valueOf(pre.getAlta()));

@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import salutem.Beans.PacienteBean;
 import salutem.DAO.PacientePesquisaDAO;
+import salutem.DAO.PreAtendimentoDAO;
 import salutem.Utils.Msg;
 
 /**
@@ -28,6 +29,7 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
     private PacienteBean paciente;
     private TelaAtendimento telaAtendimento;
     private TelaPreAtendimento preAtendimento;
+    private PreAtendimentoDAO preDao;
 
     /** Creates new form TelaPacientePesquisa */
   
@@ -40,7 +42,7 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
         this.telaAtendimento = parent;
         this.pacienteDao = new PacientePesquisaDAO();
         this.paciente = new PacienteBean();
-        
+     
 
     }
     
@@ -74,6 +76,7 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Tela de Pesquisa Paciente - Atendimento");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisa"));
 

@@ -41,7 +41,7 @@ public class UnidadeDAO extends MySQL {
         this.open();
 
         String SQL = "UPDATE unidade SET nome = ?, rua = ?, numero = ?, "
-                + "bairro = ?, complemento = ?, WHERE idUnidade = ?";
+                + "bairro = ?, complemento = ? WHERE idUnidade = ?";
         this.prepare(SQL);
         this.setString(1, uni.getNome());
         this.setString(2, uni.getRua());
@@ -119,6 +119,7 @@ public class UnidadeDAO extends MySQL {
 
         String SQL = "SELECT * FROM unidade WHERE idUnidade = " + id;
         this.prepare(SQL);
+        this.executeQuery();
         this.getRS().first();
         UnidadeBean uni = new UnidadeBean();
         uni.setIdUnidade(this.getRS().getInt("idUnidade"));
@@ -135,7 +136,7 @@ public class UnidadeDAO extends MySQL {
     }
 
     public int getCodigo() throws SQLException {
-        String SQL = "SELECT HIGH_PRIORITY IFNULL(MAX(idEspecialidade),0)+1 AS ID FROM especialidade";
+        String SQL = "SELECT HIGH_PRIORITY IFNULL(MAX(idUnidade),0)+1 AS ID FROM unidade";
         this.prepare(SQL);
         this.executeQuery();
         this.getRS().first();

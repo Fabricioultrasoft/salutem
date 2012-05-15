@@ -11,16 +11,33 @@
 
 package salutem.Telas;
 
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import salutem.Beans.FuncionarioBean;
+import salutem.DAO.FuncionarioDAO;
+import salutem.Utils.Msg;
+import salutem.Utils.Utils;
+
 /**
  *
  * @author Renato Doretto
  */
 public class TelaFuncionario extends javax.swing.JDialog {
 
-    /** Creates new form TelaFuncionario */
+    private FuncionarioDAO daoFunc;
+    private TelaPrincipal telaP;
+    
     public TelaFuncionario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        this.telaP = (TelaPrincipal) parent;
+        this.daoFunc = new FuncionarioDAO();
+
+        Utils.maximizar(this);
+        this.tabela.getColumnModel().getColumn(0).setMaxWidth(0);
+        this.tabela.getColumnModel().getColumn(0).setMinWidth(0);
     }
 
     /** This method is called from within the constructor to
@@ -33,7 +50,7 @@ public class TelaFuncionario extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txPesquisa = new javax.swing.JTextField();
+        txPesquisar = new javax.swing.JTextField();
         btExibir = new javax.swing.JButton();
         lbInfoPesq = new javax.swing.JLabel();
         btPesquisar = new javax.swing.JButton();
@@ -62,7 +79,7 @@ public class TelaFuncionario extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbInfoPesq, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
-                    .addComponent(txPesquisa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
+                    .addComponent(txPesquisar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btPesquisar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -77,7 +94,7 @@ public class TelaFuncionario extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btExibir)
                         .addComponent(btPesquisar))
-                    .addComponent(txPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbInfoPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -87,11 +104,11 @@ public class TelaFuncionario extends javax.swing.JDialog {
 
             },
             new String [] {
-                "NOME", "CPF", "TELEFONE", "REGISTRO"
+                "ID", "NOME", "CPF", "TELEFONE", "REGISTRO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -102,15 +119,35 @@ public class TelaFuncionario extends javax.swing.JDialog {
 
         btInserir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-inserir.png"))); // NOI18N
         btInserir.setText("Inserir");
+        btInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInserirActionPerformed(evt);
+            }
+        });
 
         btAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-alterar.png"))); // NOI18N
         btAlterar.setText("Alterar");
+        btAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAlterarActionPerformed(evt);
+            }
+        });
 
         btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-deletar.png"))); // NOI18N
         btExcluir.setText("Excluir");
+        btExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcluirActionPerformed(evt);
+            }
+        });
 
         btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-sair.png"))); // NOI18N
         btSair.setText("Sair");
+        btSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSairActionPerformed(evt);
+            }
+        });
 
         btAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-help.png"))); // NOI18N
         btAjuda.setText("Ajuda");
@@ -152,9 +189,9 @@ public class TelaFuncionario extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -163,14 +200,30 @@ public class TelaFuncionario extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInserirActionPerformed
+        this.inserir();
+    }//GEN-LAST:event_btInserirActionPerformed
+
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        this.alterar();
+    }//GEN-LAST:event_btAlterarActionPerformed
+
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+        this.excluir();
+    }//GEN-LAST:event_btExcluirActionPerformed
+
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+        this.sair();
+    }//GEN-LAST:event_btSairActionPerformed
 
     /**
     * @param args the command line arguments
@@ -202,7 +255,116 @@ public class TelaFuncionario extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbInfoPesq;
     private javax.swing.JTable tabela;
-    private javax.swing.JTextField txPesquisa;
+    private javax.swing.JTextField txPesquisar;
     // End of variables declaration//GEN-END:variables
 
+    private void sair(){
+        this.setVisible(false);
+        this.dispose();
+    }
+
+    protected void atualizarTabela(){
+        try{
+            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+            modelo.setNumRows(0);
+
+            List<FuncionarioBean> listaFunc = this.daoFunc.getLista();
+
+            for(int i=0; i < listaFunc.size(); i++){
+                modelo.addRow(new Object[]{
+                listaFunc.get(i).getIdFuncionario(),
+                listaFunc.get(i).getNome(),
+                listaFunc.get(i).getCpfCnpj(),
+                listaFunc.get(i).getTelefone()});
+            }
+            this.lbInfoPesq.setText(modelo.getRowCount()+ " resultado(s).");
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
+        }
+    }
+
+    protected void atualizarTabela(String filtro){
+        try{
+            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+            modelo.setNumRows(0);
+
+            List<FuncionarioBean> listaFunc = this.daoFunc.getLista(filtro);
+
+            for(int i=0; i < listaFunc.size(); i++){
+                modelo.addRow(new Object[]{
+                listaFunc.get(i).getIdFuncionario(),
+                listaFunc.get(i).getNome(),
+                listaFunc.get(i).getCpfCnpj(),
+                listaFunc.get(i).getTelefone()});
+            }
+            this.lbInfoPesq.setText(modelo.getRowCount()+ " resultado(s).");
+        }catch(SQLException ex){
+            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
+        }
+    }
+
+    protected void limparTabela(){
+        DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+        modelo.setNumRows(0);
+        this.lbInfoPesq.setText("");
+    }
+
+    private void pesquisar(){
+        if(this.txPesquisar.getText().length() >= 3){
+            this.atualizarTabela(this.txPesquisar.getText().trim());
+        }else{
+            this.lbInfoPesq.setText("Digite no minímo 3 caracteres.");
+        }
+    }
+
+    public void inserir(){
+        TelaFuncionarioCadastro tela = new TelaFuncionarioCadastro(this, true);
+        tela.setTitle("INSERIR FUNCIONARIO");
+        tela.setInserir(true);
+        tela.setLocationRelativeTo(null);
+        tela.setVisible(true);
+    }
+
+    public void alterar(){
+        int row = this.tabela.getSelectedRow();
+        if(row == -1){
+            Msg.alerta(this, "Selecione o registro.");
+            return;
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+        int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
+
+        TelaFuncionarioCadastro tela = new TelaFuncionarioCadastro(this, true);
+        tela.setTitle("ALTERAR FUNCIONARIO");
+        tela.setInserir(false);
+        tela.setLocationRelativeTo(null);
+        //tela.preencherCampos(id);
+        tela.setVisible(true);
+    }
+
+    private void excluir(){
+        int row = this.tabela.getSelectedRow();
+        if(row == -1){
+            Msg.alerta(this, "Selecione o registro.");
+            return;
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+        int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
+        String cargo = modelo.getValueAt(row, 1).toString();
+
+        if(Msg.confirmar(this, "Deseja excluir o registro \""+cargo+"\"?")){
+            try{
+                this.daoFunc.excluir(id);
+                this.atualizarTabela();
+            }catch(SQLException ex){
+                if(ex.getMessage().startsWith("Cannot delete or update a parent row")){
+                    Msg.erro(this, "Registro tem referência com outros módulos.\n\nNão pode ser excluído.");
+                }else{
+                    Msg.erro(this, "Erro ao excluir o registro.\n\n"+ex.getMessage());
+                }
+            }
+        }
+    }
 }

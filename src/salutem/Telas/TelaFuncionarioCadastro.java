@@ -8,8 +8,22 @@
  *
  * Created on 08/05/2012, 13:45:26
  */
-
 package salutem.Telas;
+
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import salutem.Beans.CargoBean;
+import salutem.Beans.EspecialidadeBean;
+import salutem.Beans.UnidadeBean;
+import salutem.DAO.CargoDAO;
+import salutem.DAO.EspecialidadeDAO;
+import salutem.DAO.FuncionarioDAO;
+import salutem.DAO.UnidadeDAO;
+import salutem.Utils.Msg;
+import salutem.Utils.Params;
+import salutem.Utils.Utils;
 
 /**
  *
@@ -17,10 +31,37 @@ package salutem.Telas;
  */
 public class TelaFuncionarioCadastro extends javax.swing.JDialog {
 
-    /** Creates new form TelaFuncionarioCadastro */
+    private boolean inserir;
+    private Integer idFunc;
+    private FuncionarioDAO daoFunc;
+    private UnidadeDAO daoUnidade;
+    private CargoDAO daoCargo;
+    private EspecialidadeDAO daoEspecialidade;
+    private TelaFuncionario telaFunc;
+    private List<EspecialidadeBean> espSel;
+    private List<EspecialidadeBean> esps;
+    private List<CargoBean> cargSel;
+    private List<CargoBean> cargs;
+    private List<UnidadeBean> uniSel;
+    private List<UnidadeBean> unis;
+
+    public TelaFuncionarioCadastro(TelaFuncionario parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+
+        this.daoFunc = new FuncionarioDAO();
+        this.telaFunc = parent;
+        this.espSel = new ArrayList<EspecialidadeBean>();
+        this.esps = new ArrayList<EspecialidadeBean>();
+        this.cargSel = new ArrayList<CargoBean>();
+        this.cargs = new ArrayList<CargoBean>();
+        this.carregarCbUnidade();
+    }
+
     public TelaFuncionarioCadastro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
 
     /** This method is called from within the constructor to
@@ -184,9 +225,17 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nome"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane5.setViewportView(tbUnidade);
 
         btMais.setText("+");
@@ -512,13 +561,15 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     }//GEN-LAST:event_cbCidadeActionPerformed
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 TelaFuncionarioCadastro dialog = new TelaFuncionarioCadastro(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
@@ -527,7 +578,6 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btCargoMais;
@@ -585,4 +635,144 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField txTelefone;
     // End of variables declaration//GEN-END:variables
 
+    private void cancelar() {
+        this.setVisible(false);
+        this.dispose();
+    }
+
+    protected boolean isInserir() {
+        return inserir;
+    }
+
+    protected void setInserir(boolean inserir) {
+        this.inserir = inserir;
+        this.idFunc = null;
+    }
+
+    private void destacarCampo(Component c, boolean b) {
+        if (b) {
+            c.setBackground(Params.COR_CAMPO_VAZIO);
+        } else {
+            c.setBackground(Params.COR_CAMPO_NORMAL);
+        }
+    }
+
+    private boolean verificarCampos() {
+        boolean aux = false;
+
+        String msg = "Preencha corretamente os campos. \n";
+
+        if (this.txNome.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txNome, aux);
+        }
+        if (this.txCpf.getText().equals("   .   .   -  ")) {
+            aux = true;
+            this.destacarCampo(this.txCpf, aux);
+        }
+        if (this.txRg.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txRg, aux);
+        }
+        if (this.cbSexo.getSelectedIndex() != 0) {
+            aux = true;
+            this.destacarCampo(this.cbSexo, aux);
+        }
+        if (this.txTelefone.getText().equals("(  )    -    ")) {
+            aux = true;
+            this.destacarCampo(this.txTelefone, aux);
+        }
+        if (this.txCelular.getText().equals("(  )    -    ")) {
+            aux = true;
+            this.destacarCampo(this.txCelular, aux);
+        }
+        if (this.txRua.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txRua, aux);
+        }
+        if (this.txNumero.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txNumero, aux);
+        }
+        if (this.txBairro.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txBairro, aux);
+        }
+        if (this.cbEstado.getSelectedIndex() != 0) {
+            aux = true;
+            this.destacarCampo(this.cbEstado, aux);
+        }
+        if (this.txDecreto.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txDecreto, aux);
+        }
+
+        if (aux) {
+            Msg.alerta(this, msg);
+        }
+
+        return aux;
+    }
+
+    protected void carregarCbUnidade() {
+        this.cbUnidade.removeAllItems();
+        this.cbUnidade.addItem("SELECIONE");
+
+        try {
+            unis = daoUnidade.getLista();
+            for (UnidadeBean unidade : unis) {
+                this.cbUnidade.addItem(unidade.getNome().trim().toUpperCase());
+            }
+        } catch (Exception e) {
+            Msg.erro(this, "Erro ao atualizar unidades. \n" + e.getMessage());
+        }
+    }
+
+    protected void atualizarCbUnidade() {
+        for (UnidadeBean unidade : unis) {
+            this.cbUnidade.addItem(unidade.getNome().trim().toUpperCase());
+        }
+    }
+
+    private void atualizarTbUnidade() {
+        DefaultTableModel modelo = (DefaultTableModel) this.tbUnidade.getModel();
+        modelo.setNumRows(0);
+
+        for (int i = 0; i < uniSel.size(); i++) {
+            modelo.addRow(new Object[]{
+                        uniSel.get(i).getIdUnidade(),
+                        uniSel.get(i).getNome()});
+        }
+    }
+
+    private void addUnidade() {
+        if (this.cbUnidade.getSelectedIndex() != 0) {
+            this.uniSel.add(this.unis.get(this.cbUnidade.getSelectedIndex() - 1));
+            this.unis.remove(this.cbUnidade.getSelectedIndex() - 1);
+        } else {
+            Msg.alerta(this, "Selecione uma unidade.");
+        }
+        this.atualizarCbUnidade();
+        this.atualizarTbUnidade();
+    }
+
+    private void removeUnidade() {
+        int row = this.tbUnidade.getSelectedRow();
+        if (row == -1) {
+            Msg.alerta(this, "Selecione o registro.");
+            return;
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) this.tbUnidade.getModel();
+        int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
+
+        for (int i = 0; i < uniSel.size(); i++) {
+            if(uniSel.get(i).getIdUnidade() == id){
+                unis.add(uniSel.get(i));
+                uniSel.remove(i);
+            }
+        }
+        this.atualizarCbUnidade();
+        this.atualizarTbUnidade();
+    }
 }

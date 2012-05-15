@@ -189,4 +189,6 @@ public class UsuarioDAO extends MySQL{
 
         return novoId;
     }
+  
+    
 }

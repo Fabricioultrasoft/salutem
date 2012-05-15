@@ -40,7 +40,7 @@ public class TelaPacienteBusca extends javax.swing.JDialog {
     public TelaPacienteBusca(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        atualizarTabela();
+        //atualizarTabela();
         this.telaP = (TelaPrincipal) parent;
         this.pacienteDao = new pacienteDAO();
         this.pacienteBean  = new PacienteBean();

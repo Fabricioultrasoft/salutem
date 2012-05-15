@@ -50,6 +50,9 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         initComponents();
 
         this.daoFunc = new FuncionarioDAO();
+        this.daoUnidade = new UnidadeDAO();
+        this.daoCargo = new CargoDAO();
+        this.daoEspecialidade = new EspecialidadeDAO();
         this.telaFunc = parent;
         this.espSel = new ArrayList<EspecialidadeBean>();
         this.esps = new ArrayList<EspecialidadeBean>();

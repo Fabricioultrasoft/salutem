@@ -11,11 +11,13 @@
 package salutem.Telas;
 
 import java.awt.Component;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import salutem.Beans.CargoBean;
 import salutem.Beans.EspecialidadeBean;
+import salutem.Beans.FuncionarioBean;
 import salutem.Beans.UnidadeBean;
 import salutem.DAO.CargoDAO;
 import salutem.DAO.EspecialidadeDAO;
@@ -119,6 +121,8 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         tbUnidade = new javax.swing.JTable();
         btMaisUni = new javax.swing.JButton();
         btMenosUni = new javax.swing.JButton();
+        lbNascimento = new javax.swing.JLabel();
+        txDtNascimento = new org.jdesktop.swingx.JXDatePicker();
         jPanel2 = new javax.swing.JPanel();
         lbCargo = new javax.swing.JLabel();
         lbEsp = new javax.swing.JLabel();
@@ -137,6 +141,11 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
 
         btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-salvar.png"))); // NOI18N
         btSalvar.setText("Salvar");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
+            }
+        });
 
         btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-cancelar.png"))); // NOI18N
         btCancelar.setText("Cancelar");
@@ -262,6 +271,8 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             }
         });
 
+        lbNascimento.setText("Data de nascimento");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -299,10 +310,15 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                                                     .addComponent(lbRg)
                                                     .addComponent(txRg, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(10, 10, 10))
-                                            .addComponent(lbCelular)))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(lbCelular)
+                                                .addGap(77, 77, 77)
+                                                .addComponent(lbNascimento))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(txCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txDtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbRua)
@@ -363,12 +379,14 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbSexo)
                     .addComponent(lbTelefone)
-                    .addComponent(lbCelular))
+                    .addComponent(lbCelular)
+                    .addComponent(lbNascimento))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txDtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbRua)
@@ -591,6 +609,10 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         this.removeCargo();
     }//GEN-LAST:event_btMenosEspActionPerformed
 
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        this.salvar();
+    }//GEN-LAST:event_btSalvarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -642,6 +664,7 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     private javax.swing.JLabel lbDtAdmissao;
     private javax.swing.JLabel lbEsp;
     private javax.swing.JLabel lbEstado;
+    private javax.swing.JLabel lbNascimento;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbNumero;
     private javax.swing.JLabel lbRg;
@@ -657,6 +680,7 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField txCpf;
     private javax.swing.JTextField txDecreto;
     private org.jdesktop.swingx.JXDatePicker txDtAdmissao;
+    private org.jdesktop.swingx.JXDatePicker txDtNascimento;
     private javax.swing.JTextField txNome;
     private javax.swing.JTextField txNumero;
     private javax.swing.JTextField txRg;
@@ -741,6 +765,102 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         }
 
         return aux;
+    }
+
+    protected void preencherCampos(int id) {
+        try {
+            FuncionarioBean func = daoFunc.getFuncionario(id);
+            this.idFunc = func.getIdFuncionario();
+            this.txNome.setText(func.getNome().trim().toUpperCase());
+            this.txCpf.setText(func.getCpfCnpj().trim());
+            this.txRg.setText(func.getRgie().trim());
+            this.cbSexo.setSelectedItem(func.getSexo().equalsIgnoreCase("M") ? 1 : 2);
+            this.txTelefone.setText(func.getTelefone().trim());
+            this.txCelular.setText(func.getCelular().trim());
+            this.txDtNascimento.getEditor().setText(Utils.convertData(func.getData()));
+            this.txRua.setText(func.getRua().trim());
+            this.txNumero.setText(String.valueOf(func.getNumero()).trim());
+            this.txComplemento.setText(func.getComplemento().trim().toUpperCase());
+            this.txBairro.setText(func.getBairro().trim().toUpperCase());
+            this.cbEstado.setSelectedItem(func.getEstado().trim().toUpperCase());
+            this.cbCidade.setSelectedItem(func.getCidade().trim().toUpperCase());
+            this.txDtAdmissao.getEditor().setText(Utils.convertData(func.getAdmissao()));
+            this.txDecreto.setText(String.valueOf(func.getDecreto()).trim());
+            this.uniSel = func.getUnidade();
+            this.cargSel = func.getCargo();
+            this.espSel = func.getEspecialidade();
+            this.atualizarTbUnidade();
+            this.atualizarTbCargo();
+            this.atualizarTbEspecialidade();
+        } catch (SQLException e) {
+            Msg.erro(this, "Erro ao preencher campos. \n" + e.getMessage());
+        }
+    }
+
+    private void salvar() {
+        if (this.verificarCampos()) {
+            return;
+        }
+        try {
+            if (this.isInserir()) {
+                FuncionarioBean func = new FuncionarioBean();
+                func.setNome(this.txNome.getText().trim().toUpperCase());
+                func.setCpfCnpj(this.txCpf.getText().trim().toUpperCase());
+                func.setRgie(this.txRg.getText().trim().toUpperCase());
+                if (this.cbSexo.getSelectedIndex() == 1) {
+                    func.setSexo("M");
+                } else {
+                    func.setSexo("F");
+                }
+                func.setTelefone(this.txTelefone.getText().trim().toUpperCase());
+                func.setCelular(this.txCelular.getText().trim().toUpperCase());
+                func.setData(Utils.convertData(this.txDtNascimento.getEditor().getText()));
+                func.setRua(this.txRua.getText().trim().toUpperCase());
+                func.setNumero(Integer.parseInt(this.txNumero.getText().trim().toUpperCase()));
+                func.setComplemento(this.txComplemento.getText().trim().toUpperCase());
+                func.setBairro(this.txBairro.getText().trim().toUpperCase());
+                func.setEstado(this.cbEstado.getSelectedItem().toString());
+                func.setCidade(this.cbEstado.getSelectedItem().toString());
+                func.setAdmissao(Utils.convertData(this.txDtAdmissao.getEditor().getText()));
+                func.setDecreto(Integer.parseInt(this.txDecreto.getText().trim().toUpperCase()));
+                func.setUnidade(uniSel);
+                func.setCargo(cargSel);
+                func.setEspecialidade(espSel);
+                this.daoFunc.inserir(func);
+                Msg.informacao(this, "Salvo com sucesso.");
+                this.cancelar();
+            }else{
+                FuncionarioBean func = new FuncionarioBean();
+                func.setIdFuncionario(this.idFunc);
+                func.setNome(this.txNome.getText().trim().toUpperCase());
+                func.setCpfCnpj(this.txCpf.getText().trim().toUpperCase());
+                func.setRgie(this.txRg.getText().trim().toUpperCase());
+                if (this.cbSexo.getSelectedIndex() == 1) {
+                    func.setSexo("M");
+                } else {
+                    func.setSexo("F");
+                }
+                func.setTelefone(this.txTelefone.getText().trim().toUpperCase());
+                func.setCelular(this.txCelular.getText().trim().toUpperCase());
+                func.setData(Utils.convertData(this.txDtNascimento.getEditor().getText()));
+                func.setRua(this.txRua.getText().trim().toUpperCase());
+                func.setNumero(Integer.parseInt(this.txNumero.getText().trim().toUpperCase()));
+                func.setComplemento(this.txComplemento.getText().trim().toUpperCase());
+                func.setBairro(this.txBairro.getText().trim().toUpperCase());
+                func.setEstado(this.cbEstado.getSelectedItem().toString());
+                func.setCidade(this.cbEstado.getSelectedItem().toString());
+                func.setAdmissao(Utils.convertData(this.txDtAdmissao.getEditor().getText()));
+                func.setDecreto(Integer.parseInt(this.txDecreto.getText().trim().toUpperCase()));
+                func.setUnidade(uniSel);
+                func.setCargo(cargSel);
+                func.setEspecialidade(espSel);
+                this.daoFunc.alterar(func);
+                Msg.informacao(this, "Alterado com sucesso.");
+                this.cancelar();
+            }
+        } catch (SQLException e) {
+            Msg.erro(this, "Erro ao salvar.");
+        }
     }
 
     protected void carregarCbUnidade() {

@@ -80,6 +80,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Salvar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSalvarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btCancelar">
           <Properties>
@@ -151,12 +154,18 @@
                                                       </Group>
                                                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Component id="lbCelular" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="lbCelular" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                                                      <Component id="lbNascimento" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="txCelular" min="-2" pref="107" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txDtNascimento" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -239,12 +248,14 @@
                           <Component id="lbSexo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbCelular" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cbSexo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txCelular" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txDtNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -493,6 +504,13 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btMenosUniActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbNascimento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Data de nascimento"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXDatePicker" name="txDtNascimento">
             </Component>
           </SubComponents>
         </Container>

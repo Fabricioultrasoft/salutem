@@ -69,7 +69,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
         initComponents();
         desabilitarCampos();
         this.principal = new TelaPrincipal();
-        this.lbUsuario.setText(String.valueOf(this.principal.getUsuario()));
+        this.lbUsuario.setText(this.principal.getUsuario().getFuncionario().getNome());
        
     }
 

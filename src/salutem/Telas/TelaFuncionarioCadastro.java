@@ -61,12 +61,14 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         this.uniSel = new ArrayList<UnidadeBean>();
         this.unis = new ArrayList<UnidadeBean>();
         this.carregarCbUnidade();
+        this.carregarCbEspecialidade();
+        this.carregarCbCargo();
     }
 
     public TelaFuncionarioCadastro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -115,23 +117,21 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         cbUnidade = new javax.swing.JComboBox();
         jScrollPane5 = new javax.swing.JScrollPane();
         tbUnidade = new javax.swing.JTable();
-        btMais = new javax.swing.JButton();
-        btMenos = new javax.swing.JButton();
+        btMaisUni = new javax.swing.JButton();
+        btMenosUni = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lbEspecialidade = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbEspTodas = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbEspSelect = new javax.swing.JTable();
-        btEspMais = new javax.swing.JButton();
-        btEspMenos = new javax.swing.JButton();
         lbCargo = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tbCargoTodos = new javax.swing.JTable();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tbCargoSelect = new javax.swing.JTable();
-        btCargoMais = new javax.swing.JButton();
-        btCargoMenos = new javax.swing.JButton();
+        cbEsp = new javax.swing.JComboBox();
+        btMaisEsp = new javax.swing.JButton();
+        btMenosEsp = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbEsp = new javax.swing.JTable();
+        cbCargo = new javax.swing.JComboBox();
+        btMaisCargo = new javax.swing.JButton();
+        btMenosCargo = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbCargo = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -248,17 +248,17 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         });
         jScrollPane5.setViewportView(tbUnidade);
 
-        btMais.setText("+");
-        btMais.addActionListener(new java.awt.event.ActionListener() {
+        btMaisUni.setText("+");
+        btMaisUni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btMaisActionPerformed(evt);
+                btMaisUniActionPerformed(evt);
             }
         });
 
-        btMenos.setText("-");
-        btMenos.addActionListener(new java.awt.event.ActionListener() {
+        btMenosUni.setText("-");
+        btMenosUni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btMenosActionPerformed(evt);
+                btMenosUniActionPerformed(evt);
             }
         });
 
@@ -339,12 +339,12 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(cbUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbUnidade, 0, 254, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btMais)
+                        .addComponent(btMaisUni)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btMenos)
-                        .addGap(172, 172, 172))))
+                        .addComponent(btMenosUni)
+                        .addGap(107, 107, 107))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,10 +401,10 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(btMais)
-                    .addComponent(btMenos))
+                    .addComponent(btMaisUni)
+                    .addComponent(btMenosUni))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -412,54 +412,30 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
 
         lbEspecialidade.setText("Especialidades");
 
-        tbEspTodas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Todas especialidades"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tbEspTodas);
-
-        tbEspSelect.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Especialidades selecionadas"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(tbEspSelect);
-
-        btEspMais.setText(">");
-
-        btEspMenos.setText("<");
-
         lbCargo.setText("Cargos");
 
-        tbCargoTodos.setModel(new javax.swing.table.DefaultTableModel(
+        cbEsp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btMaisEsp.setText("+");
+        btMaisEsp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMaisEspActionPerformed(evt);
+            }
+        });
+
+        btMenosEsp.setText("-");
+        btMenosEsp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMenosEspActionPerformed(evt);
+            }
+        });
+
+        tbEsp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Todos cargos"
+                "ID", "Especialidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -470,14 +446,32 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(tbCargoTodos);
+        jScrollPane1.setViewportView(tbEsp);
 
-        tbCargoSelect.setModel(new javax.swing.table.DefaultTableModel(
+        cbCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btMaisCargo.setText("+");
+        btMaisCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMaisCargoActionPerformed(evt);
+            }
+        });
+
+        btMenosCargo.setText("-");
+        btMenosCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMenosCargoActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(452, 100));
+
+        tbCargo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Cargos selecionados"
+                "ID", "Cargo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -488,66 +482,55 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(tbCargoSelect);
-
-        btCargoMais.setText(">");
-
-        btCargoMenos.setText("<");
+        jScrollPane2.setViewportView(tbCargo);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btEspMenos)
-                                .addComponent(btEspMais))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(lbEspecialidade))
-                    .addComponent(lbCargo)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbEspecialidade)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btCargoMais)
-                            .addComponent(btCargoMenos))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cbEsp, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btMaisEsp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btMenosEsp))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbCargo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btMaisCargo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btMenosCargo)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbEspecialidade)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbEspecialidade)
+                    .addComponent(cbEsp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btMaisEsp)
+                    .addComponent(btMenosEsp))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(btEspMais)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btEspMenos)
-                        .addGap(124, 124, 124)
-                        .addComponent(btCargoMais)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btCargoMenos))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbCargo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCargo)
+                    .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btMaisCargo)
+                    .addComponent(btMenosCargo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Outros dados", jPanel2);
@@ -584,13 +567,29 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         this.cancelar();
     }//GEN-LAST:event_btCancelarActionPerformed
 
-    private void btMaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMaisActionPerformed
+    private void btMaisUniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMaisUniActionPerformed
         this.addUnidade();
-    }//GEN-LAST:event_btMaisActionPerformed
+    }//GEN-LAST:event_btMaisUniActionPerformed
 
-    private void btMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenosActionPerformed
+    private void btMenosUniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenosUniActionPerformed
         this.removeUnidade();
-    }//GEN-LAST:event_btMenosActionPerformed
+    }//GEN-LAST:event_btMenosUniActionPerformed
+
+    private void btMaisEspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMaisEspActionPerformed
+        this.addEspecialidade();
+    }//GEN-LAST:event_btMaisEspActionPerformed
+
+    private void btMenosEspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenosEspActionPerformed
+        this.removeEspecialidade();
+    }//GEN-LAST:event_btMenosEspActionPerformed
+
+    private void btMaisCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMaisCargoActionPerformed
+        this.addCargo();
+    }//GEN-LAST:event_btMaisCargoActionPerformed
+
+    private void btMenosCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenosCargoActionPerformed
+        this.removeCargo();
+    }//GEN-LAST:event_btMenosCargoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -612,14 +611,16 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
-    private javax.swing.JButton btCargoMais;
-    private javax.swing.JButton btCargoMenos;
-    private javax.swing.JButton btEspMais;
-    private javax.swing.JButton btEspMenos;
-    private javax.swing.JButton btMais;
-    private javax.swing.JButton btMenos;
+    private javax.swing.JButton btMaisCargo;
+    private javax.swing.JButton btMaisEsp;
+    private javax.swing.JButton btMaisUni;
+    private javax.swing.JButton btMenosCargo;
+    private javax.swing.JButton btMenosEsp;
+    private javax.swing.JButton btMenosUni;
     private javax.swing.JButton btSalvar;
+    private javax.swing.JComboBox cbCargo;
     private javax.swing.JComboBox cbCidade;
+    private javax.swing.JComboBox cbEsp;
     private javax.swing.JComboBox cbEstado;
     private javax.swing.JComboBox cbSexo;
     private javax.swing.JComboBox cbUnidade;
@@ -629,8 +630,6 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbBairro;
@@ -649,10 +648,8 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     private javax.swing.JLabel lbRua;
     private javax.swing.JLabel lbSexo;
     private javax.swing.JLabel lbTelefone;
-    private javax.swing.JTable tbCargoSelect;
-    private javax.swing.JTable tbCargoTodos;
-    private javax.swing.JTable tbEspSelect;
-    private javax.swing.JTable tbEspTodas;
+    private javax.swing.JTable tbCargo;
+    private javax.swing.JTable tbEsp;
     private javax.swing.JTable tbUnidade;
     private javax.swing.JTextField txBairro;
     private javax.swing.JFormattedTextField txCelular;
@@ -760,12 +757,57 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         }
     }
 
+    protected void carregarCbEspecialidade() {
+        this.cbEsp.removeAllItems();
+        this.cbEsp.addItem("SELECIONE");
+
+        try {
+            esps = daoEspecialidade.getLista();
+            for (EspecialidadeBean esp : esps) {
+                this.cbEsp.addItem(esp.getNome().trim().toUpperCase());
+            }
+        } catch (Exception e) {
+            Msg.erro(this, "Erro ao atualizar especialidades. \n" + e.getMessage());
+        }
+    }
+
+    protected void carregarCbCargo() {
+        this.cbCargo.removeAllItems();
+        this.cbCargo.addItem("SELECIONE");
+
+        try {
+            cargs = daoCargo.getLista();
+            for (CargoBean cargo : cargs) {
+                this.cbCargo.addItem(cargo.getDescricao().trim().toUpperCase());
+            }
+        } catch (Exception e) {
+            Msg.erro(this, "Erro ao atualizar cargos. \n" + e.getMessage());
+        }
+    }
+
     protected void atualizarCbUnidade() {
         this.cbUnidade.removeAllItems();
         this.cbUnidade.addItem("SELECIONE");
         for (UnidadeBean unidade : unis) {
             this.cbUnidade.addItem(unidade.getNome().trim().toUpperCase());
         }
+    }
+
+    protected void atualizarCbEspecialidade() {
+        this.cbEsp.removeAllItems();
+        this.cbEsp.addItem("SELECIONE");
+        for (EspecialidadeBean esp : esps) {
+            this.cbEsp.addItem(esp.getNome().trim().toUpperCase());
+        }
+    }
+
+    protected void atualizarCbCargo() {
+        this.cbCargo.removeAllItems();
+        this.cbCargo.addItem("SELECIONE");
+        for (CargoBean cargo : cargs) {
+            this.cbCargo.addItem(cargo.getDescricao().trim().toUpperCase());
+        }
+
     }
 
     private void atualizarTbUnidade() {
@@ -776,6 +818,28 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             modelo.addRow(new Object[]{
                         uniSel.get(i).getIdUnidade(),
                         uniSel.get(i).getNome()});
+        }
+    }
+
+    private void atualizarTbEspecialidade() {
+        DefaultTableModel modelo = (DefaultTableModel) this.tbEsp.getModel();
+        modelo.setNumRows(0);
+
+        for (int i = 0; i < espSel.size(); i++) {
+            modelo.addRow(new Object[]{
+                        espSel.get(i).getIdEspecialidade(),
+                        espSel.get(i).getNome()});
+        }
+    }
+
+    private void atualizarTbCargo() {
+        DefaultTableModel modelo = (DefaultTableModel) this.tbCargo.getModel();
+        modelo.setNumRows(0);
+
+        for (int i = 0; i < cargSel.size(); i++) {
+            modelo.addRow(new Object[]{
+                        cargSel.get(i).getIdCargo(),
+                        cargSel.get(i).getDescricao()});
         }
     }
 
@@ -790,6 +854,28 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         this.atualizarTbUnidade();
     }
 
+    private void addEspecialidade() {
+        if (this.cbEsp.getSelectedIndex() != 0) {
+            this.espSel.add(this.esps.get(this.cbEsp.getSelectedIndex() - 1));
+            this.esps.remove(this.cbEsp.getSelectedIndex() - 1);
+        } else {
+            Msg.alerta(this, "Selecione uma especialidade.");
+        }
+        this.atualizarCbEspecialidade();
+        this.atualizarTbEspecialidade();
+    }
+
+    private void addCargo() {
+        if (this.cbCargo.getSelectedIndex() != 0) {
+            this.cargSel.add(this.cargs.get(this.cbCargo.getSelectedIndex() - 1));
+            this.cargs.remove(this.cbCargo.getSelectedIndex() - 1);
+        } else {
+            Msg.alerta(this, "Selecione um cargo.");
+        }
+        this.atualizarCbCargo();
+        this.atualizarTbCargo();
+    }
+
     private void removeUnidade() {
         int row = this.tbUnidade.getSelectedRow();
         if (row == -1) {
@@ -801,12 +887,52 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
         for (int i = 0; i < uniSel.size(); i++) {
-            if(uniSel.get(i).getIdUnidade() == id){
+            if (uniSel.get(i).getIdUnidade() == id) {
                 unis.add(uniSel.get(i));
                 uniSel.remove(i);
             }
         }
         this.atualizarCbUnidade();
         this.atualizarTbUnidade();
+    }
+
+    private void removeEspecialidade() {
+        int row = this.tbEsp.getSelectedRow();
+        if (row == -1) {
+            Msg.alerta(this, "Selecione o registro.");
+            return;
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) this.tbEsp.getModel();
+        int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
+
+        for (int i = 0; i < espSel.size(); i++) {
+            if (espSel.get(i).getIdEspecialidade() == id) {
+                esps.add(espSel.get(i));
+                espSel.remove(i);
+            }
+        }
+        this.atualizarCbEspecialidade();
+        this.atualizarTbEspecialidade();
+    }
+
+    private void removeCargo() {
+        int row = this.tbCargo.getSelectedRow();
+        if (row == -1) {
+            Msg.alerta(this, "Selecione o registro.");
+            return;
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) this.tbCargo.getModel();
+        int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
+
+        for (int i = 0; i < cargSel.size(); i++) {
+            if (cargSel.get(i).getIdCargo() == id) {
+                cargs.add(cargSel.get(i));
+                cargSel.remove(i);
+            }
+        }
+        this.atualizarCbCargo();
+        this.atualizarTbCargo();
     }
 }

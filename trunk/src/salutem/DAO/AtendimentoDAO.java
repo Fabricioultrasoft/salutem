@@ -28,8 +28,8 @@ public class AtendimentoDAO extends MySQL{
         int id = getCodigo();
 
         String sql = "INSERT INTO atendimento (idAtendimento,data,descricao,idUsuario,idUnidade,"+
-                       "idPaciente,medicamento,temperatura,alta,baixa,diagnostico"+
-                      ") values (?,?,?,?,?,?,?,?,?,?,?)";
+                       "idPaciente,medicamento,temperatura,alta,baixa,diagnostico,nomeMedico"+
+                      ") values (?,?,?,?,?,?,?,?,?,?,?,?)";
        this.prepare(sql);
        
         
@@ -45,6 +45,7 @@ public class AtendimentoDAO extends MySQL{
         this.setInt(9, atendimento.getAlta());
         this.setInt(10, atendimento.getBaixa());
         this.setString(11, atendimento.getDiagnostico());
+        this.setString(12, atendimento.getNomeMedico());
         
         
         
@@ -73,6 +74,7 @@ public class AtendimentoDAO extends MySQL{
             paciente.setMedicamento(this.getRS().getString("medicamento"));
             paciente.setDiagnostico(this.getRS().getString("diagnostico"));
             paciente.setTemperatura(this.getRS().getInt("temperatura"));
+            paciente.setNomeMedico(this.getRS().getString("nomeMedico"));
             
            
             listaEsp.add(paciente);

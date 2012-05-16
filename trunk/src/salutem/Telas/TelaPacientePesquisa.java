@@ -220,9 +220,13 @@ pesquisar();
 }//GEN-LAST:event_btnPesquisarActionPerformed
 
 private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
-pegarId();
+try{
+    pegarId();
 setVisible(false);
 dispose();
+}catch(Exception e){
+   Msg.alerta(this, "Esse Paciente Não Foi Pré-Atendido."); 
+}
 }//GEN-LAST:event_btnSelecionarActionPerformed
 
     /**

@@ -575,7 +575,7 @@ salvar();
             this.lbDataNascimento.setText(util.convertData(paciente.getData()));
            
              this.atendimentoDao = new AtendimentoDAO();
-             AtendimentoBean atend = this.atendimentoDao.getPaciente(id);
+             AtendimentoBean atend = this.atendimentoDao.getAtendimento(id);
              this.idAtendimento = atend.getIdAtendimento();
              this.txMedicamentosHis.setText(atend.getMedicamento());
              this.txDescricaoHis.setText(atend.getDescricao());

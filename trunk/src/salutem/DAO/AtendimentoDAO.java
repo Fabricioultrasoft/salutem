@@ -152,7 +152,7 @@ public class AtendimentoDAO extends MySQL{
         return novoId;
     }
 
-   public AtendimentoBean getPaciente(int id)throws SQLException{
+   public AtendimentoBean getAtendimento(int id)throws SQLException{
         this.setConnection("sal");
         this.open();
 

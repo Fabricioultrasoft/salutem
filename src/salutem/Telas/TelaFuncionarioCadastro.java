@@ -216,11 +216,11 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
 
         lbBairro.setText("Bairro");
 
-        cbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<.UF.>" }));
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<.UF.>", "PR" }));
 
         lbEstado.setText("Estado");
 
-        cbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<.SELECIONE.>", "QUATIGUÁ" }));
         cbCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCidadeActionPerformed(evt);
@@ -230,6 +230,8 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         lbCidade.setText("Cidade");
 
         lbDtAdmissao.setText("Data de admissão");
+
+        txDtAdmissao.setFormats("dd/MM/yyyy");
 
         lbDecreto.setText("Número decreto");
 
@@ -272,6 +274,8 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         });
 
         lbNascimento.setText("Data de nascimento");
+
+        txDtNascimento.setFormats("dd/MM/yyyy");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

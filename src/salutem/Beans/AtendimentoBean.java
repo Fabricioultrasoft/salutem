@@ -14,6 +14,7 @@ import javax.xml.soap.Text;
 public class AtendimentoBean {
     private int idUsuario;
     private int idUnidade;
+    private String nomeMedico;
     private UnidadeBean unidade;
     private UsuarioBean usuario;
     private int idAtendimento;
@@ -208,6 +209,20 @@ public class AtendimentoBean {
      */
     public void setUsuario(UsuarioBean usuario) {
         this.usuario = usuario;
+    }
+
+    /**
+     * @return the nomeMedico
+     */
+    public String getNomeMedico() {
+        return nomeMedico;
+    }
+
+    /**
+     * @param nomeMedico the nomeMedico to set
+     */
+    public void setNomeMedico(String nomeMedico) {
+        this.nomeMedico = nomeMedico;
     }
 
     /**

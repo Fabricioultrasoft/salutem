@@ -48,6 +48,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
     private AtendimentoDAO atendimentoDao;
     private PreAtendimentoDAO preDao;
     private int row;
+    private TelaPrincipal principal;
     
     
 
@@ -58,15 +59,16 @@ public class TelaAtendimento extends javax.swing.JDialog {
         this.telaBusca = parent;
         this.atendimentoDao = new AtendimentoDAO();
         this.preDao = new PreAtendimentoDAO();
+        this.principal = new TelaPrincipal();
        
-         
+        
         
     }
      public TelaAtendimento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         desabilitarCampos();
-        
+        this.lbUsuario.setText(String.valueOf(this.principal.getUsuario()));
        
     }
 
@@ -96,6 +98,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
         txAlta = new javax.swing.JLabel();
         txBaixa = new javax.swing.JLabel();
         txTemp = new javax.swing.JLabel();
+        lbUsuario = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
@@ -148,6 +151,8 @@ public class TelaAtendimento extends javax.swing.JDialog {
 
         jLabel11.setText("Baixa:");
 
+        lbUsuario.setText("jLabel14");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -157,9 +162,15 @@ public class TelaAtendimento extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbNome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 545, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbNome)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 545, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbUsuario)
+                                .addGap(142, 142, 142)))
                         .addComponent(btnPesquisaPaciente)
                         .addGap(144, 144, 144))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -199,7 +210,8 @@ public class TelaAtendimento extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lbNome)
-                    .addComponent(btnPesquisaPaciente))
+                    .addComponent(btnPesquisaPaciente)
+                    .addComponent(lbUsuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -235,13 +247,20 @@ public class TelaAtendimento extends javax.swing.JDialog {
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Código", "Data", "Diagnóstico", "Descrição", "Temperatura", "PA Alta", "PA Baixa", "Medicamento"
+                "Código", "Data", "Diagnóstico", "Temperatura", "PA Alta", "PA Baixa"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabela);
 
         txDescricaoHis.setColumns(20);
@@ -252,9 +271,9 @@ public class TelaAtendimento extends javax.swing.JDialog {
         txMedicamentosHis.setRows(5);
         jScrollPane5.setViewportView(txMedicamentosHis);
 
-        jLabel12.setText("Descrição");
+        jLabel12.setText("Histórico Descrição");
 
-        jLabel13.setText("Medicamentos");
+        jLabel13.setText("Histórico Medicamentos");
 
         jButton1.setText("Selecionar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -278,7 +297,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
                         .addComponent(jLabel12)
                         .addGap(107, 107, 107))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
@@ -368,7 +387,12 @@ public class TelaAtendimento extends javax.swing.JDialog {
 
         jButton2.setText("Gerar Receita");
 
-        jButton3.setText("Cancelar");
+        jButton3.setText("Sair");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Salvar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -382,16 +406,11 @@ public class TelaAtendimento extends javax.swing.JDialog {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton2))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton4))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton3)))
+                    .addComponent(jButton2)
+                    .addComponent(jButton4)
+                    .addComponent(jButton3))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -415,14 +434,14 @@ public class TelaAtendimento extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(126, Short.MAX_VALUE))
+                        .addContainerGap(149, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 966, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 989, Short.MAX_VALUE)
                         .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
@@ -459,6 +478,10 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Logger.getLogger(TelaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
         }
 }//GEN-LAST:event_jButton1ActionPerformed
+
+private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+cancelar();
+}//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -568,12 +591,11 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 lista.get(i).getIdAtendimento(),
                 lista.get(i).getData(),
                 lista.get(i).getDiagnostico(),
-                lista.get(i).getDescricao(),
                 lista.get(i).getTemperatura(),
                 lista.get(i).getAlta(),
                 lista.get(i).getBaixa(),
                                 
-                lista.get(i).getMedicamento(),
+                
                              
                 });
                 
@@ -585,8 +607,8 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
     }
    public void desabilitarCampos(){
-       this.txDescricaoHis.enable(true);
-       this.txMedicamentosHis.enable(true);
+       this.txDescricaoHis.enable(false);
+       this.txMedicamentosHis.enable(false);
    }
    
    public void pegarId() throws SQLException{
@@ -736,6 +758,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JLabel lbIdade;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbTemperatura;
+    private javax.swing.JLabel lbUsuario;
     private javax.swing.JTable tabela;
     private javax.swing.JLabel txAlta;
     private javax.swing.JLabel txBaixa;

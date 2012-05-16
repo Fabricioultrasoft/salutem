@@ -35,6 +35,7 @@ import salutem.Utils.Utils;
  * @author Tironi
  */
 public class TelaAtendimento extends javax.swing.JDialog {
+
     private Integer idPaciente;
     private Integer idAtendimento;
     private Integer idPreAtendimento;
@@ -43,34 +44,22 @@ public class TelaAtendimento extends javax.swing.JDialog {
     private int alta;
     private int baixa;
     private pacienteDAO pacientedao = new pacienteDAO();
-    private TelaPacientePesquisa telaBusca;
     private boolean inserir;
     private AtendimentoDAO atendimentoDao;
     private PreAtendimentoDAO preDao;
     private int row;
     private TelaPrincipal principal;
-    
-    
 
     /** Creates new form TelaAtendimento */
-    public TelaAtendimento(TelaPacientePesquisa parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-        this.telaBusca = parent;
-        this.atendimentoDao = new AtendimentoDAO();
-        this.preDao = new PreAtendimentoDAO();
-        this.principal = new TelaPrincipal();
-       
-        
-        
-    }
-     public TelaAtendimento(java.awt.Frame parent, boolean modal) {
+    public TelaAtendimento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         desabilitarCampos();
-        this.principal = new TelaPrincipal();
+        this.principal = (TelaPrincipal) parent;
+        this.atendimentoDao = new AtendimentoDAO();
+        this.preDao = new PreAtendimentoDAO();
         this.lbUsuario.setText(this.principal.getUsuario().getFuncionario().getNome());
-       
+
     }
 
     /** This method is called from within the constructor to
@@ -463,25 +452,25 @@ public class TelaAtendimento extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 private void btnPesquisaPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaPacienteActionPerformed
-telaBusca = new TelaPacientePesquisa(this, true);
-this.telaBusca.setVisible(true);
+    TelaPacientePesquisa telaBusca = new TelaPacientePesquisa(this, true);
+    telaBusca.setVisible(true);
 }//GEN-LAST:event_btnPesquisaPacienteActionPerformed
 
 private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-setInserir(true);
-salvar();
+    setInserir(true);
+    salvar();
 }//GEN-LAST:event_jButton4ActionPerformed
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            pegarId();
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    try {
+        pegarId();
+    } catch (SQLException ex) {
+        Logger.getLogger(TelaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
+    }
 }//GEN-LAST:event_jButton1ActionPerformed
 
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-cancelar();
+    cancelar();
 }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -527,26 +516,25 @@ cancelar();
             }
         });
     }
-    
-     protected void setInserir(boolean inserir) {
+
+    protected void setInserir(boolean inserir) {
         this.inserir = inserir;
         this.idPaciente = null;
     }
-     
-      protected boolean isInserir() {
+
+    protected boolean isInserir() {
         return inserir;
     }
 
-     
-     private void destacarCampo(Component c, boolean b) {
+    private void destacarCampo(Component c, boolean b) {
         if (b) {
             c.setBackground(Params.COR_CAMPO_VAZIO);
         } else {
             c.setBackground(Params.COR_CAMPO_NORMAL);
         }
     }
-     
-     private boolean verificarCampos() {
+
+    private boolean verificarCampos() {
         boolean aux = false;
         String msg = "Preencha corretamente os campos. \n";
 
@@ -557,19 +545,19 @@ cancelar();
             this.destacarCampo(this.txDiagnostico, aux);
 
         }
-        
+
         if (this.txDescricao.getText().isEmpty()) {
             aux = true;
             this.destacarCampo(this.txDescricao, aux);
 
-        }    
-        
-         if (this.txMedicamento.getText().isEmpty()) {
+        }
+
+        if (this.txMedicamento.getText().isEmpty()) {
             aux = true;
             this.destacarCampo(this.txMedicamento, aux);
 
-        }    
-        
+        }
+
 
         if (aux) {
             Msg.alerta(this, msg);
@@ -577,46 +565,42 @@ cancelar();
         return aux;
     }
 
-    
-   protected void atualizarTabela(){
-        try{
+    protected void atualizarTabela() {
+        try {
             DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
             modelo.setNumRows(0);
-            
-           this.atendimentoDao = new AtendimentoDAO();
+
+            this.atendimentoDao = new AtendimentoDAO();
 
             List<AtendimentoBean> lista = this.atendimentoDao.getLista(this.idPac);
 
-            for(int i=0; i< lista.size(); i++){
+            for (int i = 0; i < lista.size(); i++) {
                 modelo.addRow(new Object[]{
-                lista.get(i).getIdAtendimento(),
-                lista.get(i).getData(),
-                lista.get(i).getDiagnostico(),
-                lista.get(i).getTemperatura(),
-                lista.get(i).getAlta(),
-                lista.get(i).getBaixa(),
-                                
-                
-                             
-                });
-                
-            }
-           
+                            lista.get(i).getIdAtendimento(),
+                            lista.get(i).getData(),
+                            lista.get(i).getDiagnostico(),
+                            lista.get(i).getTemperatura(),
+                            lista.get(i).getAlta(),
+                            lista.get(i).getBaixa(),});
 
-        }catch(SQLException ex){
-            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
+            }
+
+
+        } catch (SQLException ex) {
+            Msg.erro(this, "Erro ao atualizar tabela. \n" + ex.getMessage());
         }
     }
-   public void desabilitarCampos(){
-       this.txDescricaoHis.enable(false);
-       this.txMedicamentosHis.enable(false);
-   }
-   
-   public void pegarId() throws SQLException{
-       
+
+    public void desabilitarCampos() {
+        this.txDescricaoHis.enable(false);
+        this.txMedicamentosHis.enable(false);
+    }
+
+    public void pegarId() throws SQLException {
+
         this.row = this.tabela.getSelectedRow();
 
-        if(row == -1){
+        if (row == -1) {
             Msg.alerta(this, "Selecione o registro.");
             return;
         }
@@ -624,82 +608,82 @@ cancelar();
         DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
         int id = Integer.parseInt(modelo.getValueAt(this.row, 0).toString());
 
-        
-        
+
+
         this.preencheTela(id);
-        
-        
-        
+
+
+
     }
-   
-   public void preencheTela(int id) throws SQLException{
-       
-       
-             this.atendimentoDao = new AtendimentoDAO();
-             AtendimentoBean atend = this.atendimentoDao.getAtendimento(id);
-             this.idAtendimento = atend.getIdAtendimento();
-             this.txMedicamentosHis.setText(atend.getMedicamento());
-             this.txDescricaoHis.setText(atend.getDescricao());
-   }
-   
-   protected void preencherCampos(int id) {
+
+    public void preencheTela(int id) throws SQLException {
+
+
+        this.atendimentoDao = new AtendimentoDAO();
+        AtendimentoBean atend = this.atendimentoDao.getAtendimento(id);
+        this.idAtendimento = atend.getIdAtendimento();
+        this.txMedicamentosHis.setText(atend.getMedicamento());
+        this.txDescricaoHis.setText(atend.getDescricao());
+    }
+
+    protected void preencherCampos(int id) {
         try {
 
             this.idPac = id;
-            
-            
-            
+
+
+
             PacienteBean paciente = pacientedao.getPaciente(id);
-                        
+
             Utils util = new Utils();
 
             this.idPaciente = paciente.getIdPaciente();
             this.lbNome.setText(paciente.getNome().trim().toUpperCase());
             this.lbDataNascimento.setText(util.convertData(paciente.getData()));
 
-            
 
-            try{
-            this.preDao = new PreAtendimentoDAO();
-            PreAtendimentoBean pre = preDao.getUltimoAtendimento(id);
-            this.idPreAtendimento = pre.getIdPreAtendimento();
-            this.txTemp.setText(String.valueOf(pre.getTemperatura()));
-            this.txAlta.setText(String.valueOf(pre.getAlta()));
-            this.txBaixa.setText(String.valueOf(pre.getBaixa()));
-            
-            this.temperatura = pre.getTemperatura();
-            this.alta = pre.getAlta();
-            this.baixa = pre.getBaixa();
-            }catch(Exception e){
+
+            try {
+                this.preDao = new PreAtendimentoDAO();
+                PreAtendimentoBean pre = preDao.getUltimoAtendimento(id);
+                this.idPreAtendimento = pre.getIdPreAtendimento();
+                this.txTemp.setText(String.valueOf(pre.getTemperatura()));
+                this.txAlta.setText(String.valueOf(pre.getAlta()));
+                this.txBaixa.setText(String.valueOf(pre.getBaixa()));
+
+                this.temperatura = pre.getTemperatura();
+                this.alta = pre.getAlta();
+                this.baixa = pre.getBaixa();
+            } catch (Exception e) {
                 Msg.alerta(this, "Não possui Pré-Atendimento");
             }
-            
+
             atualizarTabela();
-            
-           
+
+
 
 
 
         } catch (SQLException ex) {
             Msg.erro(this, "Erro ao preencher campos. \n" + ex.getMessage());
         }
-       
+
     }
-   
+
     private void cancelar() {
 
         this.setVisible(false);
         this.dispose();
     }
-   
+
     private void salvar() {
         if (this.verificarCampos()) {
             return;
         }
         try {
             if (this.isInserir()) {
-                
-                
+
+
 
                 AtendimentoBean atendimento = new AtendimentoBean();
                 atendimento.setDiagnostico(txDiagnostico.getText().trim().toUpperCase());
@@ -710,24 +694,21 @@ cancelar();
                 atendimento.setTemperatura(this.temperatura);
                 atendimento.setAlta(this.alta);
                 atendimento.setBaixa(this.baixa);
-                
-                
-               
-                
+
+
+
+
                 this.atendimentoDao = new AtendimentoDAO();
                 this.atendimentoDao.inserir(atendimento);
                 Msg.informacao(this, "Salvo com sucesso.");
-                //telaBusca = new TelaPacienteBusca(null, inserir);
-                this.telaBusca.atualizarTabela();
                 atualizarTabela();
-            } 
-            
+            }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
             Msg.erro(this, "Erro ao salvar. \n" + ex.getMessage());
         }
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisaPaciente;
     private org.jdesktop.swingx.JXDatePicker dtAtendimento;

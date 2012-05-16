@@ -594,19 +594,19 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     }//GEN-LAST:event_btMenosUniActionPerformed
 
     private void btMaisCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMaisCargoActionPerformed
-        this.addEspecialidade();
+        this.addCargo();
     }//GEN-LAST:event_btMaisCargoActionPerformed
 
     private void btMenosCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenosCargoActionPerformed
-        this.removeEspecialidade();
+        this.removeCargo();
     }//GEN-LAST:event_btMenosCargoActionPerformed
 
     private void btMaisEspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMaisEspActionPerformed
-        this.addCargo();
+        this.addEspecialidade();
     }//GEN-LAST:event_btMaisEspActionPerformed
 
     private void btMenosEspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenosEspActionPerformed
-        this.removeCargo();
+        this.removeEspecialidade();
     }//GEN-LAST:event_btMenosEspActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
@@ -727,7 +727,7 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             aux = true;
             this.destacarCampo(this.txRg, aux);
         }
-        if (this.cbSexo.getSelectedIndex() != 0) {
+        if (this.cbSexo.getSelectedIndex() == 0) {
             aux = true;
             this.destacarCampo(this.cbSexo, aux);
         }
@@ -751,9 +751,13 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             aux = true;
             this.destacarCampo(this.txBairro, aux);
         }
-        if (this.cbEstado.getSelectedIndex() != 0) {
+        if (this.cbEstado.getSelectedIndex() == 0) {
             aux = true;
             this.destacarCampo(this.cbEstado, aux);
+        }
+        if(this.cbCidade.getSelectedIndex() == 0){
+            aux = true;
+            this.destacarCampo(this.cbCidade, aux);
         }
         if (this.txDecreto.getText().isEmpty()) {
             aux = true;

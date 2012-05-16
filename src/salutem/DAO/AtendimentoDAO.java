@@ -152,7 +152,24 @@ public class AtendimentoDAO extends MySQL{
         return novoId;
     }
 
-   
+   public AtendimentoBean getPaciente(int id)throws SQLException{
+        this.setConnection("sal");
+        this.open();
+
+        String SQL = "SELECT * FROM atendimento WHERE idAtendimento = "+id;
+        this.prepare(SQL);
+        this.executeQuery();
+        this.getRS().first();
+        AtendimentoBean atend = new AtendimentoBean();
+        atend.setIdAtendimento(this.getRS().getInt("idPaciente"));
+        atend.setDescricao(this.getRS().getString("descricao"));
+        atend.setMedicamento(this.getRS().getString("medicamento"));
+       
+
+        this.close();
+        return atend;
+
+    }
   
     
 }

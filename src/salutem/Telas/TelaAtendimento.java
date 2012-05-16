@@ -34,6 +34,7 @@ import salutem.Utils.Utils;
  */
 public class TelaAtendimento extends javax.swing.JDialog {
     private Integer idPaciente;
+    private Integer idAtendimento;
     private Integer idPreAtendimento;
     private int idPac;
     private int temperatura;
@@ -61,6 +62,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
      public TelaAtendimento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        desabilitarCampos();
         
        
     }
@@ -94,6 +96,12 @@ public class TelaAtendimento extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txDescricaoHis = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txMedicamentosHis = new javax.swing.JTextArea();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         txDiagnostico = new javax.swing.JTextField();
@@ -232,20 +240,50 @@ public class TelaAtendimento extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tabela);
 
+        txDescricaoHis.setColumns(20);
+        txDescricaoHis.setRows(5);
+        jScrollPane4.setViewportView(txDescricaoHis);
+
+        txMedicamentosHis.setColumns(20);
+        txMedicamentosHis.setRows(5);
+        jScrollPane5.setViewportView(txMedicamentosHis);
+
+        jLabel12.setText("Descrição");
+
+        jLabel13.setText("Medicamentos");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados de Atendimento"));
@@ -372,7 +410,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
@@ -515,6 +553,10 @@ salvar();
             Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
         }
     }
+   public void desabilitarCampos(){
+       this.txDescricaoHis.enable(true);
+       this.txMedicamentosHis.enable(true);
+   }
    
     
    protected void preencherCampos(int id) {
@@ -532,6 +574,12 @@ salvar();
             this.lbNome.setText(paciente.getNome().trim().toUpperCase());
             this.lbDataNascimento.setText(util.convertData(paciente.getData()));
            
+             this.atendimentoDao = new AtendimentoDAO();
+             AtendimentoBean atend = this.atendimentoDao.getPaciente(id);
+             this.idAtendimento = atend.getIdAtendimento();
+             this.txMedicamentosHis.setText(atend.getMedicamento());
+             this.txDescricaoHis.setText(atend.getDescricao());
+             
             
             this.preDao = new PreAtendimentoDAO();
             PreAtendimentoBean pre = preDao.getUltimoAtendimento(id);
@@ -607,6 +655,8 @@ salvar();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -622,6 +672,8 @@ salvar();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lbArterial;
     private javax.swing.JLabel lbDataNascimento;
     private javax.swing.JLabel lbIdade;
@@ -631,8 +683,10 @@ salvar();
     private javax.swing.JLabel txAlta;
     private javax.swing.JLabel txBaixa;
     private javax.swing.JTextArea txDescricao;
+    private javax.swing.JTextArea txDescricaoHis;
     private javax.swing.JTextField txDiagnostico;
     private javax.swing.JTextArea txMedicamento;
+    private javax.swing.JTextArea txMedicamentosHis;
     private javax.swing.JLabel txTemp;
     // End of variables declaration//GEN-END:variables
 }

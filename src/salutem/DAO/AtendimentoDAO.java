@@ -65,6 +65,7 @@ public class AtendimentoDAO extends MySQL{
         while (this.getRS().next()) {
             AtendimentoBean paciente = new AtendimentoBean();
             paciente.setIdPaciente(this.getRS().getInt("idPaciente"));
+            paciente.setIdAtendimento(this.getRS().getInt("idAtendimento"));
             paciente.setAlta(this.getRS().getInt("alta"));
             paciente.setBaixa(this.getRS().getInt("baixa"));
             paciente.setData(this.getRS().getDate("data"));
@@ -161,7 +162,7 @@ public class AtendimentoDAO extends MySQL{
         this.executeQuery();
         this.getRS().first();
         AtendimentoBean atend = new AtendimentoBean();
-        atend.setIdAtendimento(this.getRS().getInt("idPaciente"));
+        atend.setIdAtendimento(this.getRS().getInt("idAtendimento"));
         atend.setDescricao(this.getRS().getString("descricao"));
         atend.setMedicamento(this.getRS().getString("medicamento"));
        

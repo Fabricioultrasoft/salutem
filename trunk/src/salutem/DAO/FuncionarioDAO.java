@@ -63,7 +63,47 @@ public class FuncionarioDAO extends MySQL {
         this.setDate(18, func.getData());
         this.execute();
 
+        for (int i = 0; i < func.getUnidade().size(); i++) {
+            this.inserirUnidade(id, func.getUnidade().get(i).getIdUnidade());
+        }
+
+        for (int i = 0; i < func.getCargo().size(); i++) {
+            this.inserirCargo(id, func.getCargo().get(i).getIdCargo());
+        }
+
+        for (int i = 0; i < func.getEspecialidade().size(); i++) {
+            this.inserirEspecialidade(id, func.getEspecialidade().get(i).getIdEspecialidade());
+
+        }
+
         this.close();
+    }
+
+    public void inserirUnidade(int idFunc, int idUni) throws SQLException{
+        String SQL = "INSERT INTO funcionarioUnidade (idFuncionario, idUnidade) "
+                + "VALUES (?,?)";
+        this.prepare(SQL);
+        this.setInt(1, idFunc);
+        this.setInt(2, idUni);
+        this.execute();
+    }
+
+    public void inserirEspecialidade(int idFunc, int idEsp) throws SQLException{
+        String SQL = "INSERT INTO especialidadeFuncionario (idEspecialidade, idFuncionario) "
+                + "VALUES (?,?)";
+        this.prepare(SQL);
+        this.setInt(1, idEsp);
+        this.setInt(2, idFunc);
+        this.execute();
+    }
+
+    public void inserirCargo(int idFunc, int idCargo) throws SQLException{
+        String SQL = "INSERT INTO cargoFuncionario (idCargo, idFuncionario) "
+                + "VALUES (?,?)";
+        this.prepare(SQL);
+        this.setInt(1, idCargo);
+        this.setInt(2, idFunc);
+        this.execute();
     }
 
     public void alterar(FuncionarioBean func) throws SQLException {

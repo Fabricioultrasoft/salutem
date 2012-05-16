@@ -120,18 +120,18 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         btMaisUni = new javax.swing.JButton();
         btMenosUni = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        lbEspecialidade = new javax.swing.JLabel();
         lbCargo = new javax.swing.JLabel();
-        cbEsp = new javax.swing.JComboBox();
-        btMaisEsp = new javax.swing.JButton();
-        btMenosEsp = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbEsp = new javax.swing.JTable();
+        lbEsp = new javax.swing.JLabel();
         cbCargo = new javax.swing.JComboBox();
         btMaisCargo = new javax.swing.JButton();
         btMenosCargo = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         tbCargo = new javax.swing.JTable();
+        cbEsp = new javax.swing.JComboBox();
+        btMaisEsp = new javax.swing.JButton();
+        btMenosEsp = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbEsp = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -410,43 +410,9 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Dados Pessoais", jPanel1);
 
-        lbEspecialidade.setText("Especialidades");
+        lbCargo.setText("Cargo");
 
-        lbCargo.setText("Cargos");
-
-        cbEsp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        btMaisEsp.setText("+");
-        btMaisEsp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btMaisEspActionPerformed(evt);
-            }
-        });
-
-        btMenosEsp.setText("-");
-        btMenosEsp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btMenosEspActionPerformed(evt);
-            }
-        });
-
-        tbEsp.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Especialidade"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tbEsp);
+        lbEsp.setText("Especialidade");
 
         cbCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -464,8 +430,6 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             }
         });
 
-        jScrollPane2.setPreferredSize(new java.awt.Dimension(452, 100));
-
         tbCargo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -482,7 +446,43 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tbCargo);
+        jScrollPane1.setViewportView(tbCargo);
+
+        cbEsp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btMaisEsp.setText("+");
+        btMaisEsp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMaisEspActionPerformed(evt);
+            }
+        });
+
+        btMenosEsp.setText("-");
+        btMenosEsp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMenosEspActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(452, 100));
+
+        tbEsp.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Especialidade"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tbEsp);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -494,21 +494,21 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(lbEspecialidade)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbEsp, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btMaisEsp)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btMenosEsp))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(lbCargo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btMaisCargo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btMenosCargo)))
+                        .addComponent(btMenosCargo))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbEsp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbEsp, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btMaisEsp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btMenosEsp)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -516,18 +516,18 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbEspecialidade)
-                    .addComponent(cbEsp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btMaisEsp)
-                    .addComponent(btMenosEsp))
+                    .addComponent(lbCargo)
+                    .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btMenosCargo)
+                    .addComponent(btMaisCargo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbCargo)
-                    .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btMaisCargo)
-                    .addComponent(btMenosCargo))
+                    .addComponent(lbEsp)
+                    .addComponent(cbEsp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btMaisEsp)
+                    .addComponent(btMenosEsp))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addContainerGap())
@@ -575,21 +575,21 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         this.removeUnidade();
     }//GEN-LAST:event_btMenosUniActionPerformed
 
-    private void btMaisEspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMaisEspActionPerformed
-        this.addEspecialidade();
-    }//GEN-LAST:event_btMaisEspActionPerformed
-
-    private void btMenosEspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenosEspActionPerformed
-        this.removeEspecialidade();
-    }//GEN-LAST:event_btMenosEspActionPerformed
-
     private void btMaisCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMaisCargoActionPerformed
-        this.addCargo();
+        this.addEspecialidade();
     }//GEN-LAST:event_btMaisCargoActionPerformed
 
     private void btMenosCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenosCargoActionPerformed
-        this.removeCargo();
+        this.removeEspecialidade();
     }//GEN-LAST:event_btMenosCargoActionPerformed
+
+    private void btMaisEspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMaisEspActionPerformed
+        this.addCargo();
+    }//GEN-LAST:event_btMaisEspActionPerformed
+
+    private void btMenosEspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenosEspActionPerformed
+        this.removeCargo();
+    }//GEN-LAST:event_btMenosEspActionPerformed
 
     /**
      * @param args the command line arguments
@@ -640,7 +640,7 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     private javax.swing.JLabel lbCpf;
     private javax.swing.JLabel lbDecreto;
     private javax.swing.JLabel lbDtAdmissao;
-    private javax.swing.JLabel lbEspecialidade;
+    private javax.swing.JLabel lbEsp;
     private javax.swing.JLabel lbEstado;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbNumero;

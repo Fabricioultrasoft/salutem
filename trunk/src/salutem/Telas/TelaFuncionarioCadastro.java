@@ -58,6 +58,8 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         this.esps = new ArrayList<EspecialidadeBean>();
         this.cargSel = new ArrayList<CargoBean>();
         this.cargs = new ArrayList<CargoBean>();
+        this.uniSel = new ArrayList<UnidadeBean>();
+        this.unis = new ArrayList<UnidadeBean>();
         this.carregarCbUnidade();
     }
 
@@ -138,6 +140,11 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
 
         btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-cancelar.png"))); // NOI18N
         btCancelar.setText("Cancelar");
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -242,8 +249,18 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         jScrollPane5.setViewportView(tbUnidade);
 
         btMais.setText("+");
+        btMais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMaisActionPerformed(evt);
+            }
+        });
 
         btMenos.setText("-");
+        btMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMenosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -563,6 +580,18 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbCidadeActionPerformed
 
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+        this.cancelar();
+    }//GEN-LAST:event_btCancelarActionPerformed
+
+    private void btMaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMaisActionPerformed
+        this.addUnidade();
+    }//GEN-LAST:event_btMaisActionPerformed
+
+    private void btMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenosActionPerformed
+        this.removeUnidade();
+    }//GEN-LAST:event_btMenosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -732,6 +761,8 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     }
 
     protected void atualizarCbUnidade() {
+        this.cbUnidade.removeAllItems();
+        this.cbUnidade.addItem("SELECIONE");
         for (UnidadeBean unidade : unis) {
             this.cbUnidade.addItem(unidade.getNome().trim().toUpperCase());
         }

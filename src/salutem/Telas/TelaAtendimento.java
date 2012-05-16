@@ -659,7 +659,7 @@ cancelar();
 
             
 
-
+            try{
             this.preDao = new PreAtendimentoDAO();
             PreAtendimentoBean pre = preDao.getUltimoAtendimento(id);
             this.idPreAtendimento = pre.getIdPreAtendimento();
@@ -670,6 +670,9 @@ cancelar();
             this.temperatura = pre.getTemperatura();
             this.alta = pre.getAlta();
             this.baixa = pre.getBaixa();
+            }catch(Exception e){
+                Msg.alerta(this, "Não possui Pré-Atendimento");
+            }
             
             atualizarTabela();
             

@@ -50,6 +50,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
     private int row;
     private TelaPrincipal principal;
     private String nomeMedico;
+    private TelaPacientePesquisa telaBusca;
 
     /** Creates new form TelaAtendimento */
     public TelaAtendimento(java.awt.Frame parent, boolean modal) {
@@ -64,6 +65,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
 
         Utils.maximizar(this);
     }
+    
 
     /** This method is called from within the constructor to
      * initialize the form.

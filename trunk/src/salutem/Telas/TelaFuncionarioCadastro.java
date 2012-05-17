@@ -811,14 +811,14 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             }
             for (int x = 0; x < esps.size(); x++) {
                 for (int i = 0; i < espSel.size(); i++) {
-                    if(esps.get(x).getIdEspecialidade() ==  espSel.get(i).getIdEspecialidade()){
+                    if (esps.get(x).getIdEspecialidade() == espSel.get(i).getIdEspecialidade()) {
                         esps.remove(esps.get(x));
                     }
                 }
             }
             for (int x = 0; x < cargs.size(); x++) {
                 for (int i = 0; i < cargSel.size(); i++) {
-                    if(cargs.get(x).getIdCargo() ==  cargSel.get(i).getIdCargo()){
+                    if (cargs.get(x).getIdCargo() == cargSel.get(i).getIdCargo()) {
                         cargs.remove(cargs.get(x));
                     }
                 }
@@ -856,10 +856,12 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 func.setNumero(Integer.parseInt(this.txNumero.getText().trim().toUpperCase()));
                 func.setComplemento(this.txComplemento.getText().trim().toUpperCase());
                 func.setBairro(this.txBairro.getText().trim().toUpperCase());
-                func.setEstado(this.cbEstado.getSelectedItem().toString());
-                func.setCidade(this.cbEstado.getSelectedItem().toString());
+                func.setEstado(this.cbEstado.getSelectedItem().toString().trim());
+                func.setCidade(this.cbCidade.getSelectedItem().toString().trim());
                 func.setAdmissao(Utils.convertData(this.txDtAdmissao.getEditor().getText()));
                 func.setDecreto(Integer.parseInt(this.txDecreto.getText().trim().toUpperCase()));
+                func.setTipoRegistro(null);
+                func.setRegistro(null);
                 func.setUnidade(uniSel);
                 func.setCargo(cargSel);
                 func.setEspecialidade(espSel);
@@ -884,8 +886,8 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 func.setNumero(Integer.parseInt(this.txNumero.getText().trim().toUpperCase()));
                 func.setComplemento(this.txComplemento.getText().trim().toUpperCase());
                 func.setBairro(this.txBairro.getText().trim().toUpperCase());
-                func.setEstado(this.cbEstado.getSelectedItem().toString());
-                func.setCidade(this.cbEstado.getSelectedItem().toString());
+                func.setEstado(this.cbEstado.getSelectedItem().toString().trim());
+                func.setCidade(this.cbEstado.getSelectedItem().toString().trim());
                 func.setAdmissao(Utils.convertData(this.txDtAdmissao.getEditor().getText()));
                 func.setDecreto(Integer.parseInt(this.txDecreto.getText().trim().toUpperCase()));
                 func.setUnidade(uniSel);
@@ -896,7 +898,7 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 this.cancelar();
             }
         } catch (SQLException e) {
-            Msg.erro(this, "Erro ao salvar.");
+            Msg.erro(this, "Erro ao salvar. \n"+e.getMessage());
         }
     }
 

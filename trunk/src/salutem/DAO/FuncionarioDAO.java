@@ -22,6 +22,7 @@ public class FuncionarioDAO extends MySQL {
     public void inserir(FuncionarioBean func) throws SQLException {
         this.setConnection("sal");
         this.open();
+        this.startTransaction();
 
         int id = this.getCodigo();
 
@@ -76,12 +77,14 @@ public class FuncionarioDAO extends MySQL {
 
         }
 
+        this.commit();
         this.close();
     }
 
     public void alterar(FuncionarioBean func) throws SQLException {
         this.setConnection("sal");
         this.open();
+        this.startTransaction();
 
         String SQL = "SELECT COUNT(*) AS T FROM funcionario "
                 + "WHERE funcionario.cpf = ? AND funcionario.idFuncionario <> ?";
@@ -91,7 +94,7 @@ public class FuncionarioDAO extends MySQL {
         this.executeQuery();
         this.getRS().first();
 
-        if (this.getRS().getInt("T") > 0) {
+        if (this.getRS().getInt("T") > 1) {
             this.close();
             throw new SQLException("CPF-DUPLICADO");
         }
@@ -99,7 +102,8 @@ public class FuncionarioDAO extends MySQL {
         SQL = "UPDATE funcionario SET nome = ?, cpf = ?, rg = ?, admissao = ?, "
                 + "decreto = ?, registro = ?, telefone = ?, celular = ?, rua = ?, "
                 + "complemento = ?, bairro = ?, numero = ?, cidade = ?, estado = ?, "
-                + "tipoRegistro = ?, sexo = ?, dtNascimento = ? WHERE idFuncionario = ?";
+                + "tipoRegistro = ?, sexo = ?, dtNascimento = ? "
+                + "WHERE idFuncionario = ?";
 
         this.prepare(SQL);
         this.setString(1, func.getNome());
@@ -110,7 +114,7 @@ public class FuncionarioDAO extends MySQL {
         this.setString(6, func.getRegistro());
         this.setString(7, func.getTelefone());
         this.setString(8, func.getCelular());
-        this.setString(8, func.getRua());
+        this.setString(9, func.getRua());
         this.setString(10, func.getComplemento());
         this.setString(11, func.getBairro());
         this.setInt(12, func.getNumero());
@@ -139,6 +143,7 @@ public class FuncionarioDAO extends MySQL {
 
         }
 
+        this.commit();
         this.close();
     }
 
@@ -462,21 +467,18 @@ public class FuncionarioDAO extends MySQL {
         String SQL = "DELETE FROM funcionarioUnidade WHERE idFuncionario = " + id;
         this.prepare(SQL);
         this.execute();
-        this.close();
     }
 
     public void excluirEspecialidade(int id) throws SQLException {
         String SQL = "DELETE FROM especialidadeFuncionario WHERE idFuncionario = " + id;
         this.prepare(SQL);
         this.execute();
-        this.close();
     }
 
     public void excluirCargo(int id) throws SQLException {
         String SQL = "DELETE FROM cargoFuncionario WHERE idFuncionario = " + id;
         this.prepare(SQL);
         this.execute();
-        this.close();
     }
 
     public int getCodigo() throws SQLException {

@@ -31,6 +31,7 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
     private TelaAtendimento telaAtendimento;
     private TelaEncaminhamento telaEncaminhamento;
     private TelaPreAtendimento preAtendimento;
+    private TelaAgendaConsulta agendaConsulta;
     private PreAtendimentoDAO preDao;
     private JDialog tela;
 
@@ -55,6 +56,18 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
 
         this.telaEncaminhamento = parent;
         this.tela = parent;
+        this.pacienteDao = new PacientePesquisaDAO();
+        this.paciente = new PacienteBean();
+        
+
+    }
+     public TelaPacientePesquisa(TelaAgendaConsulta parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+
+        this.agendaConsulta = parent;
+        this.tela = parent;
+        
         this.pacienteDao = new PacientePesquisaDAO();
         this.paciente = new PacienteBean();
         
@@ -132,7 +145,7 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+
             },
             new String [] {
                 "Código", "Nome"
@@ -305,6 +318,8 @@ private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             this.telaAtendimento.preencherCampos(id);
         }else if(tela.equals(telaEncaminhamento)){
             this.telaEncaminhamento.preencherCampos(id);
+        }else if(tela.equals(agendaConsulta)){
+            this.agendaConsulta.preencherCampos(id);
         }
         
         

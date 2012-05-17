@@ -167,7 +167,7 @@ public class FuncionarioDAO extends MySQL {
             int idFunc = this.getRS().getInt("idFuncionario");
 
             String SQLaux = "SELECT e.idEspecialidade, e.nome AS nomeEsp "
-                    + "FROM especiialidade e, especialidadeFuncionario ef"
+                    + "FROM especialidade e, especialidadeFuncionario ef"
                     + "WHERE ef.idEspecialidade = e.idEspecialidade "
                     + "AND ef.idFuncionario = " + idFunc;
             conAux.prepare(SQL);

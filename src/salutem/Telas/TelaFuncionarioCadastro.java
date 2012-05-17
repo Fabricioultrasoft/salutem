@@ -62,9 +62,7 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         this.cargs = new ArrayList<CargoBean>();
         this.uniSel = new ArrayList<UnidadeBean>();
         this.unis = new ArrayList<UnidadeBean>();
-        this.carregarCbUnidade();
-        this.carregarCbEspecialidade();
-        this.carregarCbCargo();
+        this.carregarCombos();
     }
 
     public TelaFuncionarioCadastro(java.awt.Frame parent, boolean modal) {
@@ -759,7 +757,7 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             aux = true;
             this.destacarCampo(this.cbEstado, aux);
         }
-        if(this.cbCidade.getSelectedIndex() == 0){
+        if (this.cbCidade.getSelectedIndex() == 0) {
             aux = true;
             this.destacarCampo(this.cbCidade, aux);
         }
@@ -798,8 +796,11 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             this.cargSel = func.getCargo();
             this.espSel = func.getEspecialidade();
             this.atualizarTbUnidade();
+            this.atualizarCbUnidade();
             this.atualizarTbCargo();
+            this.atualizarCbCargo();
             this.atualizarTbEspecialidade();
+            this.atualizarCbEspecialidade();
         } catch (SQLException e) {
             Msg.erro(this, "Erro ao preencher campos. \n" + e.getMessage());
         }
@@ -837,7 +838,7 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 this.daoFunc.inserir(func);
                 Msg.informacao(this, "Salvo com sucesso.");
                 this.cancelar();
-            }else{
+            } else {
                 FuncionarioBean func = new FuncionarioBean();
                 func.setIdFuncionario(this.idFunc);
                 func.setNome(this.txNome.getText().trim().toUpperCase());
@@ -1062,5 +1063,26 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         }
         this.atualizarCbCargo();
         this.atualizarTbCargo();
+    }
+
+    private void carregarCombos() {
+        if (this.isInserir()) {
+            this.carregarCbUnidade();
+            this.carregarCbEspecialidade();
+            this.carregarCbCargo();
+        } else {
+            this.carregarCbUnidade();
+            for (int i = 0; i < uniSel.size(); i++) {
+                unis.remove(uniSel.get(i));
+            }
+            this.carregarCbEspecialidade();
+            for (int i = 0; i < uniSel.size(); i++) {
+                esps.remove(espSel.get(i));
+            }
+            this.carregarCbCargo();
+            for (int i = 0; i < uniSel.size(); i++) {
+                cargs.remove(cargSel.get(i));
+            }
+        }
     }
 }

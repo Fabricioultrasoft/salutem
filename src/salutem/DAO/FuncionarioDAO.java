@@ -166,17 +166,17 @@ public class FuncionarioDAO extends MySQL {
         while (this.getRS().next()) {
             int idFunc = this.getRS().getInt("idFuncionario");
 
-            String SQLaux = "SELECT e.idEspecialidade, e.nome AS nomeEsp "
-                    + "FROM especialidade e, especialidadeFuncionario ef"
+            String SQLaux = "SELECT e.idEspecialidade AS idEsp, e.nome AS nomeEsp "
+                    + "FROM especialidade e, especialidadeFuncionario ef "
                     + "WHERE ef.idEspecialidade = e.idEspecialidade "
                     + "AND ef.idFuncionario = " + idFunc;
-            conAux.prepare(SQL);
+            conAux.prepare(SQLaux);
             conAux.executeQuery();
 
             List<EspecialidadeBean> listaEsp = new ArrayList<EspecialidadeBean>();
             while (conAux.getRS().next()) {
                 EspecialidadeBean esp = new EspecialidadeBean();
-                esp.setIdEspecialidade(conAux.getRS().getInt("idEspecialidade"));
+                esp.setIdEspecialidade(conAux.getRS().getInt("idEsp"));
                 esp.setNome(conAux.getRS().getString("nomeEsp"));
                 listaEsp.add(esp);
             }
@@ -184,7 +184,7 @@ public class FuncionarioDAO extends MySQL {
             SQLaux = "SELECT c.* FROM cargo c, cargoFuncionario cf "
                     + "WHERE c.idCargo = cf.idCargo "
                     + "AND cf.idFuncionario = " + idFunc;
-            conAux.prepare(SQL);
+            conAux.prepare(SQLaux);
             conAux.executeQuery();
 
             List<CargoBean> listaCargo = new ArrayList<CargoBean>();
@@ -195,12 +195,12 @@ public class FuncionarioDAO extends MySQL {
                 listaCargo.add(cargo);
             }
 
-            SQLaux = "SELECT u.idUnidade u.nome AS nomeU, u.rua AS ruaU, u.numero AS numeroU, "
+            SQLaux = "SELECT u.idUnidade, u.nome AS nomeU, u.rua AS ruaU, u.numero AS numeroU, "
                     + "u.bairro AS bairroU, u.complemento AS compU "
-                    + "FROM unidade u, unidadeFuncionario uf "
+                    + "FROM unidade u, funcionarioUnidade uf "
                     + "WHERE u.idUnidade = uf.idUnidade "
                     + "AND uf.idFuncionario = " + idFunc;
-            conAux.prepare(SQL);
+            conAux.prepare(SQLaux);
             conAux.executeQuery();
 
             List<UnidadeBean> listaUn = new ArrayList<UnidadeBean>();
@@ -261,10 +261,10 @@ public class FuncionarioDAO extends MySQL {
             int idFunc = this.getRS().getInt("idFuncionario");
 
             String SQLaux = "SELECT e.idEspecialidade, e.nome AS nomeEsp "
-                    + "FROM especiialidade e, especialidadeFuncionario ef"
+                    + "FROM especialidade e, especialidadeFuncionario ef "
                     + "WHERE ef.idEspecialidade = e.idEspecialidade "
                     + "AND ef.idFuncionario = " + idFunc;
-            conAux.prepare(SQL);
+            conAux.prepare(SQLaux);
             conAux.executeQuery();
 
             List<EspecialidadeBean> listaEsp = new ArrayList<EspecialidadeBean>();
@@ -278,7 +278,7 @@ public class FuncionarioDAO extends MySQL {
             SQLaux = "SELECT c.* FROM cargo c, cargoFuncionario cf "
                     + "WHERE c.idCargo = cf.idCargo "
                     + "AND cf.idFuncionario = " + idFunc;
-            conAux.prepare(SQL);
+            conAux.prepare(SQLaux);
             conAux.executeQuery();
 
             List<CargoBean> listaCargo = new ArrayList<CargoBean>();
@@ -289,12 +289,12 @@ public class FuncionarioDAO extends MySQL {
                 listaCargo.add(cargo);
             }
 
-            SQLaux = "SELECT u.idUnidade u.nome AS nomeU, u.rua AS ruaU, u.numero AS numeroU, "
+            SQLaux = "SELECT u.idUnidade, u.nome AS nomeU, u.rua AS ruaU, u.numero AS numeroU, "
                     + "u.bairro AS bairroU, u.complemento AS compU "
-                    + "FROM unidade u, unidadeFuncionario uf "
+                    + "FROM unidade u, funcionarioUnidade uf "
                     + "WHERE u.idUnidade = uf.idUnidade "
                     + "AND uf.idFuncionario = " + idFunc;
-            conAux.prepare(SQL);
+            conAux.prepare(SQLaux);
             conAux.executeQuery();
 
             List<UnidadeBean> listaUn = new ArrayList<UnidadeBean>();
@@ -354,10 +354,10 @@ public class FuncionarioDAO extends MySQL {
             int idFunc = this.getRS().getInt("idFuncionario");
 
             String SQLaux = "SELECT e.idEspecialidade, e.nome AS nomeEsp "
-                    + "FROM especiialidade e, especialidadeFuncionario ef"
+                    + "FROM especialidade e, especialidadeFuncionario ef "
                     + "WHERE ef.idEspecialidade = e.idEspecialidade "
                     + "AND ef.idFuncionario = " + idFunc;
-            conAux.prepare(SQL);
+            conAux.prepare(SQLaux);
             conAux.executeQuery();
 
             List<EspecialidadeBean> listaEsp = new ArrayList<EspecialidadeBean>();
@@ -371,7 +371,7 @@ public class FuncionarioDAO extends MySQL {
             SQLaux = "SELECT c.* FROM cargo c, cargoFuncionario cf "
                     + "WHERE c.idCargo = cf.idCargo "
                     + "AND cf.idFuncionario = " + idFunc;
-            conAux.prepare(SQL);
+            conAux.prepare(SQLaux);
             conAux.executeQuery();
 
             List<CargoBean> listaCargo = new ArrayList<CargoBean>();
@@ -382,12 +382,12 @@ public class FuncionarioDAO extends MySQL {
                 listaCargo.add(cargo);
             }
 
-            SQLaux = "SELECT u.idUnidade u.nome AS nomeU, u.rua AS ruaU, u.numero AS numeroU, "
+            SQLaux = "SELECT u.idUnidade, u.nome AS nomeU, u.rua AS ruaU, u.numero AS numeroU, "
                     + "u.bairro AS bairroU, u.complemento AS compU "
-                    + "FROM unidade u, unidadeFuncionario uf "
+                    + "FROM unidade u, funcionarioUnidade uf "
                     + "WHERE u.idUnidade = uf.idUnidade "
                     + "AND uf.idFuncionario = " + idFunc;
-            conAux.prepare(SQL);
+            conAux.prepare(SQLaux);
             conAux.executeQuery();
 
             List<UnidadeBean> listaUn = new ArrayList<UnidadeBean>();

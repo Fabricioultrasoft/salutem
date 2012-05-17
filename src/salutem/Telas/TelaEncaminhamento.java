@@ -10,8 +10,13 @@
  */
 package salutem.Telas;
 
+import java.sql.SQLException;
 import java.util.List;
 import salutem.Beans.EspecialidadeBean;
+import salutem.Beans.PacienteBean;
+import salutem.DAO.EspecialidadeDAO;
+import salutem.DAO.pacienteDAO;
+import salutem.Utils.Msg;
 
 /**
  *
@@ -19,11 +24,17 @@ import salutem.Beans.EspecialidadeBean;
  */
 public class TelaEncaminhamento extends javax.swing.JDialog {
 private List<EspecialidadeBean> esps;
+private EspecialidadeDAO especialidadeDao;
+private pacienteDAO pacientedao;
+private int idPac;
+private int idPaciente;
+private TelaPacientePesquisa telaBusca;
     
     /** Creates new form TelaEncaminhamento */
     public TelaEncaminhamento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        carregarCbEspecialidade();
     }
 
     /** This method is called from within the constructor to
@@ -40,6 +51,9 @@ private List<EspecialidadeBean> esps;
         jXDatePicker2 = new org.jdesktop.swingx.JXDatePicker();
         jLabel2 = new javax.swing.JLabel();
         cbEspecialidade = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        lbNome = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -52,6 +66,15 @@ private List<EspecialidadeBean> esps;
 
         cbEspecialidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel3.setText("Nome:");
+
+        jButton1.setText("Localizar Paciente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -59,15 +82,20 @@ private List<EspecialidadeBean> esps;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(cbEspecialidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))))
+                    .addComponent(cbEspecialidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbNome)
+                    .addComponent(jButton1)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(28, 28, 28))))
+                .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +108,12 @@ private List<EspecialidadeBean> esps;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbEspecialidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lbNome)
+                    .addComponent(jButton1))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -97,11 +130,16 @@ private List<EspecialidadeBean> esps;
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+this.telaBusca = new TelaPacientePesquisa(this, true);
+this.telaBusca.setVisible(true);
+}//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,22 +188,50 @@ private List<EspecialidadeBean> esps;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbEspecialidade;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
+    private javax.swing.JLabel lbNome;
     // End of variables declaration//GEN-END:variables
 
 
- protected void atualizarCbEspecialidade() {
-        
+    protected void carregarCbEspecialidade() {
         this.cbEspecialidade.removeAllItems();
         this.cbEspecialidade.addItem("SELECIONE");
-        for (EspecialidadeBean esp : esps) {
-            this.cbEspecialidade.addItem(esp.getNome().trim().toUpperCase());
+
+        try {
+            this.especialidadeDao = new EspecialidadeDAO();
+            esps = this.especialidadeDao.getLista();
+            for (EspecialidadeBean esp : esps) {
+                this.cbEspecialidade.addItem(esp.getNome().trim().toUpperCase());
+            }
+        } catch (Exception e) {
+            Msg.erro(this, "Erro ao atualizar especialidades. \n" + e.getMessage());
         }
+    }
+    
+     protected void preencherCampos(int id) {
+        try {
+
+            this.idPac = id;
+
+
+            this.pacientedao = new pacienteDAO();
+            PacienteBean paciente = pacientedao.getPaciente(id);
+
+           
+            this.idPaciente = paciente.getIdPaciente();
+            this.lbNome.setText(paciente.getNome().trim().toUpperCase());
+            
+        } catch (SQLException ex) {
+            Msg.erro(this, "Erro ao preencher campos. \n" + ex.getMessage());
+        }
+
+    }
     
 
-}
 }

@@ -28,6 +28,7 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
     private PacientePesquisaDAO pacienteDao;
     private PacienteBean paciente;
     private TelaAtendimento telaAtendimento;
+    private TelaEncaminhamento telaEncaminhamento;
     private TelaPreAtendimento preAtendimento;
     private PreAtendimentoDAO preDao;
 
@@ -43,6 +44,16 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
         this.pacienteDao = new PacientePesquisaDAO();
         this.paciente = new PacienteBean();
      
+
+    }
+     public TelaPacientePesquisa(TelaEncaminhamento parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+
+        this.telaEncaminhamento = parent;
+        this.pacienteDao = new PacientePesquisaDAO();
+        this.paciente = new PacienteBean();
+        
 
     }
     
@@ -220,13 +231,13 @@ pesquisar();
 }//GEN-LAST:event_btnPesquisarActionPerformed
 
 private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
-try{
-    pegarId();
-setVisible(false);
-dispose();
-}catch(Exception e){
-   Msg.alerta(this, "Esse Paciente Não Foi Pré-Atendido."); 
-}
+    try {
+        pegarId();
+        setVisible(false);
+        dispose();
+    } catch (Exception e) {
+       e.printStackTrace();
+    }
 }//GEN-LAST:event_btnSelecionarActionPerformed
 
     /**
@@ -285,9 +296,10 @@ dispose();
         DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
-        
+      
         
         this.telaAtendimento.preencherCampos(id);
+        this.telaEncaminhamento.preencherCampos(id);
         
         
         

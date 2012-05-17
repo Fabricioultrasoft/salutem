@@ -59,7 +59,6 @@ public class TelaFuncionario extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         btInserir = new javax.swing.JButton();
         btAlterar = new javax.swing.JButton();
-        btExcluir = new javax.swing.JButton();
         btSair = new javax.swing.JButton();
         btAjuda = new javax.swing.JButton();
 
@@ -68,8 +67,18 @@ public class TelaFuncionario extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisa"));
 
         btExibir.setText("Exibir todos");
+        btExibir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExibirActionPerformed(evt);
+            }
+        });
 
         btPesquisar.setText("Pesquisar");
+        btPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,14 +142,6 @@ public class TelaFuncionario extends javax.swing.JDialog {
             }
         });
 
-        btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-deletar.png"))); // NOI18N
-        btExcluir.setText("Excluir");
-        btExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btExcluirActionPerformed(evt);
-            }
-        });
-
         btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-sair.png"))); // NOI18N
         btSair.setText("Sair");
         btSair.addActionListener(new java.awt.event.ActionListener() {
@@ -161,9 +162,7 @@ public class TelaFuncionario extends javax.swing.JDialog {
                 .addComponent(btInserir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btAlterar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btExcluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
                 .addComponent(btSair)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btAjuda)
@@ -176,7 +175,6 @@ public class TelaFuncionario extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btInserir)
                     .addComponent(btAlterar)
-                    .addComponent(btExcluir)
                     .addComponent(btAjuda)
                     .addComponent(btSair))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -217,13 +215,17 @@ public class TelaFuncionario extends javax.swing.JDialog {
         this.alterar();
     }//GEN-LAST:event_btAlterarActionPerformed
 
-    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        this.excluir();
-    }//GEN-LAST:event_btExcluirActionPerformed
-
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         this.sair();
     }//GEN-LAST:event_btSairActionPerformed
+
+    private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
+        this.pesquisar();
+    }//GEN-LAST:event_btPesquisarActionPerformed
+
+    private void btExibirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExibirActionPerformed
+        this.atualizarTabela();
+    }//GEN-LAST:event_btExibirActionPerformed
 
     /**
     * @param args the command line arguments
@@ -245,7 +247,6 @@ public class TelaFuncionario extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAjuda;
     private javax.swing.JButton btAlterar;
-    private javax.swing.JButton btExcluir;
     private javax.swing.JButton btExibir;
     private javax.swing.JButton btInserir;
     private javax.swing.JButton btPesquisar;
@@ -339,7 +340,7 @@ public class TelaFuncionario extends javax.swing.JDialog {
         tela.setTitle("ALTERAR FUNCIONARIO");
         tela.setInserir(false);
         tela.setLocationRelativeTo(null);
-        //tela.preencherCampos(id);
+        tela.preencherCampos(id);
         tela.setVisible(true);
     }
 

@@ -4,6 +4,8 @@
  */
 package salutem.Beans;
 
+import java.util.Date;
+
 /**
  *
  * @author Tironi
@@ -13,7 +15,9 @@ public class EncaminhamentoBean {
     private int idPaciente;
     private int idEspecialidade;
     private int idFuncionario;
+    private int idAtendimento;
     private String descricao;
+    private Date data;
 
     /**
      * @return the idEncaminhamento
@@ -83,6 +87,34 @@ public class EncaminhamentoBean {
      */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    /**
+     * @return the idAtendimento
+     */
+    public int getIdAtendimento() {
+        return idAtendimento;
+    }
+
+    /**
+     * @param idAtendimento the idAtendimento to set
+     */
+    public void setIdAtendimento(int idAtendimento) {
+        this.idAtendimento = idAtendimento;
+    }
+
+    /**
+     * @return the data
+     */
+    public Date getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(Date data) {
+        this.data = data;
     }
     
 }

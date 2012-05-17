@@ -12,6 +12,7 @@ package salutem.Telas;
 
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import salutem.Beans.PacienteBean;
@@ -31,6 +32,7 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
     private TelaEncaminhamento telaEncaminhamento;
     private TelaPreAtendimento preAtendimento;
     private PreAtendimentoDAO preDao;
+    private JDialog tela;
 
     /** Creates new form TelaPacientePesquisa */
   
@@ -41,6 +43,7 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
         initComponents();
 
         this.telaAtendimento = parent;
+        this.tela = parent;
         this.pacienteDao = new PacientePesquisaDAO();
         this.paciente = new PacienteBean();
      
@@ -51,6 +54,7 @@ public class TelaPacientePesquisa extends javax.swing.JDialog {
         initComponents();
 
         this.telaEncaminhamento = parent;
+        this.tela = parent;
         this.pacienteDao = new PacientePesquisaDAO();
         this.paciente = new PacienteBean();
         
@@ -232,7 +236,7 @@ pesquisar();
 
 private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
     try {
-        pegarId();
+        pegarId(this.tela);
         setVisible(false);
         dispose();
     } catch (Exception e) {
@@ -284,7 +288,7 @@ private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         });
     }
     
-    public void pegarId(){
+    public void pegarId(JDialog tela){
        
         int row = this.tabela.getSelectedRow();
 
@@ -297,9 +301,13 @@ private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
       
+        if(tela.equals(telaAtendimento)){
+            this.telaAtendimento.preencherCampos(id);
+        }else if(tela.equals(telaEncaminhamento)){
+            this.telaEncaminhamento.preencherCampos(id);
+        }
         
-        this.telaAtendimento.preencherCampos(id);
-        this.telaEncaminhamento.preencherCampos(id);
+        
         
         
         

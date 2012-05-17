@@ -22,7 +22,7 @@ public class EspecialidadeDAO extends MySQL {
 
         int id = this.getCodigo();
 
-        String SQL = "INSERT INTO especialidade (idEspecialidade, nome) VALUES (?,?)";
+        String SQL = "INSERT INTO especialidade (idEspecialidade, nomeEsp) VALUES (?,?)";
         this.prepare(SQL);
         this.setInt(1, id);
         this.setString(2, esp.getNome());
@@ -64,7 +64,7 @@ public class EspecialidadeDAO extends MySQL {
         while (this.getRS().next()) {
             EspecialidadeBean esp = new EspecialidadeBean();
             esp.setIdEspecialidade(this.getRS().getInt("idEspecialidade"));
-            esp.setNome(this.getRS().getString("nome"));
+            esp.setNome(this.getRS().getString("nomeEsp"));
             listaEsp.add(esp);
         }
 
@@ -104,7 +104,7 @@ public class EspecialidadeDAO extends MySQL {
         this.getRS().first();
         EspecialidadeBean esp = new EspecialidadeBean();
         esp.setIdEspecialidade(this.getRS().getInt("idEspecialidade"));
-        esp.setNome(this.getRS().getString("nome"));
+        esp.setNome(this.getRS().getString("nomeEsp"));
 
         this.close();
         return esp;

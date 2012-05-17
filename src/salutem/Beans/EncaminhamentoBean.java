@@ -13,11 +13,12 @@ import java.util.Date;
 public class EncaminhamentoBean {
     private int idEncaminhamento;
     private int idPaciente;
-    private int idEspecialidade;
+    private String nomeEspecialidade;
     private int idFuncionario;
     private int idAtendimento;
     private String descricao;
     private Date data;
+    private String nomePaciente;
 
     /**
      * @return the idEncaminhamento
@@ -50,17 +51,7 @@ public class EncaminhamentoBean {
     /**
      * @return the idEspecialidade
      */
-    public int getIdEspecialidade() {
-        return idEspecialidade;
-    }
-
-    /**
-     * @param idEspecialidade the idEspecialidade to set
-     */
-    public void setIdEspecialidade(int idEspecialidade) {
-        this.idEspecialidade = idEspecialidade;
-    }
-
+    
     /**
      * @return the idFuncionario
      */
@@ -115,6 +106,34 @@ public class EncaminhamentoBean {
      */
     public void setData(Date data) {
         this.data = data;
+    }
+
+    /**
+     * @return the nomeEspecialidade
+     */
+    public String getNomeEspecialidade() {
+        return nomeEspecialidade;
+    }
+
+    /**
+     * @param nomeEspecialidade the nomeEspecialidade to set
+     */
+    public void setNomeEspecialidade(String nomeEspecialidade) {
+        this.nomeEspecialidade = nomeEspecialidade;
+    }
+
+    /**
+     * @return the nomePaciente
+     */
+    public String getNomePaciente() {
+        return nomePaciente;
+    }
+
+    /**
+     * @param nomePaciente the nomePaciente to set
+     */
+    public void setNomePaciente(String nomePaciente) {
+        this.nomePaciente = nomePaciente;
     }
     
 }

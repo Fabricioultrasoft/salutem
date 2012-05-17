@@ -10,13 +10,17 @@
  */
 package salutem.Telas;
 
+import java.awt.Component;
 import java.sql.SQLException;
 import java.util.List;
+import salutem.Beans.EncaminhamentoBean;
 import salutem.Beans.EspecialidadeBean;
 import salutem.Beans.PacienteBean;
+import salutem.DAO.EncaminhamentoDAO;
 import salutem.DAO.EspecialidadeDAO;
 import salutem.DAO.pacienteDAO;
 import salutem.Utils.Msg;
+import salutem.Utils.Params;
 
 /**
  *
@@ -27,8 +31,11 @@ private List<EspecialidadeBean> esps;
 private EspecialidadeDAO especialidadeDao;
 private pacienteDAO pacientedao;
 private int idPac;
-private int idPaciente;
+private Integer idPaciente;
 private TelaPacientePesquisa telaBusca;
+private boolean inserir;
+private String nomeEspecialidade;
+private String nomePaciente;
 
     
     /** Creates new form TelaEncaminhamento */
@@ -50,7 +57,7 @@ private TelaPacientePesquisa telaBusca;
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jXDatePicker2 = new org.jdesktop.swingx.JXDatePicker();
+        dtData = new org.jdesktop.swingx.JXDatePicker();
         jLabel2 = new javax.swing.JLabel();
         cbEspecialidade = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
@@ -60,7 +67,10 @@ private TelaPacientePesquisa telaBusca;
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txDescricao = new javax.swing.JTextArea();
+        btnSalvar = new javax.swing.JButton();
+        btnEncaminhar = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -99,7 +109,7 @@ private TelaPacientePesquisa telaBusca;
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel2)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(28, 28, 28))))
                 .addGap(59, 59, 59))
         );
@@ -112,7 +122,7 @@ private TelaPacientePesquisa telaBusca;
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbEspecialidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -126,9 +136,9 @@ private TelaPacientePesquisa telaBusca;
 
         jLabel4.setText("Descrição");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txDescricao.setColumns(20);
+        txDescricao.setRows(5);
+        jScrollPane1.setViewportView(txDescricao);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -137,9 +147,9 @@ private TelaPacientePesquisa telaBusca;
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(321, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,20 +157,40 @@ private TelaPacientePesquisa telaBusca;
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        btnEncaminhar.setText("Encaminhar");
+
+        btnSair.setText("Sair");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEncaminhar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSair)
+                        .addGap(43, 43, 43))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +199,12 @@ private TelaPacientePesquisa telaBusca;
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnEncaminhar)
+                    .addComponent(btnSair))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -179,6 +214,11 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 this.telaBusca = new TelaPacientePesquisa(this, true);
 this.telaBusca.setVisible(true);
 }//GEN-LAST:event_jButton1ActionPerformed
+
+private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+setInserir(true);
+    salvar();
+}//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,7 +266,11 @@ this.telaBusca.setVisible(true);
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEncaminhar;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox cbEspecialidade;
+    private org.jdesktop.swingx.JXDatePicker dtData;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -235,10 +279,9 @@ this.telaBusca.setVisible(true);
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private javax.swing.JLabel lbNome;
+    private javax.swing.JTextArea txDescricao;
     // End of variables declaration//GEN-END:variables
 
 
@@ -251,6 +294,7 @@ this.telaBusca.setVisible(true);
             esps = this.especialidadeDao.getLista();
             for (EspecialidadeBean esp : esps) {
                 this.cbEspecialidade.addItem(esp.getNome().trim().toUpperCase());
+                this.nomeEspecialidade = esp.getNome();
             }
         } catch (Exception e) {
             Msg.erro(this, "Erro ao atualizar especialidades. \n" + e.getMessage());
@@ -269,12 +313,83 @@ this.telaBusca.setVisible(true);
            
             this.idPaciente = paciente.getIdPaciente();
             this.lbNome.setText(paciente.getNome().trim().toUpperCase());
+            this.nomePaciente = paciente.getNome();
             
         } catch (SQLException ex) {
             Msg.erro(this, "Erro ao preencher campos. \n" + ex.getMessage());
         }
 
     }
-    
+      private void destacarCampo(Component c, boolean b) {
+        if (b) {
+            c.setBackground(Params.COR_CAMPO_VAZIO);
+        } else {
+            c.setBackground(Params.COR_CAMPO_NORMAL);
+        }
+    }
+     
+      private boolean verificarCampos() {
+        boolean aux = false;
+        String msg = "Preencha corretamente os campos. \n";
+
+
+
+        if (this.txDescricao.getText().isEmpty()) {
+            aux = true;
+            this.destacarCampo(this.txDescricao, aux);
+
+        }
+        
+
+
+
+        if (aux) {
+            Msg.alerta(this, msg);
+        }
+        return aux;
+    }
+     
+     protected boolean isInserir() {
+        return inserir;
+    }
+
+    protected void setInserir(boolean inserir) {
+        this.inserir = inserir;
+        this.idPaciente = null;
+    }
+
+    private void cancelar() {
+
+        this.setVisible(false);
+        this.dispose();
+    }
+
+    private void salvar() {
+        if (this.verificarCampos()) {
+            return;
+        }
+        try {
+            if (this.isInserir()) {
+
+
+                EncaminhamentoBean enca = new EncaminhamentoBean();
+                enca.setDescricao(txDescricao.getText().trim().toUpperCase());
+                enca.setData(dtData.getDate());
+                enca.setNomeEspecialidade(this.nomeEspecialidade);
+                enca.setNomePaciente(this.nomePaciente);
+                
+                
+
+                EncaminhamentoDAO encaDao = new EncaminhamentoDAO();
+                encaDao.inserir(enca);
+                Msg.informacao(this, "Salvo com sucesso.");
+                
+               
+            } 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Msg.erro(this, "Erro ao salvar. \n" + ex.getMessage());
+        }
+    }
 
 }

@@ -35,7 +35,7 @@ private Integer idPaciente;
 private TelaPacientePesquisa telaBusca;
 private boolean inserir;
 private String nomeEspecialidade;
-private String nomePaciente;
+private String nomePaciente = null;
 
     
     /** Creates new form TelaEncaminhamento */
@@ -100,8 +100,9 @@ private String nomePaciente;
                     .addComponent(jLabel1)
                     .addComponent(cbEspecialidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbNome, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,7 +117,7 @@ private String nomePaciente;
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
@@ -171,6 +172,11 @@ private String nomePaciente;
         btnEncaminhar.setText("Encaminhar");
 
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,7 +210,7 @@ private String nomePaciente;
                     .addComponent(btnSalvar)
                     .addComponent(btnEncaminhar)
                     .addComponent(btnSair))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -219,6 +225,10 @@ private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 setInserir(true);
     salvar();
 }//GEN-LAST:event_btnSalvarActionPerformed
+
+private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+cancelar();
+}//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,10 +320,10 @@ setInserir(true);
             this.pacientedao = new pacienteDAO();
             PacienteBean paciente = pacientedao.getPaciente(id);
 
-           
+            this.nomePaciente = paciente.getNome().trim().toUpperCase();
             this.idPaciente = paciente.getIdPaciente();
-            this.lbNome.setText(paciente.getNome().trim().toUpperCase());
-            this.nomePaciente = paciente.getNome();
+            this.lbNome.setText(this.nomePaciente);
+           
             
         } catch (SQLException ex) {
             Msg.erro(this, "Erro ao preencher campos. \n" + ex.getMessage());
@@ -340,6 +350,12 @@ setInserir(true);
 
         }
         
+        
+       
+        if (this.nomePaciente == null){
+            aux = true;
+            
+        }
 
 
 
@@ -376,6 +392,7 @@ setInserir(true);
                 enca.setDescricao(txDescricao.getText().trim().toUpperCase());
                 enca.setData(dtData.getDate());
                 enca.setNomeEspecialidade(this.nomeEspecialidade);
+               
                 enca.setNomePaciente(this.nomePaciente);
                 
                 

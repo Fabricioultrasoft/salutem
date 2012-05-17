@@ -781,12 +781,19 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             this.txCpf.setText(func.getCpfCnpj().trim());
             this.txRg.setText(func.getRgie().trim());
             this.cbSexo.setSelectedItem(func.getSexo().equalsIgnoreCase("M") ? 1 : 2);
-            this.txTelefone.setText(func.getTelefone().trim());
-            this.txCelular.setText(func.getCelular().trim());
+            if (func.getTelefone() != null) {
+                this.txTelefone.setText(func.getTelefone().trim());
+            }
+            if (func.getCelular() != null) {
+                this.txCelular.setText(func.getCelular().trim());
+            }
+
             this.txDtNascimento.getEditor().setText(Utils.convertData(func.getData()));
             this.txRua.setText(func.getRua().trim());
             this.txNumero.setText(String.valueOf(func.getNumero()).trim());
-            this.txComplemento.setText(func.getComplemento().trim().toUpperCase());
+            if (func.getComplemento() != null) {
+                this.txComplemento.setText(func.getComplemento().trim().toUpperCase());
+            }
             this.txBairro.setText(func.getBairro().trim().toUpperCase());
             this.cbEstado.setSelectedItem(func.getEstado().trim().toUpperCase());
             this.cbCidade.setSelectedItem(func.getCidade().trim().toUpperCase());
@@ -795,6 +802,27 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             this.uniSel = func.getUnidade();
             this.cargSel = func.getCargo();
             this.espSel = func.getEspecialidade();
+            for (int x = 0; x < unis.size(); x++) {
+                for (int i = 0; i < uniSel.size(); i++) {
+                    if(unis.get(x).getIdUnidade() ==  uniSel.get(i).getIdUnidade()){
+                        unis.remove(unis.get(x));
+                    }
+                }
+            }
+            for (int x = 0; x < esps.size(); x++) {
+                for (int i = 0; i < espSel.size(); i++) {
+                    if(esps.get(x).getIdEspecialidade() ==  espSel.get(i).getIdEspecialidade()){
+                        esps.remove(esps.get(x));
+                    }
+                }
+            }
+            for (int x = 0; x < cargs.size(); x++) {
+                for (int i = 0; i < cargSel.size(); i++) {
+                    if(cargs.get(x).getIdCargo() ==  cargSel.get(i).getIdCargo()){
+                        cargs.remove(cargs.get(x));
+                    }
+                }
+            }
             this.atualizarTbUnidade();
             this.atualizarCbUnidade();
             this.atualizarTbCargo();
@@ -1066,23 +1094,8 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     }
 
     private void carregarCombos() {
-        if (this.isInserir()) {
-            this.carregarCbUnidade();
-            this.carregarCbEspecialidade();
-            this.carregarCbCargo();
-        } else {
-            this.carregarCbUnidade();
-            for (int i = 0; i < uniSel.size(); i++) {
-                unis.remove(uniSel.get(i));
-            }
-            this.carregarCbEspecialidade();
-            for (int i = 0; i < uniSel.size(); i++) {
-                esps.remove(espSel.get(i));
-            }
-            this.carregarCbCargo();
-            for (int i = 0; i < uniSel.size(); i++) {
-                cargs.remove(cargSel.get(i));
-            }
-        }
+        this.carregarCbUnidade();
+        this.carregarCbEspecialidade();
+        this.carregarCbCargo();
     }
 }

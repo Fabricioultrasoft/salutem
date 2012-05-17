@@ -64,7 +64,7 @@ public class EspecialidadeDAO extends MySQL {
         while (this.getRS().next()) {
             EspecialidadeBean esp = new EspecialidadeBean();
             esp.setIdEspecialidade(this.getRS().getInt("idEspecialidade"));
-            esp.setNome(this.getRS().getString("nomeEsp"));
+            esp.setNome(this.getRS().getString("nome"));
             listaEsp.add(esp);
         }
 

@@ -62,7 +62,7 @@ public class TelaAtendimento extends javax.swing.JDialog {
         this.nomeMedico = this.principal.getUsuario().getFuncionario().getNome();
         this.lbUsuario.setText(this.nomeMedico);
 
-        
+        Utils.maximizar(this);
     }
 
     /** This method is called from within the constructor to

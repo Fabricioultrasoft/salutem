@@ -22,7 +22,7 @@ public class EspecialidadeDAO extends MySQL {
 
         int id = this.getCodigo();
 
-        String SQL = "INSERT INTO especialidade (idEspecialidade, nomeEsp) VALUES (?,?)";
+        String SQL = "INSERT INTO especialidade (idEspecialidade, nome) VALUES (?,?)";
         this.prepare(SQL);
         this.setInt(1, id);
         this.setString(2, esp.getNome());

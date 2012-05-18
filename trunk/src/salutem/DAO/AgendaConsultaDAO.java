@@ -71,7 +71,7 @@ public class AgendaConsultaDAO extends MySQL{
         return listaEsp;
     }
      
-      public List<AgendaConsultaBean> getLista(String data) throws SQLException {
+      public List<AgendaConsultaBean> getLista(Date data) throws SQLException {
         this.setConnection("sal");
         this.open();
 

@@ -41,6 +41,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         barraMenu = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("SALUTEM");
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -57,7 +58,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        lbIdentificacao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbIdentificacao.setFont(new java.awt.Font("Tahoma", 1, 11));
         lbIdentificacao.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbIdentificacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/man.png"))); // NOI18N
         lbIdentificacao.setText("Usuário");

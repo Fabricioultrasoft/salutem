@@ -121,6 +121,10 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         btMenosUni = new javax.swing.JButton();
         lbNascimento = new javax.swing.JLabel();
         txDtNascimento = new org.jdesktop.swingx.JXDatePicker();
+        lbTpReg = new javax.swing.JLabel();
+        cbReg = new javax.swing.JComboBox();
+        lbReg = new javax.swing.JLabel();
+        txReg = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         lbCargo = new javax.swing.JLabel();
         lbEsp = new javax.swing.JLabel();
@@ -275,6 +279,12 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
 
         txDtNascimento.setFormats("dd/MM/yyyy");
 
+        lbTpReg.setText("Tipo do Registro");
+
+        cbReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<..>", "CRF", "CRM" }));
+
+        lbReg.setText("Registro");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -332,27 +342,39 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                                 .addGap(10, 10, 10))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txComplemento, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                                    .addComponent(lbComplemento))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbBairro)
+                                    .addComponent(txBairro, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbEstado, 0, 64, Short.MAX_VALUE)
+                                    .addComponent(lbEstado))
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbCidade)
+                                    .addComponent(cbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cbReg, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbTpReg, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbReg)
+                                    .addComponent(txReg, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txDtAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txComplemento, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                    .addComponent(lbComplemento)
                                     .addComponent(lbDtAdmissao))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txBairro, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                                            .addComponent(lbBairro))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cbEstado, 0, 74, Short.MAX_VALUE)
-                                            .addComponent(lbEstado))
-                                        .addGap(6, 6, 6)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lbCidade)
-                                            .addComponent(cbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(20, 20, 20))
-                                    .addComponent(lbDecreto)
-                                    .addComponent(txDecreto, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txDecreto, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbDecreto)
+                                        .addGap(116, 116, 116)))))
                         .addGap(0, 0, 0))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -406,17 +428,23 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbDecreto)
                     .addComponent(lbDtAdmissao)
-                    .addComponent(lbDecreto))
+                    .addComponent(lbTpReg)
+                    .addComponent(lbReg))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txDtAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txDecreto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txDecreto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txDtAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -646,6 +674,7 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     private javax.swing.JComboBox cbCidade;
     private javax.swing.JComboBox cbEsp;
     private javax.swing.JComboBox cbEstado;
+    private javax.swing.JComboBox cbReg;
     private javax.swing.JComboBox cbSexo;
     private javax.swing.JComboBox cbUnidade;
     private javax.swing.JLabel jLabel3;
@@ -669,10 +698,12 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     private javax.swing.JLabel lbNascimento;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbNumero;
+    private javax.swing.JLabel lbReg;
     private javax.swing.JLabel lbRg;
     private javax.swing.JLabel lbRua;
     private javax.swing.JLabel lbSexo;
     private javax.swing.JLabel lbTelefone;
+    private javax.swing.JLabel lbTpReg;
     private javax.swing.JTable tbCargo;
     private javax.swing.JTable tbEsp;
     private javax.swing.JTable tbUnidade;
@@ -685,6 +716,7 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     private org.jdesktop.swingx.JXDatePicker txDtNascimento;
     private javax.swing.JTextField txNome;
     private javax.swing.JTextField txNumero;
+    private javax.swing.JTextField txReg;
     private javax.swing.JTextField txRg;
     private javax.swing.JTextField txRua;
     private javax.swing.JFormattedTextField txTelefone;
@@ -780,7 +812,7 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             this.txNome.setText(func.getNome().trim().toUpperCase());
             this.txCpf.setText(func.getCpfCnpj().trim());
             this.txRg.setText(func.getRgie().trim());
-            this.cbSexo.setSelectedItem(func.getSexo().equalsIgnoreCase("M") ? 1 : 2);
+            this.cbSexo.setSelectedIndex(func.getSexo().equalsIgnoreCase("M") ? 1 : 2);
             if (func.getTelefone() != null) {
                 this.txTelefone.setText(func.getTelefone().trim());
             }
@@ -799,12 +831,16 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
             this.cbCidade.setSelectedItem(func.getCidade().trim().toUpperCase());
             this.txDtAdmissao.getEditor().setText(Utils.convertData(func.getAdmissao()));
             this.txDecreto.setText(String.valueOf(func.getDecreto()).trim());
+            if (func.getTipoRegistro() != null && func.getRegistro() != null) {
+                this.cbReg.setSelectedItem(func.getTipoRegistro().trim().toUpperCase());
+                this.txReg.setText(func.getRegistro().trim().toUpperCase());
+            }
             this.uniSel = func.getUnidade();
             this.cargSel = func.getCargo();
             this.espSel = func.getEspecialidade();
             for (int x = 0; x < unis.size(); x++) {
                 for (int i = 0; i < uniSel.size(); i++) {
-                    if(unis.get(x).getIdUnidade() ==  uniSel.get(i).getIdUnidade()){
+                    if (unis.get(x).getIdUnidade() == uniSel.get(i).getIdUnidade()) {
                         unis.remove(unis.get(x));
                     }
                 }
@@ -845,9 +881,9 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 func.setCpfCnpj(this.txCpf.getText().trim().toUpperCase());
                 func.setRgie(this.txRg.getText().trim().toUpperCase());
                 if (this.cbSexo.getSelectedIndex() == 1) {
-                    func.setSexo("M");
+                    func.setSexo("M".trim());
                 } else {
-                    func.setSexo("F");
+                    func.setSexo("F".trim());
                 }
                 func.setTelefone(this.txTelefone.getText().trim().toUpperCase());
                 func.setCelular(this.txCelular.getText().trim().toUpperCase());
@@ -860,8 +896,8 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 func.setCidade(this.cbCidade.getSelectedItem().toString().trim());
                 func.setAdmissao(Utils.convertData(this.txDtAdmissao.getEditor().getText()));
                 func.setDecreto(Integer.parseInt(this.txDecreto.getText().trim().toUpperCase()));
-                func.setTipoRegistro(null);
-                func.setRegistro(null);
+                func.setTipoRegistro(this.cbReg.getSelectedItem().toString().trim());
+                func.setRegistro(this.txReg.getText().trim().toUpperCase());
                 func.setUnidade(uniSel);
                 func.setCargo(cargSel);
                 func.setEspecialidade(espSel);
@@ -887,9 +923,11 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 func.setComplemento(this.txComplemento.getText().trim().toUpperCase());
                 func.setBairro(this.txBairro.getText().trim().toUpperCase());
                 func.setEstado(this.cbEstado.getSelectedItem().toString().trim());
-                func.setCidade(this.cbEstado.getSelectedItem().toString().trim());
+                func.setCidade(this.cbCidade.getSelectedItem().toString().trim());
                 func.setAdmissao(Utils.convertData(this.txDtAdmissao.getEditor().getText()));
                 func.setDecreto(Integer.parseInt(this.txDecreto.getText().trim().toUpperCase()));
+                func.setTipoRegistro(this.cbReg.getSelectedItem().toString().trim());
+                func.setRegistro(this.txReg.getText().trim().toUpperCase());
                 func.setUnidade(uniSel);
                 func.setCargo(cargSel);
                 func.setEspecialidade(espSel);
@@ -898,7 +936,7 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 this.cancelar();
             }
         } catch (SQLException e) {
-            Msg.erro(this, "Erro ao salvar. \n"+e.getMessage());
+            Msg.erro(this, "Erro ao salvar. \n" + e.getMessage());
         }
     }
 

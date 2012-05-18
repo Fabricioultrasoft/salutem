@@ -42,7 +42,7 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
     public TelaAgendaConsulta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+        atualizarTabela();
     }
 
     /** This method is called from within the constructor to
@@ -294,8 +294,9 @@ salvar();
             modelo.setNumRows(0);
 
             this.agendaDao = new AgendaConsultaDAO();
+            Date data = dtAgenda.getDate();
             
-            List<AgendaConsultaBean> lista = this.agendaDao.getLista();
+            List<AgendaConsultaBean> lista = this.agendaDao.getLista(data);
 
             for (int i = 0; i < lista.size(); i++) {
                 modelo.addRow(new Object[]{

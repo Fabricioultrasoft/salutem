@@ -126,6 +126,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txNome">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txNomeKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbRua">
           <Properties>
@@ -133,8 +136,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txRua">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txRuaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txNumero">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txNumeroKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbNumero">
           <Properties>
@@ -147,6 +156,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txBairro">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txBairroKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txComplemento">
         </Component>

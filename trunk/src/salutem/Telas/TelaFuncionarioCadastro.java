@@ -180,6 +180,12 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
 
         lbNome.setText("Nome");
 
+        txNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txNomeKeyTyped(evt);
+            }
+        });
+
         lbCpf.setText("CPF");
 
         try {
@@ -187,8 +193,19 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txCpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txCpfKeyTyped(evt);
+            }
+        });
 
         lbRg.setText("RG");
+
+        txRg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txRgKeyTyped(evt);
+            }
+        });
 
         lbSexo.setText("Sexo");
 
@@ -201,6 +218,11 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txTelefoneKeyTyped(evt);
+            }
+        });
 
         lbCelular.setText("Celular");
 
@@ -209,12 +231,35 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txCelular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txCelularKeyTyped(evt);
+            }
+        });
 
         lbRua.setText("Rua");
+
+        txRua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txRuaKeyTyped(evt);
+            }
+        });
+
+        txNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txNumeroKeyTyped(evt);
+            }
+        });
 
         lbNumero.setText("Número");
 
         lbComplemento.setText("Complemento");
+
+        txBairro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txBairroKeyTyped(evt);
+            }
+        });
 
         lbBairro.setText("Bairro");
 
@@ -236,6 +281,12 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         txDtAdmissao.setFormats("dd/MM/yyyy");
 
         lbDecreto.setText("Número decreto");
+
+        txDecreto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txDecretoKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("Unidades");
 
@@ -278,12 +329,23 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         lbNascimento.setText("Data de nascimento");
 
         txDtNascimento.setFormats("dd/MM/yyyy");
+        txDtNascimento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txDtNascimentoMouseClicked(evt);
+            }
+        });
 
         lbTpReg.setText("Tipo do Registro");
 
         cbReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<..>", "CRF", "CRM" }));
 
         lbReg.setText("Registro");
+
+        txReg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txRegKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -314,10 +376,14 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                                         .addGap(9, 9, 9)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(lbCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                                                    .addComponent(txCpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addComponent(lbCpf)
+                                                        .addGap(110, 110, 110))
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addComponent(txCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(lbRg)
                                                     .addComponent(txRg, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -327,9 +393,9 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                                                 .addGap(77, 77, 77)
                                                 .addComponent(lbNascimento))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGap(6, 6, 6)
                                         .addComponent(txCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGap(18, 18, 18)
                                         .addComponent(txDtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,13 +458,13 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNome)
-                    .addComponent(lbCpf)
-                    .addComponent(lbRg))
+                    .addComponent(lbRg)
+                    .addComponent(lbCpf))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbSexo)
@@ -642,6 +708,50 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         this.salvar();
     }//GEN-LAST:event_btSalvarActionPerformed
+
+    private void txNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNomeKeyTyped
+        this.destacarCampo(this.txNome, false);
+    }//GEN-LAST:event_txNomeKeyTyped
+
+    private void txCpfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txCpfKeyTyped
+        this.destacarCampo(this.txCpf, false);
+    }//GEN-LAST:event_txCpfKeyTyped
+
+    private void txRgKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRgKeyTyped
+        this.destacarCampo(this.txRg, false);
+    }//GEN-LAST:event_txRgKeyTyped
+
+    private void txTelefoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txTelefoneKeyTyped
+        this.destacarCampo(this.txTelefone, false);
+    }//GEN-LAST:event_txTelefoneKeyTyped
+
+    private void txCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txCelularKeyTyped
+        this.destacarCampo(this.txCelular, false);
+    }//GEN-LAST:event_txCelularKeyTyped
+
+    private void txDtNascimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txDtNascimentoMouseClicked
+        this.destacarCampo(this.txDtNascimento, false);
+    }//GEN-LAST:event_txDtNascimentoMouseClicked
+
+    private void txRuaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRuaKeyTyped
+        this.destacarCampo(this.txRua, false);
+    }//GEN-LAST:event_txRuaKeyTyped
+
+    private void txNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNumeroKeyTyped
+        this.destacarCampo(this.txNumero, false);
+    }//GEN-LAST:event_txNumeroKeyTyped
+
+    private void txBairroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBairroKeyTyped
+        this.destacarCampo(this.txBairro, false);
+    }//GEN-LAST:event_txBairroKeyTyped
+
+    private void txRegKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRegKeyTyped
+        this.destacarCampo(this.txReg, false);
+    }//GEN-LAST:event_txRegKeyTyped
+
+    private void txDecretoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDecretoKeyTyped
+        this.destacarCampo(this.txDecreto, false);
+    }//GEN-LAST:event_txDecretoKeyTyped
 
     /**
      * @param args the command line arguments

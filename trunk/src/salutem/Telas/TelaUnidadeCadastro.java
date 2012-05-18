@@ -72,11 +72,35 @@ public class TelaUnidadeCadastro extends javax.swing.JDialog {
 
         lbNome.setText("Nome");
 
+        txNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txNomeKeyTyped(evt);
+            }
+        });
+
         lbRua.setText("Rua");
+
+        txRua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txRuaKeyTyped(evt);
+            }
+        });
+
+        txNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txNumeroKeyTyped(evt);
+            }
+        });
 
         lbNumero.setText("Número");
 
         lbBairro.setText("Bairro");
+
+        txBairro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txBairroKeyTyped(evt);
+            }
+        });
 
         lbComplemento.setText("Complemento");
 
@@ -204,6 +228,22 @@ public class TelaUnidadeCadastro extends javax.swing.JDialog {
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         this.cancelar();
     }//GEN-LAST:event_btCancelarActionPerformed
+
+    private void txNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNomeKeyTyped
+        this.destacarCampo(this.txNome, false);
+    }//GEN-LAST:event_txNomeKeyTyped
+
+    private void txRuaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRuaKeyTyped
+        this.destacarCampo(this.txRua, false);
+    }//GEN-LAST:event_txRuaKeyTyped
+
+    private void txNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNumeroKeyTyped
+        this.destacarCampo(this.txNumero, false);
+    }//GEN-LAST:event_txNumeroKeyTyped
+
+    private void txBairroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBairroKeyTyped
+        this.destacarCampo(this.txBairro, false);
+    }//GEN-LAST:event_txBairroKeyTyped
 
     /**
      * @param args the command line arguments

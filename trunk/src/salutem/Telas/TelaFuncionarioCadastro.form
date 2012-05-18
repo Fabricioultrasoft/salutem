@@ -143,11 +143,17 @@
                                               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="lbCpf" alignment="0" pref="133" max="32767" attributes="0"/>
-                                                          <Component id="txCpf" alignment="1" min="-2" pref="123" max="-2" attributes="1"/>
+                                                      <EmptySpace pref="10" max="32767" attributes="0"/>
+                                                      <Group type="103" groupAlignment="1" attributes="0">
+                                                          <Group type="102" attributes="0">
+                                                              <Component id="lbCpf" min="-2" max="-2" attributes="0"/>
+                                                              <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Group type="102" alignment="1" attributes="0">
+                                                              <Component id="txCpf" min="-2" pref="123" max="-2" attributes="1"/>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                          </Group>
                                                       </Group>
-                                                      <EmptySpace min="-2" max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" attributes="0">
                                                           <Component id="lbRg" min="-2" max="-2" attributes="0"/>
                                                           <Component id="txRg" min="-2" pref="111" max="-2" attributes="2"/>
@@ -162,9 +168,9 @@
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                               <Component id="txCelular" min="-2" pref="107" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="txDtNascimento" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -250,14 +256,14 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lbNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbRg" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txRg" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -336,6 +342,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txNome">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txNomeKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbCpf">
               <Properties>
@@ -348,6 +357,9 @@
                   <Format format="###.###.###-##" subtype="-1" type="5"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txCpfKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbRg">
               <Properties>
@@ -355,6 +367,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txRg">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txRgKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbSexo">
               <Properties>
@@ -383,6 +398,9 @@
                   <Format format="(##)####-####" subtype="-1" type="5"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txTelefoneKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbCelular">
               <Properties>
@@ -395,6 +413,9 @@
                   <Format format="(##)####-####" subtype="-1" type="5"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txCelularKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbRua">
               <Properties>
@@ -402,8 +423,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txRua">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txRuaKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txNumero">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txNumeroKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbNumero">
               <Properties>
@@ -418,6 +445,9 @@
             <Component class="javax.swing.JTextField" name="txComplemento">
             </Component>
             <Component class="javax.swing.JTextField" name="txBairro">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txBairroKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbBairro">
               <Properties>
@@ -475,6 +505,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txDecreto">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txDecretoKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
@@ -544,6 +577,9 @@
                   <Connection code="&quot;dd/MM/yyyy&quot;" type="code"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txDtNascimentoMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbTpReg">
               <Properties>
@@ -567,6 +603,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txReg">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txRegKeyTyped"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

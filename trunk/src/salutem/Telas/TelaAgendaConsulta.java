@@ -149,7 +149,7 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Data", "Nome"
             }
         ));
         jScrollPane1.setViewportView(tabela);

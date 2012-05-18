@@ -13,6 +13,7 @@ package salutem.Telas;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import salutem.Beans.EspecialidadeBean;
 import salutem.DAO.EspecialidadeDAO;
@@ -63,6 +64,12 @@ public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lbNome.setText("Nome");
+
+        txNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txNomeKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,6 +160,13 @@ public class TelaEspecialidadeCadastro extends javax.swing.JDialog {
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         this.cancelar();
     }//GEN-LAST:event_btCancelarActionPerformed
+
+    private void txNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNomeKeyTyped
+        this.destacarCampo(this.txNome, false);
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            this.salvar();
+        }
+    }//GEN-LAST:event_txNomeKeyTyped
 
     /**
     * @param args the command line arguments

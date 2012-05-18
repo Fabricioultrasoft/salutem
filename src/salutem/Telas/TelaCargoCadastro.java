@@ -12,6 +12,7 @@
 package salutem.Telas;
 
 import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import salutem.Beans.CargoBean;
 import salutem.DAO.CargoDAO;
@@ -62,6 +63,12 @@ public class TelaCargoCadastro extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lbDescricao.setText("Descrição");
+
+        txDescricao.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txDescricaoKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -152,6 +159,13 @@ public class TelaCargoCadastro extends javax.swing.JDialog {
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         this.cancelar();
     }//GEN-LAST:event_btCancelarActionPerformed
+
+    private void txDescricaoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDescricaoKeyTyped
+        this.destacarCampo(this.txDescricao, false);
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            this.salvar();
+        }
+    }//GEN-LAST:event_txDescricaoKeyTyped
 
     /**
     * @param args the command line arguments

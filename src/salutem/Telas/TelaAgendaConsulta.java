@@ -103,6 +103,8 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
 
         jLabel2.setText("Data");
 
+        dtAgenda.setFormats("dd/MM/yyyy");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -115,9 +117,8 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lbNome)
-                                .addContainerGap(511, Short.MAX_VALUE))))
+                            .addComponent(lbNome))
+                        .addContainerGap(269, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -294,7 +295,7 @@ salvar();
             modelo.setNumRows(0);
 
             this.agendaDao = new AgendaConsultaDAO();
-            Date data = dtAgenda.getDate();
+            Date data = Utils.convertData(this.dtAgenda.getEditor().getText());
             
             List<AgendaConsultaBean> lista = this.agendaDao.getLista(data);
 

@@ -75,7 +75,7 @@ public class AgendaConsultaDAO extends MySQL{
         this.setConnection("sal");
         this.open();
 
-        String SQL = "SELECT * FROM agendaconsulta WHERE data LIKE '"+data+"'";
+        String SQL = "SELECT * FROM agendaconsulta WHERE data = "+data;
         this.prepare(SQL);
         this.executeQuery();
 

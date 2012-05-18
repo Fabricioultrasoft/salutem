@@ -11,6 +11,7 @@
 
 package salutem.Telas;
 
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -65,6 +66,12 @@ public class TelaEspecialidade extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
+
+        txPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txPesquisarKeyTyped(evt);
+            }
+        });
 
         btTodos.setText("Exibir todos");
         btTodos.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +132,11 @@ public class TelaEspecialidade extends javax.swing.JDialog {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tabela);
@@ -244,6 +256,20 @@ public class TelaEspecialidade extends javax.swing.JDialog {
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         this.sair();
     }//GEN-LAST:event_btSairActionPerformed
+
+    private void txPesquisarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPesquisarKeyTyped
+        this.lbInfoPesq.setText("");
+
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            this.pesquisar();
+        }
+    }//GEN-LAST:event_txPesquisarKeyTyped
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        if (evt.getClickCount() == 2) {
+            this.alterar();
+        }
+    }//GEN-LAST:event_tabelaMouseClicked
 
     /**
     * @param args the command line arguments

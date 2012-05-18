@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.crypto.Data;
 import salutem.Beans.AgendaConsultaBean;
 import salutem.Beans.PacienteBean;
 import salutem.DAO.AgendaConsultaDAO;
@@ -294,7 +295,6 @@ salvar();
 
             this.agendaDao = new AgendaConsultaDAO();
             
-
             List<AgendaConsultaBean> lista = this.agendaDao.getLista();
 
             for (int i = 0; i < lista.size(); i++) {

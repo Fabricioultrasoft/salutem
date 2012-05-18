@@ -6,6 +6,7 @@ package salutem.DAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import salutem.Beans.AgendaConsultaBean;
 import salutem.conexao.MySQL;
@@ -49,6 +50,58 @@ public class AgendaConsultaDAO extends MySQL{
         this.open();
 
         String SQL = "SELECT * FROM agendaconsulta WHERE idAgendaConsulta = "+id;
+        this.prepare(SQL);
+        this.executeQuery();
+
+        List<AgendaConsultaBean> listaEsp = new ArrayList<AgendaConsultaBean>();
+        while (this.getRS().next()) {
+            AgendaConsultaBean agenda = new AgendaConsultaBean();
+            agenda.setIdAgendaConsulta(this.getRS().getInt("idAgendaConsulta"));
+            agenda.setDate(this.getRS().getDate("data"));
+            agenda.setIdFuncionario(this.getRS().getInt("idFuncionario"));
+            agenda.setIdPaciente(this.getRS().getInt("idPaciente"));
+            agenda.setNomeFuncionario(this.getRS().getString("nomeFuncionario"));
+            agenda.setNomePaciente(this.getRS().getString("nomePaciente"));
+           
+            listaEsp.add(agenda);
+        }
+
+        this.close();
+
+        return listaEsp;
+    }
+     
+      public List<AgendaConsultaBean> getLista(String data) throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String SQL = "SELECT * FROM agendaconsulta WHERE data = "+data;
+        this.prepare(SQL);
+        this.executeQuery();
+
+        List<AgendaConsultaBean> listaEsp = new ArrayList<AgendaConsultaBean>();
+        while (this.getRS().next()) {
+            AgendaConsultaBean agenda = new AgendaConsultaBean();
+            agenda.setIdAgendaConsulta(this.getRS().getInt("idAgendaConsulta"));
+            agenda.setDate(this.getRS().getDate("data"));
+            agenda.setIdFuncionario(this.getRS().getInt("idFuncionario"));
+            agenda.setIdPaciente(this.getRS().getInt("idPaciente"));
+            agenda.setNomeFuncionario(this.getRS().getString("nomeFuncionario"));
+            agenda.setNomePaciente(this.getRS().getString("nomePaciente"));
+           
+            listaEsp.add(agenda);
+        }
+
+        this.close();
+
+        return listaEsp;
+    }
+     
+      public List<AgendaConsultaBean> getLista() throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String SQL = "SELECT * FROM agendaconsulta";
         this.prepare(SQL);
         this.executeQuery();
 

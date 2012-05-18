@@ -12,6 +12,7 @@ package salutem.Telas;
 
 import java.awt.Component;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import salutem.Beans.AgendaConsultaBean;
@@ -21,6 +22,7 @@ import salutem.DAO.PacientePesquisaDAO;
 import salutem.DAO.pacienteDAO;
 import salutem.Utils.Msg;
 import salutem.Utils.Params;
+import salutem.Utils.Utils;
 
 /**
  *
@@ -39,6 +41,7 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
     public TelaAgendaConsulta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
 
     /** This method is called from within the constructor to
@@ -110,20 +113,17 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
                         .addComponent(jLabel1)
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                                .addComponent(btnPesquisar)
-                                .addGap(108, 108, 108))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lbNome)
                                 .addContainerGap(511, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(529, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(dtAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(448, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(dtAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
+                        .addComponent(btnPesquisar)
+                        .addGap(67, 67, 67))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,11 +132,12 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbNome)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(1, 1, 1)
                 .addComponent(dtAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -202,7 +203,7 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -292,11 +293,13 @@ salvar();
             modelo.setNumRows(0);
 
             this.agendaDao = new AgendaConsultaDAO();
+            
 
-            List<AgendaConsultaBean> lista = this.agendaDao.getLista(this.idPac);
+            List<AgendaConsultaBean> lista = this.agendaDao.getLista();
 
             for (int i = 0; i < lista.size(); i++) {
                 modelo.addRow(new Object[]{
+                          
                             lista.get(i).getDate(),
                             lista.get(i).getNomePaciente(),
                            

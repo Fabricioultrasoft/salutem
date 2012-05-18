@@ -10,11 +10,17 @@
  */
 package salutem.Telas;
 
+import java.awt.Component;
 import java.sql.SQLException;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import salutem.Beans.AgendaConsultaBean;
 import salutem.Beans.PacienteBean;
+import salutem.DAO.AgendaConsultaDAO;
 import salutem.DAO.PacientePesquisaDAO;
 import salutem.DAO.pacienteDAO;
 import salutem.Utils.Msg;
+import salutem.Utils.Params;
 
 /**
  *
@@ -26,6 +32,8 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
     private Integer idPaciente;
     private String nomePaciente;
     private TelaPacientePesquisa telaBusca;
+    private AgendaConsultaDAO agendaDao;
+    private boolean inserir;
 
     /** Creates new form TelaAgendaConsulta */
     public TelaAgendaConsulta(java.awt.Frame parent, boolean modal) {
@@ -49,9 +57,12 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         lbNome2 = new javax.swing.JLabel();
         lbNome3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        dtAgenda = new org.jdesktop.swingx.JXDatePicker();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -86,23 +97,33 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
                 .addComponent(lbNome3))
         );
 
+        jLabel2.setText("Data");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                        .addComponent(btnPesquisar)
-                        .addGap(108, 108, 108))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbNome)
-                        .addContainerGap(511, Short.MAX_VALUE))))
+                        .addComponent(jLabel1)
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                                .addComponent(btnPesquisar)
+                                .addGap(108, 108, 108))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbNome)
+                                .addContainerGap(511, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(529, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(dtAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(448, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,12 +135,16 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
                         .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbNome)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(59, 59, 59))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addGap(1, 1, 1)
+                .addComponent(dtAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -127,7 +152,7 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
                 "Title 1", "Title 2"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabela);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -146,6 +171,13 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
+        jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,15 +188,21 @@ public class TelaAgendaConsulta extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(457, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(96, 96, 96))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -174,6 +212,11 @@ private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 this.telaBusca = new TelaPacientePesquisa(this, true);
 this.telaBusca.setVisible(true);
 }//GEN-LAST:event_btnPesquisarActionPerformed
+
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+setInserir(true);
+salvar();
+}//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,8 +272,12 @@ this.telaBusca.setVisible(true);
             PacienteBean paciente = pacientedao.getPaciente(id);
 
             this.nomePaciente = paciente.getNome().trim().toUpperCase();
+            
+            
             this.idPaciente = paciente.getIdPaciente();
             this.lbNome3.setText(this.nomePaciente);
+            
+            atualizarTabela();
            
             
         } catch (SQLException ex) {
@@ -238,17 +285,107 @@ this.telaBusca.setVisible(true);
         }
 
     }
+     
+     protected void atualizarTabela() {
+        try {
+            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
+            modelo.setNumRows(0);
+
+            this.agendaDao = new AgendaConsultaDAO();
+
+            List<AgendaConsultaBean> lista = this.agendaDao.getLista(this.idPac);
+
+            for (int i = 0; i < lista.size(); i++) {
+                modelo.addRow(new Object[]{
+                            lista.get(i).getDate(),
+                            lista.get(i).getNomePaciente(),
+                           
+                });
+                            
+
+            }
+
+
+        } catch (SQLException ex) {
+            Msg.erro(this, "Erro ao atualizar tabela. \n" + ex.getMessage());
+        }
+    }
+     
+     protected void setInserir(boolean inserir) {
+        this.inserir = inserir;
+        this.idPaciente = null;
+    }
+
+    protected boolean isInserir() {
+        return inserir;
+    }
+
+    private void destacarCampo(Component c, boolean b) {
+        if (b) {
+            c.setBackground(Params.COR_CAMPO_VAZIO);
+        } else {
+            c.setBackground(Params.COR_CAMPO_NORMAL);
+        }
+    }
+
+    private boolean verificarCampos() {
+        boolean aux = false;
+        String msg = "Preencha corretamente os campos. \n";
+
+
+        if (aux) {
+            Msg.alerta(this, msg);
+        }
+        return aux;
+    }
+     
+      private void cancelar() {
+
+        this.setVisible(false);
+        this.dispose();
+    }
+
+    private void salvar() {
+        if (this.verificarCampos()) {
+            return;
+        }
+        try {
+            if (this.isInserir()) {
+
+
+
+                AgendaConsultaBean agenda = new AgendaConsultaBean();
+                
+                agenda.setNomePaciente(this.nomePaciente);
+                agenda.setDate(dtAgenda.getDate());
+
+
+
+                this.agendaDao = new AgendaConsultaDAO();
+                this.agendaDao.inserir(agenda);
+                Msg.informacao(this, "Salvo com sucesso.");
+                atualizarTabela();
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Msg.erro(this, "Erro ao salvar. \n" + ex.getMessage());
+        }
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
+    private org.jdesktop.swingx.JXDatePicker dtAgenda;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbNome2;
     private javax.swing.JLabel lbNome3;
+    private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

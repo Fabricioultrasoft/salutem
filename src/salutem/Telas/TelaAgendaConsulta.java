@@ -295,7 +295,7 @@ salvar();
             modelo.setNumRows(0);
 
             this.agendaDao = new AgendaConsultaDAO();
-            Date data = Utils.convertData(this.dtAgenda.getEditor().getText());
+            String data = this.dtAgenda.getEditor().getText();
             
             List<AgendaConsultaBean> lista = this.agendaDao.getLista(data);
 

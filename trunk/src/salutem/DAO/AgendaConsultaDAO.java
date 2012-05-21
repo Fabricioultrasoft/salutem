@@ -96,6 +96,17 @@ public class AgendaConsultaDAO extends MySQL{
 
         return listaEsp;
     }
+      
+       public void excluir() throws SQLException {
+        this.setConnection("sal");
+        this.open();
+
+        String sql = "DELETE FROM agendaconsulta ";
+        this.prepare(sql);
+        this.execute();
+
+        this.close();
+    }
      
       public List<AgendaConsultaBean> getLista() throws SQLException {
         this.setConnection("sal");

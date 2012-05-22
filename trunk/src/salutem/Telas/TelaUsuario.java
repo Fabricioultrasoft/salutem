@@ -4,42 +4,23 @@
  */
 
 /*
- * TelaCargo.java
+ * TelaUsuario.java
  *
- * Created on 11/05/2012, 14:31:04
+ * Created on 21/05/2012, 09:36:32
  */
 
 package salutem.Telas;
-
-import com.mysql.jdbc.Util;
-import java.awt.event.KeyEvent;
-import java.sql.SQLException;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
-import salutem.Beans.CargoBean;
-import salutem.DAO.CargoDAO;
-import salutem.Utils.Msg;
-import salutem.Utils.Utils;
 
 /**
  *
  * @author Renato Doretto
  */
-public class TelaCargo extends javax.swing.JDialog {
+public class TelaUsuario extends javax.swing.JDialog {
 
-    private CargoDAO daoCargo;
-    private TelaPrincipal telaP;
-    
-    public TelaCargo(java.awt.Frame parent, boolean modal) {
+    /** Creates new form TelaUsuario */
+    public TelaUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
-        this.telaP = (TelaPrincipal) parent;
-        this.daoCargo = new CargoDAO();
-
-        Utils.maximizar(this);
-        this.tabela.getColumnModel().getColumn(0).setMaxWidth(0);
-        this.tabela.getColumnModel().getColumn(0).setMinWidth(0);
     }
 
     /** This method is called from within the constructor to
@@ -69,26 +50,10 @@ public class TelaCargo extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
-        txPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txPesquisarKeyTyped(evt);
-            }
-        });
-
-        btTodos.setText("Exibir Todos");
-        btTodos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTodosActionPerformed(evt);
-            }
-        });
+        btTodos.setText("Exibir todos");
 
         btPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-pesquisar.png"))); // NOI18N
         btPesquisar.setText("Pesquisar");
-        btPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPesquisarActionPerformed(evt);
-            }
-        });
 
         lbInfoPesq.setPreferredSize(new java.awt.Dimension(0, 15));
 
@@ -99,8 +64,8 @@ public class TelaCargo extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbInfoPesq, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                    .addComponent(txPesquisar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
+                    .addComponent(lbInfoPesq, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                    .addComponent(txPesquisar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btPesquisar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -124,55 +89,30 @@ public class TelaCargo extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "Descricao"
+                "ID", "Login", "Funcionario"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tabela);
 
         btInserir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-inserir.png"))); // NOI18N
         btInserir.setText("Inserir");
-        btInserir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btInserirActionPerformed(evt);
-            }
-        });
 
         btAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-alterar.png"))); // NOI18N
         btAlterar.setText("Alterar");
-        btAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAlterarActionPerformed(evt);
-            }
-        });
 
         btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-deletar.png"))); // NOI18N
         btExcluir.setText("Excluir");
-        btExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btExcluirActionPerformed(evt);
-            }
-        });
 
         btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-sair.png"))); // NOI18N
         btSair.setText("Sair");
-        btSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSairActionPerformed(evt);
-            }
-        });
 
         btAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salutem/imagens/icone-help.png"))); // NOI18N
         btAjuda.setText("Ajuda");
@@ -188,7 +128,7 @@ public class TelaCargo extends javax.swing.JDialog {
                 .addComponent(btAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btExcluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                 .addComponent(btSair)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btAjuda)
@@ -214,7 +154,7 @@ public class TelaCargo extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -225,7 +165,7 @@ public class TelaCargo extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -234,51 +174,13 @@ public class TelaCargo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
-        this.pesquisar();
-    }//GEN-LAST:event_btPesquisarActionPerformed
-
-    private void btTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTodosActionPerformed
-        this.atualizarTabela();
-    }//GEN-LAST:event_btTodosActionPerformed
-
-    private void btInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInserirActionPerformed
-        this.inserir();
-    }//GEN-LAST:event_btInserirActionPerformed
-
-    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        this.alterar();
-    }//GEN-LAST:event_btAlterarActionPerformed
-
-    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        this.excluir();
-    }//GEN-LAST:event_btExcluirActionPerformed
-
-    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
-        this.sair();
-    }//GEN-LAST:event_btSairActionPerformed
-
-    private void txPesquisarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPesquisarKeyTyped
-        this.lbInfoPesq.setText("");
-
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-            this.pesquisar();
-        }
-    }//GEN-LAST:event_txPesquisarKeyTyped
-
-    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-        if (evt.getClickCount() == 2) {
-            this.alterar();
-        }
-    }//GEN-LAST:event_tabelaMouseClicked
-
     /**
     * @param args the command line arguments
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TelaCargo dialog = new TelaCargo(new javax.swing.JFrame(), true);
+                TelaUsuario dialog = new TelaUsuario(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
@@ -305,109 +207,4 @@ public class TelaCargo extends javax.swing.JDialog {
     private javax.swing.JTextField txPesquisar;
     // End of variables declaration//GEN-END:variables
 
-    private void sair(){
-        this.setVisible(false);
-        this.dispose();
-    }
-
-    protected void atualizarTabela(){
-        try{
-            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
-            modelo.setNumRows(0);
-
-            List<CargoBean> listaCargo = this.daoCargo.getLista();
-
-            for(int i=0; i < listaCargo.size(); i++){
-                modelo.addRow(new Object[]{
-                listaCargo.get(i).getIdCargo(),
-                listaCargo.get(i).getDescricao()});
-            }
-            this.lbInfoPesq.setText(modelo.getRowCount()+ " resultado(s).");
-        }catch(SQLException ex){
-            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
-        }
-    }
-
-    protected void atualizarTabela(String filtro){
-        try{
-            DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
-            modelo.setNumRows(0);
-
-            List<CargoBean> listaCargo = this.daoCargo.getLista(filtro);
-
-            for(int i=0; i < listaCargo.size(); i++){
-                modelo.addRow(new Object[]{
-                listaCargo.get(i).getIdCargo(),
-                listaCargo.get(i).getDescricao()});
-            }
-            this.lbInfoPesq.setText(modelo.getRowCount()+ " resultado(s).");
-        }catch(SQLException ex){
-            Msg.erro(this, "Erro ao atualizar tabela. \n"+ex.getMessage());
-        }
-    }
-
-    protected void limparTabela(){
-        DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
-        modelo.setNumRows(0);
-        this.lbInfoPesq.setText("");
-    }
-
-    private void pesquisar(){
-        if(this.txPesquisar.getText().length() >= 3){
-            this.atualizarTabela(this.txPesquisar.getText().trim());
-        }else{
-            this.lbInfoPesq.setText("Digite no minímo 3 caracteres.");
-        }
-    }
-
-    public void inserir(){
-        TelaCargoCadastro tela = new TelaCargoCadastro(this, true);
-        tela.setTitle("INSERIR CARGO");
-        tela.setInserir(true);
-        tela.setLocationRelativeTo(null);
-        tela.setVisible(true);
-    }
-
-    public void alterar(){
-        int row = this.tabela.getSelectedRow();
-        if(row == -1){
-            Msg.alerta(this, "Selecione o registro.");
-            return;
-        }
-
-        DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
-        int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
-
-        TelaCargoCadastro tela = new TelaCargoCadastro(this, true);
-        tela.setTitle("ALTERAR CARGO");
-        tela.setInserir(false);
-        tela.setLocationRelativeTo(null);
-        tela.preencherCampos(id);
-        tela.setVisible(true);
-    }
-
-    private void excluir(){
-        int row = this.tabela.getSelectedRow();
-        if(row == -1){
-            Msg.alerta(this, "Selecione o registro.");
-            return;
-        }
-
-        DefaultTableModel modelo = (DefaultTableModel) this.tabela.getModel();
-        int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
-        String cargo = modelo.getValueAt(row, 1).toString();
-
-        if(Msg.confirmar(this, "Deseja excluir o registro \""+cargo+"\"?")){
-            try{
-                this.daoCargo.excluir(id);
-                this.atualizarTabela();
-            }catch(SQLException ex){
-                if(ex.getMessage().startsWith("Cannot delete or update a parent row")){
-                    Msg.erro(this, "Registro tem referência com outros módulos.\n\nNão pode ser excluído.");
-                }else{
-                    Msg.erro(this, "Erro ao excluir o registro.\n\n"+ex.getMessage());
-                }
-            }
-        }
-    }
 }

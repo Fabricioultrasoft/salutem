@@ -1046,73 +1046,129 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
                 this.cancelar();
             }
         } catch (SQLException e) {
-            Msg.erro(this, "Erro ao salvar. \n" + e.getMessage());
+            if (e.getMessage().equals("CPF-DUPLICADO")) {
+                Msg.alerta(this, "CPF já cadastrado!!!");
+                this.txCpf.requestFocus();
+                this.txCpf.selectAll();
+            } else {
+
+                Msg.erro(this, "Erro ao salvar. \n" + e.getMessage());
+            }
         }
+
     }
 
     protected void carregarCbUnidade() {
         this.cbUnidade.removeAllItems();
+
+
         this.cbUnidade.addItem("SELECIONE");
+
+
 
         try {
             unis = daoUnidade.getLista();
+
+
             for (UnidadeBean unidade : unis) {
                 this.cbUnidade.addItem(unidade.getNome().trim().toUpperCase());
+
+
             }
         } catch (Exception e) {
             Msg.erro(this, "Erro ao atualizar unidades. \n" + e.getMessage());
+
+
         }
     }
 
     protected void carregarCbEspecialidade() {
         this.cbEsp.removeAllItems();
+
+
         this.cbEsp.addItem("SELECIONE");
+
+
 
         try {
             esps = daoEspecialidade.getLista();
+
+
             for (EspecialidadeBean esp : esps) {
                 this.cbEsp.addItem(esp.getNome().trim().toUpperCase());
+
+
             }
         } catch (Exception e) {
             Msg.erro(this, "Erro ao atualizar especialidades. \n" + e.getMessage());
+
+
         }
     }
 
     protected void carregarCbCargo() {
         this.cbCargo.removeAllItems();
+
+
         this.cbCargo.addItem("SELECIONE");
+
+
 
         try {
             cargs = daoCargo.getLista();
+
+
             for (CargoBean cargo : cargs) {
                 this.cbCargo.addItem(cargo.getDescricao().trim().toUpperCase());
+
+
             }
         } catch (Exception e) {
             Msg.erro(this, "Erro ao atualizar cargos. \n" + e.getMessage());
+
+
         }
     }
 
     protected void atualizarCbUnidade() {
         this.cbUnidade.removeAllItems();
+
+
         this.cbUnidade.addItem("SELECIONE");
+
+
         for (UnidadeBean unidade : unis) {
             this.cbUnidade.addItem(unidade.getNome().trim().toUpperCase());
+
+
         }
     }
 
     protected void atualizarCbEspecialidade() {
         this.cbEsp.removeAllItems();
+
+
         this.cbEsp.addItem("SELECIONE");
+
+
         for (EspecialidadeBean esp : esps) {
             this.cbEsp.addItem(esp.getNome().trim().toUpperCase());
+
+
         }
     }
 
     protected void atualizarCbCargo() {
         this.cbCargo.removeAllItems();
+
+
         this.cbCargo.addItem("SELECIONE");
+
+
         for (CargoBean cargo : cargs) {
             this.cbCargo.addItem(cargo.getDescricao().trim().toUpperCase());
+
+
         }
 
     }
@@ -1121,10 +1177,15 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         DefaultTableModel modelo = (DefaultTableModel) this.tbUnidade.getModel();
         modelo.setNumRows(0);
 
-        for (int i = 0; i < uniSel.size(); i++) {
+
+
+        for (int i = 0; i
+                < uniSel.size(); i++) {
             modelo.addRow(new Object[]{
                         uniSel.get(i).getIdUnidade(),
                         uniSel.get(i).getNome()});
+
+
         }
     }
 
@@ -1132,10 +1193,15 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         DefaultTableModel modelo = (DefaultTableModel) this.tbEsp.getModel();
         modelo.setNumRows(0);
 
-        for (int i = 0; i < espSel.size(); i++) {
+
+
+        for (int i = 0; i
+                < espSel.size(); i++) {
             modelo.addRow(new Object[]{
                         espSel.get(i).getIdEspecialidade(),
                         espSel.get(i).getNome()});
+
+
         }
     }
 
@@ -1143,109 +1209,200 @@ public class TelaFuncionarioCadastro extends javax.swing.JDialog {
         DefaultTableModel modelo = (DefaultTableModel) this.tbCargo.getModel();
         modelo.setNumRows(0);
 
-        for (int i = 0; i < cargSel.size(); i++) {
+
+
+        for (int i = 0; i
+                < cargSel.size(); i++) {
             modelo.addRow(new Object[]{
                         cargSel.get(i).getIdCargo(),
                         cargSel.get(i).getDescricao()});
+
+
         }
     }
 
     private void addUnidade() {
         if (this.cbUnidade.getSelectedIndex() != 0) {
             this.uniSel.add(this.unis.get(this.cbUnidade.getSelectedIndex() - 1));
+
+
             this.unis.remove(this.cbUnidade.getSelectedIndex() - 1);
+
+
         } else {
             Msg.alerta(this, "Selecione uma unidade.");
+
+
         }
         this.atualizarCbUnidade();
+
+
         this.atualizarTbUnidade();
+
+
     }
 
     private void addEspecialidade() {
         if (this.cbEsp.getSelectedIndex() != 0) {
             this.espSel.add(this.esps.get(this.cbEsp.getSelectedIndex() - 1));
+
+
             this.esps.remove(this.cbEsp.getSelectedIndex() - 1);
+
+
         } else {
             Msg.alerta(this, "Selecione uma especialidade.");
+
+
         }
         this.atualizarCbEspecialidade();
+
+
         this.atualizarTbEspecialidade();
+
+
     }
 
     private void addCargo() {
         if (this.cbCargo.getSelectedIndex() != 0) {
             this.cargSel.add(this.cargs.get(this.cbCargo.getSelectedIndex() - 1));
+
+
             this.cargs.remove(this.cbCargo.getSelectedIndex() - 1);
+
+
         } else {
             Msg.alerta(this, "Selecione um cargo.");
+
+
         }
         this.atualizarCbCargo();
+
+
         this.atualizarTbCargo();
+
+
     }
 
     private void removeUnidade() {
         int row = this.tbUnidade.getSelectedRow();
+
+
         if (row == -1) {
             Msg.alerta(this, "Selecione o registro.");
+
+
             return;
+
+
         }
 
         DefaultTableModel modelo = (DefaultTableModel) this.tbUnidade.getModel();
+
+
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
-        for (int i = 0; i < uniSel.size(); i++) {
+
+
+        for (int i = 0; i
+                < uniSel.size(); i++) {
             if (uniSel.get(i).getIdUnidade() == id) {
                 unis.add(uniSel.get(i));
                 uniSel.remove(i);
+
+
             }
         }
         this.atualizarCbUnidade();
+
+
         this.atualizarTbUnidade();
+
+
     }
 
     private void removeEspecialidade() {
         int row = this.tbEsp.getSelectedRow();
+
+
         if (row == -1) {
             Msg.alerta(this, "Selecione o registro.");
+
+
             return;
+
+
         }
 
         DefaultTableModel modelo = (DefaultTableModel) this.tbEsp.getModel();
+
+
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
-        for (int i = 0; i < espSel.size(); i++) {
+
+
+        for (int i = 0; i
+                < espSel.size(); i++) {
             if (espSel.get(i).getIdEspecialidade() == id) {
                 esps.add(espSel.get(i));
                 espSel.remove(i);
+
+
             }
         }
         this.atualizarCbEspecialidade();
+
+
         this.atualizarTbEspecialidade();
+
+
     }
 
     private void removeCargo() {
         int row = this.tbCargo.getSelectedRow();
+
+
         if (row == -1) {
             Msg.alerta(this, "Selecione o registro.");
+
+
             return;
+
+
         }
 
         DefaultTableModel modelo = (DefaultTableModel) this.tbCargo.getModel();
+
+
         int id = Integer.parseInt(modelo.getValueAt(row, 0).toString());
 
-        for (int i = 0; i < cargSel.size(); i++) {
+
+
+        for (int i = 0; i
+                < cargSel.size(); i++) {
             if (cargSel.get(i).getIdCargo() == id) {
                 cargs.add(cargSel.get(i));
                 cargSel.remove(i);
+
+
             }
         }
         this.atualizarCbCargo();
+
+
         this.atualizarTbCargo();
+
+
     }
 
     private void carregarCombos() {
         this.carregarCbUnidade();
+
+
         this.carregarCbEspecialidade();
+
+
         this.carregarCbCargo();
+
     }
 }

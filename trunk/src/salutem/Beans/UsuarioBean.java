@@ -5,6 +5,8 @@
 
 package salutem.Beans;
 
+import java.util.List;
+
 /**
  *
  * @author Renato Doretto
@@ -15,6 +17,7 @@ public class UsuarioBean {
     private String login;
     private String senha;
     private FuncionarioBean funcionario;
+    private List<PermissaoBean> permissao;
 
     /**
      * @return the idUsuario

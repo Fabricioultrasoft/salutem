@@ -139,6 +139,7 @@ public class UsuarioDAO extends MySQL{
         funcionario.setTipoRegistro(this.getRS().getString("tipoRegistro"));
         funcionario.setRegistro(this.getRS().getString("registro"));
         funcionario.setTelefone(this.getRS().getString("telefone"));
+        funcionario.setCelular(this.getRS().getString("celular"));
         funcionario.setRua(this.getRS().getString("rua"));
         funcionario.setNumero(this.getRS().getInt("numero"));
         funcionario.setBairro(this.getRS().getString("bairro"));
